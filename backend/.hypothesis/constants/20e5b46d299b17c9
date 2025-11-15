@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/workers/battle_worker.py
+# hypothesis_version: 6.148.0
+
+['CELERY_BROKER_URL', 'battle.run_hotseat', 'battle_worker']

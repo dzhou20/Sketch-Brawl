@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/validation.py
+# hypothesis_version: 6.148.0
+
+['attack_bonus', 'cooldown_delta', 'elements']

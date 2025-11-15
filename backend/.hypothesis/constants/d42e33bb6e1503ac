@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/gemini_client.py
+# hypothesis_version: 6.148.0
+
+[0.2, 0.95, 100, 140, 400, 500, ',', ':', ';', 'Enhanced Monster', 'Enhanced Move', 'Enhanced Skill', 'Monster_Enhance', 'Skill', 'Skill_Enhance', 'Unnamed Monster', 'Unnamed Move', 'Unnamed Skill', '`', '```', 'attack', 'attack_bonus', 'base_attack', 'candidates', 'content', 'contents', 'data', 'data:', 'defense', 'earth', 'element', 'explanation', 'fire', 'forbid', 'generationConfig', 'hp', 'image/png', 'inline_data', 'key', 'metal', 'mime_type', 'move_name', 'name', 'parts', 'role', 'seed', 'skill_type', 'temperature', 'text', 'topK', 'topP', 'user', 'water', 'wood']

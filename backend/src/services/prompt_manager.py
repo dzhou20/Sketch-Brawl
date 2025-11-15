@@ -16,9 +16,10 @@ DIVERSITY_GUIDANCE = (
     "- Base every choice on the player's latest doodle plus the metadata below. "
     "Reference what you see in the stroke summary when you justify decisions.\n"
     "- Choose the element that best matches the doodle's strokes and shapes; "
-    "do not default to a single element. If multiple elements fit, pick the one that increases variety.\n"
+    "do not default to a single element. If multiple elements seem equally valid, lean toward the suggested variety target (if present).\n"
     "- Vary health/attack/defense distributions (or power adjustments) within allowed ranges so results feel distinct yet grounded in the drawing.\n"
-    "- Give every name/move_name a fresh quirky spin tied to the doodle. Re-using previous wording is discouraged.\n"
+    "- Variety guidance is secondary: if the stroke traits clearly indicate a specific element or stat profile, honor the doodle first.\n"
+    "- Give every name/move_name a fresh quirky spin tied to the doodle. Reusing previous wording is discouraged.\n"
 )
 
 SCHEMA_MARKERS: Dict[str, List[str]] = {
@@ -97,26 +98,55 @@ def build_prompt(
     strokes: List[Dict[str, Any]],
     seed: int,
     metadata: Dict[str, Any],
+    snapshot_hint: str | None = None,
 ) -> str:
     base = _load_base_prompt()
     summary = _summarize_strokes(strokes)
     schema_block = _schema_sections(base, schema_hint) or "Follow the expected JSON schema."
     common_block = _common_sections(base)
+    metadata = metadata or {}
+    metadata_copy = dict(metadata)
+    hints = metadata_copy.pop("_hints", {})
+    metadata_text = json.dumps(metadata_copy, ensure_ascii=False)
+    hints_block = _format_hints(hints)
     prompt_parts = [schema_block]
     if common_block:
         prompt_parts.append(common_block)
     prompt_parts.append(DIVERSITY_GUIDANCE)
+    context_lines: List[str] = [
+        f"Schema: {schema_hint}",
+        f"Seed: {seed}",
+        f"Metadata: {metadata_text}",
+    ]
+    if snapshot_hint:
+        context_lines.append(f"Snapshot Preview: {snapshot_hint}")
+    if hints_block:
+        context_lines.append(hints_block)
+    context_lines.append(f"Stroke Summary: {summary}")
     prompt_parts.append(
         "### Current Doodle Context\n"
-        f"Schema: {schema_hint}\n"
-        f"Seed: {seed}\n"
-        f"Metadata: {json.dumps(metadata, ensure_ascii=False)}\n"
-        f"Stroke Summary: {summary}\n\n"
-        "Respond with JSON that matches the schema exactly. DO NOT wrap the payload "
+        + "\n".join(context_lines)
+        + "\n\nRespond with JSON that matches the schema exactly. DO NOT wrap the payload "
         "inside additional objects (no root keys like “monster” or “skill”). "
         "Do not include extra narrative fields."
     )
     return "\n\n".join(prompt_parts)
+
+
+def _format_hints(hints: Dict[str, Any]) -> str:
+    if not hints:
+        return ""
+    parts: List[str] = []
+    recent = hints.get("recent_results")
+    if recent:
+        parts.append(f"Recent Outputs: {json.dumps(recent, ensure_ascii=False)}")
+    traits = hints.get("stroke_traits")
+    if traits:
+        parts.append(f"Stroke Traits: {json.dumps(traits, ensure_ascii=False)}")
+    variety = hints.get("variety_target")
+    if variety:
+        parts.append(f"Variety Target: aim for element '{variety}' if it fits the doodle.")
+    return "\n".join(parts)
 
 
 def _summarize_strokes(strokes: List[Dict[str, Any]]) -> str:

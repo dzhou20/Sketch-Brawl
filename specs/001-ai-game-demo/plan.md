@@ -1,98 +1,113 @@
-# Implementation Plan: Sketch Brawl Demo Delivery
+# Implementation Plan: [FEATURE]
 
-**Branch**: `001-ai-game-demo` | **Date**: 2025-11-15 | **Spec**: [spec.md](./spec.md)
-**Input**: Feature specification from `/specs/001-ai-game-demo/spec.md`
+**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
+**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+
+**Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
 
 ## Summary
 
-Build a submission-ready Sketch Brawl demo where two players sketch monsters/skills,
-AI assigns combat attributes, and a deterministic server resolves battles with replay
-logs plus guided demo assets. Delivery includes: low-latency doodle canvas, AI
-attribution flow with explanations, server-authoritative battle simulator, upgrade
-validation, telemetry dashboards, Railway deployment, and packaged demo artifacts.
+[Extract from feature spec: primary requirement + technical approach from research]
 
 ## Technical Context
 
-**Language/Version**: Python 3.11 (backend services, telemetry workers); TypeScript 5 + React 18 (web canvas + UI); Unity WebGL (optional guided replay viewer embedded as iframe)  
-**Primary Dependencies**: FastAPI, PostgreSQL 15, Redis 7, PlayCanvas-like WebGL canvas or Fabric.js for drawing, TorchServe/ONNX runtime for image-to-attribute inference, Railway deployment stack  
-**Storage**: PostgreSQL for Monsters/SkillCards/BattleSessions, Redis for lobby presence + deterministic seed queue, object storage (Railway plugin) for demo artifacts/log bundles  
-**Testing**: Pytest + Hypothesis for battle math, Playwright for frontend canvas/inference loop, Locust scripts for latency soak tests  
-**Target Platform**: Desktop browsers (Chrome/Edge) at 1920x1080 with fallback 1280x720; backend hosted on Railway containers  
-**Project Type**: Web frontend + backend services  
-**Performance Goals**: <=50 ms canvas latency, >=60 fps rendering, <=1.5 s AI inference P95, <=10 s battle resolution P95, Railway cold start <=5 s  
-**Constraints**: Deterministic RNG seed propagation, bilingual UI copy, offline replay exports, invite-link access only, Railway resource quotas (2 vCPU/2 GB per service)  
-**Scale/Scope**: Two concurrent human players + judge spectators per lobby during demos; telemetry sized for 50 recorded sessions and 10 guided replays
+<!--
+  ACTION REQUIRED: Replace the content in this section with the technical details
+  for the project. The structure here is presented in advisory capacity to guide
+  the iteration process.
+-->
+
+**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
+**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
+**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
+**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
+**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
+**Project Type**: [single/web/mobile - determines source structure]  
+**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
+**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
+**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-- **Input Fidelity**: Plan includes canvas instrumentation (PerformanceObserver + worker) and Redis-backed telemetry to ensure <=50 ms latency, >=60 fps with pre-round pause if breached.
-- **AI Attribution Transparency**: FastAPI inference gateway enforces <=1.5 s SLA, stores prompt + seed + explanation JSON per doodle, and exposes UI overlays + judge logs.
-- **Deterministic Battles**: Python battle engine consumes persisted Monster/SkillCard data + single RNG seed, logs every damage event, and exports replay JSON for playback.
-- **Skill Evolution Guardrails**: Validation service enforces max three elements, additive attack caps, cooldown rules, and annotates failures so UI can block upgrades.
-- **Demo Readiness**: CI publishes Railway-hosted build + <=90 s walkthrough video, spectate scripts, and offline recap packs; smoke test checklist runs after each merge.
-
-_All gates satisfied: requirements mapped to specific components and metrics with telemetry + CI evidence. No violations to justify._
+- **Input Fidelity**: Plan documents how doodle capture meets <=50 ms latency, >=60 fps,
+  and how telemetry will expose input failures before a round starts.
+- **AI Attribution Transparency**: Plan lists inference budgets (<=1.5 s), explanation
+  surfaces, and logging that preserves prompts + seeds for replay.
+- **Deterministic Battles**: Plan shows how battle math stays server authoritative,
+  single-seed reproducible, and how logs will capture damage events for demos.
+- **Skill Evolution Guardrails**: Plan details validation logic for upgrade stacking
+  (max three elements, additive caps) and how violations block the UI flow.
+- **Demo Readiness**: Plan confirms a playable link + <=90 s video script will be
+  revalidated after delivery, and identifies the smoke test owner.
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```text
-specs/001-ai-game-demo/
-├── plan.md              # This file
-├── research.md          # Phase 0 output
-├── data-model.md        # Phase 1 output
-├── quickstart.md        # Phase 1 output
-├── contracts/           # Phase 1 output
-├── checklists/
-│   └── requirements.md
-└── tasks.md             # Phase 2 output (/speckit.tasks)
+specs/[###-feature]/
+├── plan.md              # This file (/speckit.plan command output)
+├── research.md          # Phase 0 output (/speckit.plan command)
+├── data-model.md        # Phase 1 output (/speckit.plan command)
+├── quickstart.md        # Phase 1 output (/speckit.plan command)
+├── contracts/           # Phase 1 output (/speckit.plan command)
+└── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
 ```
 
 ### Source Code (repository root)
+<!--
+  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
+  for this feature. Delete unused options and expand the chosen structure with
+  real paths (e.g., apps/admin, packages/something). The delivered plan must
+  not include Option labels.
+-->
 
 ```text
+# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
+src/
+├── models/
+├── services/
+├── cli/
+└── lib/
+
+tests/
+├── contract/
+├── integration/
+└── unit/
+
+# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
 backend/
 ├── src/
-│   ├── api/             # FastAPI routers (lobby, doodle upload, battles, telemetry)
-│   ├── services/        # AI attribution, battle engine, upgrade validator
-│   ├── models/          # SQLModel entities + seed persistence
-│   ├── workers/         # Replay exporter, telemetry aggregator
-│   └── infra/           # Railway config, Redis/Postgres clients
+│   ├── models/
+│   ├── services/
+│   └── api/
 └── tests/
-    ├── unit/
-    ├── integration/
-    └── load/
 
 frontend/
 ├── src/
-│   ├── components/      # Canvas, AI explanation panel, battle HUD, tutorial overlays
-│   ├── pages/           # Lobby, Match, Guided Replay, Admin smoke test
-│   ├── services/        # API clients, telemetry publisher
-│   └── store/           # Deterministic state synced with server seed
+│   ├── components/
+│   ├── pages/
+│   └── services/
 └── tests/
-    ├── e2e/             # Playwright
-    └── visual/
 
-unity-guided/
-└── Assets/              # Optional WebGL replay visualizer packaged for iframe use
+# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
+api/
+└── [same as backend above]
+
+ios/ or android/
+└── [platform-specific structure: feature modules, UI flows, platform tests]
 ```
 
-**Structure Decision**: Dual repo folders (`backend`, `frontend`) enable independent deployments + Railway services; Unity WebGL assets remain optional add-on referenced by frontend.
+**Structure Decision**: [Document the selected structure and reference the real
+directories captured above]
 
 ## Complexity Tracking
 
+> **Fill ONLY if Constitution Check has violations that must be justified**
+
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
-| Second runtime (Unity WebGL) | Enables cinematic guided replay judges expect | Plain React animation cannot show 3D doodle transformations convincingly |
-| Redis cache | Required for lobby presence + deterministic seed queue | Postgres alone cannot guarantee low-latency presence updates |
-
-## Constitution Re-evaluation (Post Phase 1)
-
-- **Input Fidelity**: research.md + quickstart cover Fabric.js instrumentation, telemetry event schema, and Playwright latency tests—no gaps.
-- **AI Attribution**: data-model + contracts define ONNX-backed inference endpoints with persisted prompts/seeds; SLA documented in quickstart step 6.
-- **Deterministic Battles**: data-model describes RNG + replay logs; contracts expose `/battles/{id}/replay`; research details Hypothesis test plan.
-- **Skill Evolution Guardrails**: SkillCard validations + `/skills/{id}/reinforce` endpoint enforce stacking rules and error reporting.
-- **Demo Readiness**: quickstart + DemoArtifact entity + `/artifacts/latest` endpoint ensure Railway deployment + offline bundle steps captured.
+| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |

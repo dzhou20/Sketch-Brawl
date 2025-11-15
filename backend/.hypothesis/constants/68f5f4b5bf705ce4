@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/prompt_manager.py
+# hypothesis_version: 6.148.0
+
+['# ', '## ', '### ', '### **Skill Schema**', 'GEMINI_PROMPT_PATH', 'Monster', 'Monster_Enhance', 'Skill', 'Skill_Enhance', '_hints', 'recent_results', 'stroke_traits', 'utf-8', 'variety_target']

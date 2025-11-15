@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import logging
+from collections import deque
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -26,6 +27,12 @@ class InferenceRunner:
         self._gemini: GeminiClient | None = None
         if settings.gemini_api_key:
             self._gemini = GeminiClient(settings.gemini_api_key, settings.gemini_model)
+        self._history: dict[str, deque[dict[str, Any]]] = {
+            "Monster": deque(maxlen=6),
+            "Skill": deque(maxlen=6),
+            "Monster_Enhance": deque(maxlen=6),
+            "Skill_Enhance": deque(maxlen=6),
+        }
 
         self._session = None
         if self._gemini is None and InferenceSession is not None:
@@ -41,15 +48,23 @@ class InferenceRunner:
         seed: int,
         doodle_type: Optional[DoodleType] = None,
         metadata: Optional[Dict[str, Any]] = None,
+        snapshot: str | None = None,
     ) -> dict[str, Any]:
         schema_hint = self._schema_hint(doodle_type, metadata)
+        prompt_meta = dict(metadata or {})
+        prompt_meta["_hints"] = {
+            "recent_results": self._recent_results(schema_hint),
+            "stroke_traits": self._stroke_traits(strokes),
+            "variety_target": self._variety_target(schema_hint, seed),
+        }
         if self._gemini is not None:
             try:
                 result = self._gemini.generate_attributes(
                     strokes,
                     seed,
                     schema_hint=schema_hint,
-                    metadata=metadata or {},
+                    metadata=prompt_meta,
+                    snapshot=snapshot,
                 )
                 logger = logging.getLogger("battle.inference")
                 logger.info(
@@ -60,6 +75,7 @@ class InferenceRunner:
                     result["hp"],
                     result["base_attack"],
                 )
+                self._record_history(schema_hint, result)
                 return result
             except GeminiError as exc:
                 print(f"[gemini] falling back to ONNX/stub: {exc}")
@@ -71,7 +87,7 @@ class InferenceRunner:
             element = self._decode_element(raw[0], seed)
             hp = int(np.clip(raw[1] * 500, 50, 500))
             base_attack = int(np.clip(raw[2] * 100, 5, 100))
-            return {
+            result = {
                 "element": element,
                 "hp": hp,
                 "base_attack": base_attack,
@@ -80,6 +96,8 @@ class InferenceRunner:
                 "explanation": f"onnx-seed-{seed}",
                 "variance": float(abs(raw[3]) if len(raw) > 3 else 0.1),
             }
+            self._record_history(schema_hint, result)
+            return result
 
         # fallback stub
         rng = np.random.default_rng(seed)
@@ -101,6 +119,7 @@ class InferenceRunner:
             payload["attack_bonus"] = base_attack
         else:
             payload["skill_type"] = "weapon"
+        self._record_history(schema_hint, payload)
         return payload
 
     def _resolve_model_path(self) -> Path | None:
@@ -143,6 +162,79 @@ class InferenceRunner:
             target = (metadata or {}).get("target", "skill")
             return "Monster_Enhance" if target == "monster" else "Skill_Enhance"
         return "Skill"
+
+    def _recent_results(self, schema_hint: str) -> list[dict[str, Any]]:
+        history = self._history.get(schema_hint)
+        if not history:
+            return []
+        return list(history)[-3:]
+
+    def _record_history(self, schema_hint: str, payload: dict[str, Any]) -> None:
+        entry: dict[str, Any] = {}
+        if schema_hint == "Monster":
+            entry = {
+                "element": payload.get("element"),
+                "hp": payload.get("hp"),
+                "attack": payload.get("base_attack"),
+                "name": payload.get("name"),
+            }
+        elif schema_hint == "Skill":
+            entry = {
+                "element": payload.get("element"),
+                "kind": payload.get("skill_type"),
+                "power": payload.get("attack_bonus"),
+                "name": payload.get("name"),
+            }
+        else:
+            entry = {
+                "element": payload.get("element"),
+                "delta_hp": payload.get("hp"),
+                "delta_attack": payload.get("base_attack") or payload.get("attack_bonus"),
+                "name": payload.get("name"),
+            }
+        self._history.setdefault(schema_hint, deque(maxlen=6)).append(entry)
+
+    def _stroke_traits(self, strokes: list[dict[str, Any]]) -> dict[str, Any]:
+        if not strokes:
+            return {"stroke_count": 0, "size": "none", "variance": 0}
+        xs = [float(s.get("x", 0.0)) for s in strokes]
+        ys = [float(s.get("y", 0.0)) for s in strokes]
+        pressures = [float(s.get("pressure") or 0.5) for s in strokes]
+        width = max(xs) - min(xs)
+        height = max(ys) - min(ys)
+        bbox = (round(width, 2), round(height, 2))
+        density = round(self._density(strokes), 2)
+        avg_pressure = round(sum(pressures) / len(pressures), 2)
+
+        jagged = 0
+        total_delta = 0.0
+        for prev, curr in zip(strokes, strokes[1:]):
+            dx = float(curr.get("x", 0.0)) - float(prev.get("x", 0.0))
+            dy = float(curr.get("y", 0.0)) - float(prev.get("y", 0.0))
+            delta = abs(dx) + abs(dy)
+            total_delta += delta
+            if delta > 20:
+                jagged += 1
+        return {
+            "stroke_count": len(strokes),
+            "bbox": bbox,
+            "density_index": density,
+            "avg_pressure": avg_pressure,
+            "jagged_segments": jagged,
+            "total_motion": round(total_delta, 2),
+        }
+
+    def _variety_target(self, schema_hint: str, seed: int) -> str | None:
+        if schema_hint not in {"Monster", "Skill"}:
+            return None
+        history = self._history.get(schema_hint)
+        recent = [entry.get("element") for entry in (history or []) if entry.get("element")]
+        elements = ["metal", "wood", "water", "fire", "earth"]
+        rotated = elements[seed % len(elements) :] + elements[: seed % len(elements)]
+        for candidate in rotated:
+            if candidate not in recent[-2:]:
+                return candidate
+        return None
 
 
 _runner: InferenceRunner | None = None

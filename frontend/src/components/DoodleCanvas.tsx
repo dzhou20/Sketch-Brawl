@@ -15,13 +15,21 @@ type Stroke = {
 
 type Props = {
   lobbyId: string | null;
+  playerSlot: 'A' | 'B';
   doodleType: DoodleType;
   onResult: (payload: any) => void;
+  metadataOverrides?: Record<string, unknown>;
 };
 
 const CANVAS_SIZE = 480;
 
-export function DoodleCanvas({ lobbyId, doodleType, onResult }: Props) {
+export function DoodleCanvas({
+  lobbyId,
+  playerSlot,
+  doodleType,
+  onResult,
+  metadataOverrides,
+}: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const strokesRef = useRef<Stroke[]>([]);
   const drawingRef = useRef(false);
@@ -92,10 +100,13 @@ export function DoodleCanvas({ lobbyId, doodleType, onResult }: Props) {
     }
     setStatus('Submitting doodle...');
     try {
+      const snapshot = canvasRef.current?.toDataURL('image/png');
       const ticket = await apiClient.submitDoodle({
         lobby_id: lobbyId,
         doodle_type: doodleType,
         strokes: strokesRef.current,
+        metadata: buildMetadata(),
+        snapshot,
       });
       const result = await pollInference(ticket.ticket_id);
       onResult(result);
@@ -128,6 +139,16 @@ export function DoodleCanvas({ lobbyId, doodleType, onResult }: Props) {
   };
 
   const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const buildMetadata = () => {
+    const merged: Record<string, unknown> = { player_slot: playerSlot, ...(metadataOverrides ?? {}) };
+    Object.keys(merged).forEach((key) => {
+      if (merged[key] === undefined || merged[key] === null) {
+        delete merged[key];
+      }
+    });
+    return merged;
+  };
 
   const toStroke = (event: PointerEvent, canvas: HTMLCanvasElement): Stroke => {
     const rect = canvas.getBoundingClientRect();

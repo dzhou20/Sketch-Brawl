@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import Any
 
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from src.services.attribute_store import DoodleType, get_attribute_store
 from src.services.inference_runner import get_runner
@@ -29,6 +29,7 @@ class DoodleRequest(BaseModel):
     strokes: list[Stroke]
     metadata: dict[str, Any] | None = None
     seed: int | None = None
+    snapshot: str | None = None
 
 
 class InferenceTicket(BaseModel):
@@ -64,10 +65,17 @@ async def submit_doodle(request: DoodleRequest) -> InferenceTicket:
         request.seed or int(start),
         doodle_type=request.doodle_type,
         metadata=request.metadata,
+        snapshot=request.snapshot,
     )
     elapsed = (time.perf_counter() - start) * 1000
 
-    persisted = _store().persist(request.lobby_id, request.doodle_type, attributes)
+    persisted = _store().persist(
+        request.lobby_id,
+        request.doodle_type,
+        attributes,
+        metadata=request.metadata or {},
+        snapshot=request.snapshot,
+    )
     ticket_id = _store().save_ticket(persisted)
 
     _telemetry().publish(

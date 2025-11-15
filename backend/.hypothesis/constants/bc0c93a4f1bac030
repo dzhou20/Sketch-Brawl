@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/api/main.py
+# hypothesis_version: 6.148.0
+
+['/artifacts', '/battles', '/doodles', '/health', '/lobbies', '/telemetry', 'Sketch Brawl', 'artifacts', 'battles', 'doodles', 'env', 'lobbies', 'ok', 'ops', 'status', 'telemetry', 'version']

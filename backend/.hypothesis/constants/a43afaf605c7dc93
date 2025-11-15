@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/inference_runner.py
+# hypothesis_version: 6.148.0
+
+[0.0, 0.1, 0.5, 0.6, 1.0, 100, 200, 500, 'Monster', 'Monster_Enhance', 'Skill', 'Skill_Enhance', '_hints', 'air', 'attack', 'attack_bonus', 'avg_pressure', 'base_attack', 'battle.inference', 'bbox', 'defense', 'delta_attack', 'delta_hp', 'density_index', 'earth', 'element', 'explanation', 'fire', 'hp', 'input', 'jagged_segments', 'kind', 'light', 'metal', 'monster', 'name', 'none', 'power', 'pressure', 'recent_results', 'reinforcement', 'seed', 'shadow', 'size', 'skill', 'skill_type', 'stroke_count', 'stroke_traits', 'target', 'total_motion', 'variance', 'variety_target', 'water', 'weapon', 'wood', 'x', 'y']

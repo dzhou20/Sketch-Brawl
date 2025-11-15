@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/battle_timeline.py
+# hypothesis_version: 6.148.0
+
+['base_attack', 'base_hp', 'combatants', 'element', 'hp_remaining', 'ko', 'ko_turn', 'name', 'round', 'round_end', 'rounds', 'skill_power', 'skills', 'slot', 'snapshot', 'timeline', 'total_damage', 'turns', 'winner_slot', 'wins']

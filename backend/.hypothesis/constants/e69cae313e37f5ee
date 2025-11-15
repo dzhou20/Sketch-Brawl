@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/artifact_service.py
+# hypothesis_version: 6.148.0
+
+['active', 'offline_bundle', 'offline_bundle_url', 'playable_build', 'playable_url', 'version', 'walkthrough_video']

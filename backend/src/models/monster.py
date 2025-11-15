@@ -2,17 +2,16 @@
 
 from typing import List, Optional
 
-from sqlalchemy import String
-from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy import JSON, Text
 from sqlmodel import Column, Field, Relationship, SQLModel
 
 
 class SkillCardBase(SQLModel):
     type: str = Field(index=True)
-    elements: list[str] = Field(sa_column=Column(ARRAY(String)))
+    elements: list[str] = Field(sa_column=Column(JSON))
     attack_bonus: int = Field(default=0, ge=0, le=50)
     cooldown_delta: int = Field(default=0, ge=-2, le=2)
-    history: list[str] = Field(default_factory=list, sa_column=Column(ARRAY(String)))
+    history: list[str] = Field(default_factory=list, sa_column=Column(JSON))
     explanation: Optional[str] = None
 
 
@@ -28,6 +27,9 @@ class Monster(SQLModel, table=True):
     base_attack: int = Field(ge=5, le=100)
     seed: str = Field(index=True)
     ai_explanation: Optional[str] = None
+    snapshot_data: Optional[str] = Field(
+        default=None, sa_column=Column(Text, nullable=True)
+    )
     skills: List["SkillCard"] = Relationship(back_populates="monster")
 
 

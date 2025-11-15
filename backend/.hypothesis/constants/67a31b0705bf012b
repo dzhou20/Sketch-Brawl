@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/config.py
+# hypothesis_version: 6.148.0
+
+['0.1.0', 'APP_NAME', 'APP_VERSION', 'DATABASE_URL', 'ENVIRONMENT', 'GEMINI_API_KEY', 'GEMINI_MODEL', 'REDIS_URL', 'Sketch Brawl API', 'local']

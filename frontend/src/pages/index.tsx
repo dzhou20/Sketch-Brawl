@@ -10,7 +10,10 @@ export default function Home() {
       <main>
         <h1>Sketch Brawl Demo</h1>
         <p>Launch the dual-player canvas and judge tooling.</p>
-        <Link href="/match">Open Lobby</Link>
+        <div className="home-links">
+          <Link href="/match">Open Lobby</Link>
+          <Link href="/tutorial">Judge Tutorial</Link>
+        </div>
       </main>
     </div>
   );

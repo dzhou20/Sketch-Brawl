@@ -8,8 +8,9 @@ from alembic import context
 # Ensure backend/src is on path so imports work when running from backend root
 ROOT = Path(__file__).resolve().parents[1]  # backend/alembic -> backend
 SRC = ROOT / "src"
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
+for path in [ROOT, SRC]:
+    if str(path) not in sys.path:
+        sys.path.insert(0, str(path))
 
 from api.main import get_settings  # type: ignore  # noqa: E402
 from infra.database import get_engine  # type: ignore  # noqa: E402

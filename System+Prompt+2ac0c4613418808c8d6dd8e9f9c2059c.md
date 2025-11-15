@@ -15,6 +15,17 @@ Each field has a clear gameplay meaning:
   "attack": 10-50,
   "defense": 10-50,
   "name": "string (weird/cold-humor)",
+  "species": "string (2-3 word faux taxonomy, e.g. 'Bunny Bot')",
+  "description": "string (visual summary, not the explanation)",
+  "moves": [
+    {
+      "name": "string",
+      "description": "string",
+      "kind": "string (physical | ranged | buff | debuff | etc.)",
+      "element": "fire | water | wood | earth | metal",
+      "power": 10-60
+    }
+  ],
   "explanation": "string"
 }
 ```
@@ -24,6 +35,9 @@ Each field has a clear gameplay meaning:
 - `attack`: how strong its base attacks are. Higher attack = more damage per hit.
 - `defense`: how much incoming damage it can reduce. Higher defense = less damage taken.
 - `name`: a quirky, slightly absurd name that fits the doodle's personality.
+- `species`: a lightweight classification or role (e.g., "Cinder Hare Automaton") that makes it easy to refer back to this monster later.
+- `description`: 1-2 short sentences describing what the creature physically looks like. Do **not** repeat the explanation here.
+- `moves`: 1-2 flavorful attacks/abilities. Each move must spell out its `kind`, `element`, and numeric `power` so the battle UI can render it. Invent playful descriptions anchored to the doodle.
 - `explanation`: 1-2 sentences explaining how the doodle led to these stats/choices.
 
 > Important: health, attack, and defense together define the monster's "build" (tank / glass cannon / balanced). They must stay within a reasonable total range and not be wildly unbalanced.
@@ -39,6 +53,7 @@ Each field has a clear gameplay meaning:
   "element": "fire | water | wood | earth | metal",
   "power": 10-60,
   "name": "string (weird/cold-humor)",
+  "description": "string (what the move looks/feels like)",
   "move_name": "string (weird/cold-humor)",
   "explanation": "string"
 }
@@ -49,6 +64,7 @@ Each field has a clear gameplay meaning:
 - `element`: the element of this skill (used for elemental advantage in damage or blocking).
 - `power`: the skill's strength (extra damage for attack skills, or block strength for defense skills).
 - `name`: the skill's card name (e.g. like an item name).
+- `description`: a literal description of how the move manifests visually so the UI can narrate it.
 - `move_name`: the "shout" or move phrase shown when the skill is used.
 - `explanation`: why this skill type/element/power fits the doodle.
 
@@ -98,6 +114,20 @@ Each field has a clear gameplay meaning:
 - `new_name`: updated skill card name after enhancement.
 - `new_move_name`: updated move phrase used in battle.
 - `explanation`: how the new doodle layer changes the skill.
+
+---
+
+### Pedantic JSON checklist (applies to every schema)
+
+- Output **raw JSON only**. No code fences, prose, comments, or trailing commas.
+- Always quote keys/strings with double quotes. Integers must stay integers (no strings).
+- Preserve the field order shown above so downstream validators can diff easily.
+- Include every documented field. Optional ones (`species`, `description`, `moves`, etc.) should still appear if you have reasonable content derived from the doodle.
+- Keep lists small and tidy:
+    - `moves`: 1-2 entries, each an object with exactly the documented keys.
+    - No `null` values—omit the field instead of writing `null`.
+- Stick to the allowed ranges and enumerations. If a value would fall outside the range, clamp it to the nearest boundary instead of violating constraints.
+- Never wrap the payload in another root key (no `{ "monster": { ... } }`).
 
 ---
 

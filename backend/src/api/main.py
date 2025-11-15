@@ -4,7 +4,7 @@ from typing import AsyncIterator
 
 from fastapi import FastAPI
 
-from src.api import doodles, lobbies, telemetry
+from src.api import artifacts, battles, doodles, lobbies, telemetry
 from src.config import get_settings
 from src.infra.database import init_db
 
@@ -19,7 +19,9 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 app = FastAPI(title="Sketch Brawl", lifespan=lifespan)
 app.include_router(lobbies.router, prefix="/lobbies", tags=["lobbies"])
 app.include_router(doodles.router, prefix="/doodles", tags=["doodles"])
+app.include_router(battles.router, prefix="/battles", tags=["battles"])
 app.include_router(telemetry.router, prefix="/telemetry", tags=["telemetry"])
+app.include_router(artifacts.router, prefix="/artifacts", tags=["artifacts"])
 
 
 @app.get("/health", tags=["ops"])

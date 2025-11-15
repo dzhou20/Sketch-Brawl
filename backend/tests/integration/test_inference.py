@@ -8,9 +8,13 @@ class MemoryStore:
     def __init__(self) -> None:
         self._tickets: dict[str, dict] = {}
 
-    def persist(self, lobby_id, doodle_type, attributes):
+    def persist(self, lobby_id, doodle_type, attributes, metadata=None, snapshot=None):
         attributes["lobby_id"] = lobby_id
         attributes["type"] = doodle_type
+        if metadata:
+            attributes.update(metadata)
+        if snapshot:
+            attributes["snapshot"] = snapshot
         return attributes
 
     def save_ticket(self, payload):
@@ -31,7 +35,7 @@ def test_doodle_flow(monkeypatch):
 
     from src.services import telemetry
 
-    telemetry.get_telemetry_service._service = StubTelemetry()  # type: ignore[attr-defined]
+    telemetry._service = StubTelemetry()  # type: ignore[attr-defined]
 
     client = TestClient(app)
     payload = {

@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/api/lobbies.py
+# hypothesis_version: 6.148.0
+
+[404, '/{lobby_id}/ready', 'player']

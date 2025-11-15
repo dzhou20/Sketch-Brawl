@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/models/battle_session.py
+# hypothesis_version: 6.148.0
+
+['active', 'battle_sessions', 'demo_artifacts', 'extend_existing', 'pending', 'telemetry_events']

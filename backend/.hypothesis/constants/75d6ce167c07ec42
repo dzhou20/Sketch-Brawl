@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/attribute_store.py
+# hypothesis_version: 6.148.0
+
+[100, ':', 'A', 'Sketch Beast', '_store', 'attack_bonus', 'base_attack', 'cooldown_delta', 'element', 'elements', 'explanation', 'fire', 'hp', 'monster', 'monster_id', 'name', 'player', 'player_slot', 'reinforcement', 'seed', 'skill', 'skill_id', 'skill_type', 'snapshot', 'weapon']

@@ -1,0 +1,98 @@
+{
+  "en": {
+    "title": "Sketch Brawl Judge Tutorial",
+    "subtitle": "Follow this guide to evaluate the hot-seat demo within a few minutes.",
+    "steps": [
+      {
+        "title": "1. Prepare the Environment",
+        "bullets": [
+          "Open two browser windows (Player A and Player B) and load the Match page.",
+          "Keep the telemetry dashboard tab handy to monitor latency and inference SLA.",
+          "Verify your speakers/headphones if you plan to record the walkthrough video."
+        ]
+      },
+      {
+        "title": "2. Draw Phase (Players Alternate)",
+        "bullets": [
+          "Select the player slot (A/B) and the doodle type (Monster → Skill → Reinforcement).",
+          "Sketch quickly; look for the attribution panel to show element, HP, attack, and explanations.",
+          "If reinforcement is selected, pick an existing skill card and add strokes to boost stats."
+        ]
+      },
+      {
+        "title": "3. Launch Battle & Review Timeline",
+        "bullets": [
+          "Press Start Battle for immediate playback or Queue Async Battle to stream events live.",
+          "Watch the Battle HUD: snapshots, HP bars, and per-round summaries must match the server log.",
+          "If needed, refresh `/battles/{id}` or the SSE feed to compare deterministic results."
+        ]
+      },
+      {
+        "title": "4. Capture Evidence",
+        "bullets": [
+          "Take screenshots of latency metrics (<50 ms strokes, >=60 FPS) and battle timelines.",
+          "Record a ≤90 s walkthrough video covering draw → attribution → battle → reinforcement.",
+          "Download the replay/export bundle (once generated) for inclusion in the submission."
+        ]
+      }
+    ],
+    "cta": {
+      "lobby": {
+        "label": "Open Match Lobby",
+        "href": "/match"
+      },
+      "docs": {
+        "label": "View Quickstart",
+        "href": "https://github.com/chenyuxin/Sketch-Brawl/tree/001-ai-game-demo/specs/001-ai-game-demo/quickstart.md"
+      }
+    }
+  },
+  "zh": {
+    "title": "Sketch Brawl 评审教程",
+    "subtitle": "按照此流程快速体验并记录演示证据。",
+    "steps": [
+      {
+        "title": "1. 准备环境",
+        "bullets": [
+          "打开两个浏览器窗口（玩家 A / 玩家 B），进入 Match 页面。",
+          "保持遥测仪表板窗口，以便观察延迟和推理 SLA。",
+          "如果需要录制讲解视频，提前确认麦克风 / 音频设备。"
+        ]
+      },
+      {
+        "title": "2. 轮流绘制",
+        "bullets": [
+          "选择玩家席位（A/B）以及涂鸦类型（怪兽 → 技能 → 强化）。",
+          "快速完成绘制，稍候即可在属性面板看到元素、血量、攻击和解释。",
+          "当选择强化时，点击已有技能卡，再继续作画提升该技能。"
+        ]
+      },
+      {
+        "title": "3. 启动战斗并检查时间线",
+        "bullets": [
+          "点击 Start Battle 立即播放，或使用 Queue Async Battle 体验实时事件流。",
+          "关注 Battle HUD：怪物截图、HP 条和每回合摘要都必须与后端日志一致。",
+          "如需复核，可刷新 `/battles/{id}` 或 SSE 流，确保结果可复现。"
+        ]
+      },
+      {
+        "title": "4. 收集证据",
+        "bullets": [
+          "截图保存延迟指标（<50 ms 笔画、>=60 FPS）及战斗时间线。",
+          "录制 ≤90 秒演示视频，覆盖绘制 → 解释 → 战斗 → 强化完整流程。",
+          "下载回放 / 导出包（生成后）并附在最终提交材料中。"
+        ]
+      }
+    ],
+    "cta": {
+      "lobby": {
+        "label": "进入对战大厅",
+        "href": "/match"
+      },
+      "docs": {
+        "label": "阅读 Quickstart",
+        "href": "https://github.com/chenyuxin/Sketch-Brawl/tree/001-ai-game-demo/specs/001-ai-game-demo/quickstart.md"
+      }
+    }
+  }
+}

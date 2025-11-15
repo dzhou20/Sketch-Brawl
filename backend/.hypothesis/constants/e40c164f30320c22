@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/models/monster.py
+# hypothesis_version: 6.148.0
+
+[100, 500, 'Monster', 'SkillCard', 'monster', 'monsters', 'monsters.id', 'skill_cards', 'skills']

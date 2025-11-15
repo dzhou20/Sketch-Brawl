@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/api/battles.py
+# hypothesis_version: 6.148.0
+
+[400, 404, '/{battle_id}', 'Battle not found', 'rounds', 'winner_slot', 'wins']

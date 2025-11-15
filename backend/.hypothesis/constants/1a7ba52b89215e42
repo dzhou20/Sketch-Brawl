@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/skill_history.py
+# hypothesis_version: 6.148.0
+
+['attack_bonus', 'base_attack', 'doodle_type', 'element', 'hp', 'player_slot', 'seed', 'skill_type', 'target', 'timestamp']

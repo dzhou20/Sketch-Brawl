@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/battle_service.py
+# hypothesis_version: 6.148.0
+
+[':', 'A', 'attack_bonus', 'battle_id', 'combatants', 'completed', 'elements', 'history', 'id', 'rounds', 'timeline', 'type', 'winner_slot', 'wins']

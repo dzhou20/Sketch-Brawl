@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/telemetry.py
+# hypothesis_version: 6.148.0
+
+[b'payload', b'session', 0.0, 0.95, 100, 'captured_at', 'fps', 'latency', 'min_fps', 'ms', 'p95', 'payload', 'session', 'source', 'value']

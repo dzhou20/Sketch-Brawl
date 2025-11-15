@@ -1,0 +1,4 @@
+# file: /Users/chenyuxin/Sketch-Brawl/backend/src/services/battle_engine.py
+# hypothesis_version: 6.148.0
+
+[0.4, '-', 'earth', 'fire', 'hit', 'ko', 'metal', 'round_end', 'water', 'wood']
