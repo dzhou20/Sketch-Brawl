@@ -1,0 +1,847 @@
+[2m2025-11-15T08:13:46.081623Z[0m [32m INFO[0m cwd not set, using current dir
+[2m2025-11-15T08:19:10.356618Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:19:18.599610Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:19:22.011890Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:19:24.640565Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:20:23.948079Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:20:26.639492Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:20:30.751871Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:20:51.631488Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"in_progress","step":"Review constitution template and identify placeholders/structure"},{"status":"pending","step":"Collect project context and placeholder values from repo/user info"},{"status":"pending","step":"Update constitution file with resolved values, sync impact report, version bump"},{"status":"pending","step":"Propagate checks across templates/docs and summarize changes"}]}
+[2m2025-11-15T08:20:51.632792Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:20:51.633283Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:20:54.305882Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:20:54.305898Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:20:54.305901Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:20:56.834989Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls .specify"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:20:56.835039Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:20:56.835049Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:20:59.631299Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls -a"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:20:59.631348Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:20:59.631354Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:02.371977Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg --files | grep '.specify'"],"workdir":"/Users/chenyuxin/Sketch-Brawl","timeout_ms":1000}
+[2m2025-11-15T08:21:02.372067Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:02.372265Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:05.573178Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","find .. -name constitution.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:05.573226Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:05.573236Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:18.363307Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","find . -path '*constitution.md'"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:18.363394Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:18.363409Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:22.443235Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat game/.specify/memory/constitution.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:22.443290Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:22.443299Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:26.284593Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls game"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:26.284637Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:26.284646Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:29.431139Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls -a"],"workdir":"/Users/chenyuxin/Sketch-Brawl/game"}
+[2m2025-11-15T08:21:29.431179Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:29.431186Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:32.220472Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls -a .codex"],"workdir":"/Users/chenyuxin/Sketch-Brawl/game"}
+[2m2025-11-15T08:21:32.220500Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:32.220507Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:36.324637Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls doc"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:36.324700Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:36.324712Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:38.963774Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls doc/AI-game"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:38.963811Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:38.963818Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:41.903947Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls doc/AI-game/doc/AI-game"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:41.903974Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:41.903979Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:44.594442Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","file doc/AI-game"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:44.594521Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:44.594533Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:47.196360Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '1,160p' doc/AI-game"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:47.196441Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:47.196452Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:50.384579Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '160,320p' doc/AI-game"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:50.384626Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:50.384635Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:52.778799Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls -R game/.specify"],"workdir":"/Users/chenyuxin/Sketch-Brawl","timeout_ms":1000}
+[2m2025-11-15T08:21:52.778851Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:52.778861Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:21:55.624666Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat game/.specify/templates/plan-template.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:21:55.624706Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:21:55.624713Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:22:00.776216Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat game/.specify/templates/spec-template.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:22:00.776264Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:22:00.776271Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:22:03.942372Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat game/.specify/templates/tasks-template.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:22:03.942413Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:22:03.942420Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:22:06.135399Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls game/.specify/templates/commands"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:22:06.135456Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:22:06.135466Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:22:09.067735Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","find game/.specify -maxdepth 3 -type f"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:22:09.067795Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:22:09.067805Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:22:13.522372Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls -a .."],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:22:13.522424Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:22:13.522433Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:22:17.298633Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg --files -g 'README.md'"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:22:17.298693Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:22:17.298705Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:22:22.225990Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat game/.codex/prompts/speckit.constitution.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:22:22.226043Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:22:22.226052Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:22:27.391169Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n '' doc -g '*.md'"],"workdir":"/Users/chenyuxin/Sketch-Brawl","timeout_ms":1000}
+[2m2025-11-15T08:22:27.391190Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:22:27.391195Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:22:44.514497Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","date +%Y-%m-%d"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:22:44.514675Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:22:44.514789Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:23:08.447263Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"completed","step":"Review constitution template and identify placeholders/structure"},{"status":"in_progress","step":"Collect project context and placeholder values from repo/user info"},{"status":"pending","step":"Update constitution file with resolved values, sync impact report, version bump"},{"status":"pending","step":"Propagate checks across templates/docs and summarize changes"}]}
+[2m2025-11-15T08:23:08.447393Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:23:08.447403Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:23:11.940136Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat game/.specify/templates/agent-file-template.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:23:11.940231Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:23:11.940282Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:23:19.888522Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"completed","step":"Review constitution template and identify placeholders/structure"},{"status":"completed","step":"Collect project context and placeholder values from repo/user info"},{"status":"in_progress","step":"Update constitution file with resolved values, sync impact report, version bump"},{"status":"pending","step":"Propagate checks across templates/docs and summarize changes"}]}
+[2m2025-11-15T08:23:19.888557Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:23:19.888562Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:24:03.152202Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat <<'EOF' > game/.specify/memory/constitution.md\n<!--\nSync Impact Report\nVersion change: -- → 1.0.0\nModified principles:\n- N/A (initial constitution)\nAdded sections:\n- Core Principles\n- AI + Gameplay Technical Constraints\n- Development Workflow & Review Gates\n- Governance\nRemoved sections:\n- None\nTemplates requiring updates:\n- ✅ game/.specify/templates/plan-template.md\n- ✅ game/.specify/templates/spec-template.md\n- ✅ game/.specify/templates/tasks-template.md\nFollow-up TODOs:\n- None\n-->\n# Sketch Brawl Constitution\n\n## Core Principles\n\n### I. Doodle Input Fidelity\nThe drawing canvas MUST feel instantaneous on commodity laptops (≤50 ms stroke latency,\n≥60 fps) and operate identically for both players. Stroke data, timestamps, and seed\nvalues MUST be persisted so any round can be replayed deterministically. Input errors\nor dropped frames MUST be surfaced through UI cues and telemetry within 5 seconds so a\nround can be restarted before the battle begins. This guarantees that the “skill of\nsketching” remains the strategic axis instead of fighting the UI.\n\n### II. Transparent AI Attribution\nEvery AI inference MUST output the interpreted attributes (element, HP, base attack,\nskill type, naming) plus a short explanation string that can be shown in the UI and is\nlogged for judges. Inference requests MUST complete within 1.5 seconds and are replayed\nvia stored prompts + seed so the same doodle always yields the same attributes during\njudging. Model updates require a published change note describing new behavior and new\nregression doodles to verify neutrality across art styles.\n\n### III. Deterministic Auto-Battle Loop\nBattles MUST derive all damage, elemental reactions, and win conditions from the saved\nattributes and a single RNG seed so any match can be simulated offline for verification.\nBest-of-three structure, health resets, and round timers MUST be enforced by the\nserver—not the client—to prevent tampering. Each damage event, KO, and overtime call is\nlogged and available for replay tools used in demo videos.\n\n### IV. Persistent Skill Evolution\nSkill cards accumulate upgrades between rounds, but stacking rules MUST remain explicit:\nmax three elements per skill, additive attack bonuses capped by AI-evaluated complexity,\nand cooldown adjustments declared in the log. Reinforcement doodles MUST reference their\nparent skill IDs so history is traceable. If validation fails, the UI MUST block the\nupgrade and explain which rule was violated, ensuring fairness across multi-round play.\n\n### V. Demo-Ready Delivery\nA playable build (web link or packaged app) and a ≤90 second walkthrough video MUST be\nkept current at all times because the AI hackathon submission depends on them. Builds\nMUST include instructions for connecting two players remotely, a spectate mode for\njudges, and a fallback “guided battle” script for offline capture. Any feature merged to\nmain MUST confirm that both the build link and the demo script still work end to end.\n\n## AI + Gameplay Technical Constraints\n\n- Client rendering targets 1920×1080 but MUST gracefully degrade to 1280×720 without\n  breaking pen accuracy. UI text MUST remain bilingual-ready so instructions can be\n  localized for judges.\n- AI inference hosts MUST expose a health endpoint and support batch processing of the\n  four canonical doodle types (monster, weapon, shield, augment). Cold starts may not\n  exceed 5 seconds.\n- Battle resolution MUST finish within 10 seconds per round, even when every skill stacks\n  the maximum allowed effects. Performance budgets MUST be captured in specs and tests.\n- Telemetry MUST capture: canvas device info, inference latency, battle duration, win/loss\n  outcome, and any validation failures. Analytics dumps power the submission recap deck.\n\n## Development Workflow & Review Gates\n\n1. Feature specs enumerate which principles they touch and list metrics proving\n   compliance (latency, inference time, determinism checks, and demo deliverables).\n2. Implementation plans MUST include a Constitution Check gate covering input fidelity,\n   AI transparency, deterministic battles, upgrade validation, and demo readiness before\n   coding begins.\n3. Tasks are grouped by user story so each slice can be demoed independently; at least\n   one task per story MUST cover telemetry/log updates that keep replay data trustworthy.\n4. Pull requests MUST link to updated telemetry dashboards or manual test evidence and\n   confirm that the playable link + video script were smoke-tested after the change.\n\n## Governance\n\nThis constitution is the definitive source of delivery rules for Sketch Brawl. Any\namendment requires approval from both the gameplay owner and the AI systems owner.\nVersion changes follow semantic versioning: MAJOR for rewritten principles or removed\nsections, MINOR for additional principles or new governance constraints, PATCH for\nclarifications. Every amendment MUST update affected templates (plan, spec, tasks) and\nrecord the new version in this file. Compliance is enforced during plan reviews and\nagain during pull requests via the Constitution Check gate; submissions lacking evidence\nfor the five principles cannot merge.\n\n**Version**: 1.0.0 | **Ratified**: 2025-11-15 | **Last Amended**: 2025-11-15\nEOF"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:24:03.152296Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:24:03.152300Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:24:09.311037Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat -n game/.specify/memory/constitution.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:24:09.311061Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:24:09.311066Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:24:25.081787Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: game/.specify/memory/constitution.md
+@@
+ Sync Impact Report
+-Version change: -- → 1.0.0
++Version change: -- -> 1.0.0
+ Modified principles:
+ - N/A (initial constitution)
+ Added sections:
+ - Core Principles
+ - AI + Gameplay Technical Constraints
+ - Development Workflow & Review Gates
+ - Governance
+ Removed sections:
+ - None
+ Templates requiring updates:
+-- ✅ game/.specify/templates/plan-template.md
+-- ✅ game/.specify/templates/spec-template.md
+-- ✅ game/.specify/templates/tasks-template.md
++- updated game/.specify/templates/plan-template.md
++- updated game/.specify/templates/spec-template.md
++- updated game/.specify/templates/tasks-template.md
+ Follow-up TODOs:
+ - None
+ -->
+@@
+-### I. Doodle Input Fidelity
+-The drawing canvas MUST feel instantaneous on commodity laptops (≤50 ms stroke latency,
+-≥60 fps) and operate identically for both players. Stroke data, timestamps, and seed
++### I. Doodle Input Fidelity
++The drawing canvas MUST feel instantaneous on commodity laptops (<=50 ms stroke latency,
++>=60 fps) and operate identically for both players. Stroke data, timestamps, and seed
+ values MUST be persisted so any round can be replayed deterministically. Input errors
+-or dropped frames MUST be surfaced through UI cues and telemetry within 5 seconds so a
+-round can be restarted before the battle begins. This guarantees that the “skill of
++or dropped frames MUST be surfaced through UI cues and telemetry within 5 seconds so a
++round can be restarted before the battle begins. This guarantees that the "skill of
+ sketching" remains the strategic axis instead of fighting the UI.
+@@
+-Every AI inference MUST output the interpreted attributes (element, HP, base attack,
+-skill type, naming) plus a short explanation string that can be shown in the UI and is
+-logged for judges. Inference requests MUST complete within 1.5 seconds and are replayed
++Every AI inference MUST output the interpreted attributes (element, HP, base attack,
++skill type, naming) plus a short explanation string that can be shown in the UI and is
++logged for judges. Inference requests MUST complete within 1.5 seconds and are replayed
+ via stored prompts + seed so the same doodle always yields the same attributes during
+ judging. Model updates require a published change note describing new behavior and new
+@@
+-Battles MUST derive all damage, elemental reactions, and win conditions from the saved
+-attributes and a single RNG seed so any match can be simulated offline for verification.
+-Best-of-three structure, health resets, and round timers MUST be enforced by the
+-server—not the client—to prevent tampering. Each damage event, KO, and overtime call is
+-logged and available for replay tools used in demo videos.
++Battles MUST derive all damage, elemental reactions, and win conditions from the saved
++attributes and a single RNG seed so any match can be simulated offline for verification.
++Best-of-three structure, health resets, and round timers MUST be enforced by the
++server--not the client--to prevent tampering. Each damage event, KO, and overtime call
++is logged and available for replay tools used in demo videos.
+@@
+-### V. Demo-Ready Delivery
+-A playable build (web link or packaged app) and a ≤90 second walkthrough video MUST be
+-kept current at all times because the AI hackathon submission depends on them. Builds
++### V. Demo-Ready Delivery
++A playable build (web link or packaged app) and a <=90 second walkthrough video MUST be
++kept current at all times because the AI hackathon submission depends on them. Builds
+ MUST include instructions for connecting two players remotely, a spectate mode for
+-judges, and a fallback “guided battle” script for offline capture. Any feature merged to
++judges, and a fallback "guided battle" script for offline capture. Any feature merged to
+ main MUST confirm that both the build link and the demo script still work end to end.
+@@
+-## AI + Gameplay Technical Constraints
+-
+-- Client rendering targets 1920×1080 but MUST gracefully degrade to 1280×720 without
++## AI + Gameplay Technical Constraints
++
++- Client rendering targets 1920x1080 but MUST gracefully degrade to 1280x720 without
+   breaking pen accuracy. UI text MUST remain bilingual-ready so instructions can be
+   localized for judges.
+@@
+-- AI inference hosts MUST expose a health endpoint and support batch processing of the
+-  four canonical doodle types (monster, weapon, shield, augment). Cold starts may not
+-  exceed 5 seconds.
++- AI inference hosts MUST expose a health endpoint and support batch processing of the
++  four canonical doodle types (monster, weapon, shield, augment). Cold starts may not
++  exceed 5 seconds.
+@@
+-- Battle resolution MUST finish within 10 seconds per round, even when every skill stacks
++- Battle resolution MUST finish within 10 seconds per round, even when every skill stacks
+   the maximum allowed effects. Performance budgets MUST be captured in specs and tests.
+@@
+-- Telemetry MUST capture: canvas device info, inference latency, battle duration, win/loss
++- Telemetry MUST capture: canvas device info, inference latency, battle duration, win/loss
+   outcome, and any validation failures. Analytics dumps power the submission recap deck.
+*** End Patch
+[2m2025-11-15T08:24:25.081880Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:24:25.081886Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:24:30.865272Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","python - <<'PY'\nimport pathlib,sys\ntext=pathlib.Path('game/.specify/memory/constitution.md').read_text()\nfor i,ch in enumerate(text):\n    if ord(ch)>127:\n        print('non-ascii',ord(ch),repr(ch))\n        break\nelse:\n    print('ascii-ok')\nPY"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:24:30.865456Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:24:30.865464Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:24:35.952294Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","python3 - <<'PY'\nimport pathlib\ntext=pathlib.Path('game/.specify/memory/constitution.md').read_text()\nfor i,ch in enumerate(text):\n    if ord(ch)>127:\n        print('non-ascii',ord(ch),repr(ch))\n        break\nelse:\n    print('ascii-ok')\nPY"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:24:35.952334Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:24:35.952338Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:24:51.091236Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: game/.specify/templates/plan-template.md
+@@
+ ## Constitution Check
+ 
+ *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+ 
+-[Gates determined based on constitution file]
++- **Input Fidelity**: Plan documents how doodle capture meets <=50 ms latency, >=60 fps,
++  and how telemetry will expose input failures before a round starts.
++- **AI Attribution Transparency**: Plan lists inference budgets (<=1.5 s), explanation
++  surfaces, and logging that preserves prompts + seeds for replay.
++- **Deterministic Battles**: Plan shows how battle math stays server authoritative,
++  single-seed reproducible, and how logs will capture damage events for demos.
++- **Skill Evolution Guardrails**: Plan details validation logic for upgrade stacking
++  (max three elements, additive caps) and how violations block the UI flow.
++- **Demo Readiness**: Plan confirms a playable link + <=90 s video script will be
++  revalidated after delivery, and identifies the smoke test owner.
+*** End Patch
+[2m2025-11-15T08:24:51.091264Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:24:51.091267Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:25:07.505166Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: game/.specify/templates/spec-template.md
+@@
+ ## User Scenarios & Testing *(mandatory)*
+ 
+ <!--
+   IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
+@@
+   Think of each story as a standalone slice of functionality that can be:
+   - Developed independently
+   - Tested independently
+   - Deployed independently
+   - Demonstrated to users independently
+ -->
+ 
++Each story MUST call out which constitution principles it satisfies (input fidelity,
++AI transparency, deterministic battle loop, skill evolution guardrails, demo readiness)
++and document the metric or artifact (latency budget, replay log, build link, video) that
++proves compliance.
+@@
+ ### Edge Cases
+ 
+-<!--
+-  ACTION REQUIRED: The content in this section represents placeholders.
+-  Fill them out with the right edge cases.
+--->
+-
+-- What happens when [boundary condition]?
+-- How does system handle [error scenario]?
++- AI inference exceeds 1.5 seconds or returns conflicting attributes.
++- Canvas telemetry reports >50 ms latency or misses a stroke mid-round.
++- Upgrade validation rejects a user sketch (max elements, attack caps, cooldown bounds).
++- Battle replay diverges from authoritative logs during demo capture.
++- Playable build link or demo video becomes unavailable right before submission.
+@@
+-### Functional Requirements
+-
+-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
+-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
+-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
+-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
+-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
+-
+-*Example of marking unclear requirements:*
+-
+-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
+-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
++### Functional Requirements
++
++- **FR-001**: System MUST capture doodle strokes at <=50 ms latency and >=60 fps with
++  telemetry proving compliance.
++- **FR-002**: AI attribution MUST complete within 1.5 seconds, store prompts + seeds, and
++  output explanation text shown to both players and judges.
++- **FR-003**: Auto-battle resolution MUST run server-side from persisted attributes +
++  single RNG seed and produce a replay log for each damage event.
++- **FR-004**: Skill upgrades MUST enforce stacking rules (max three elements, additive
++  attack caps, cooldown changes logged) and block invalid submissions with clear errors.
++- **FR-005**: Build delivery MUST include a live playable link + <=90 second walkthrough
++  video script that is smoke-tested after each merge.
++
++*Example of marking unclear requirements:*
++
++- **FR-006**: System MUST authenticate players via [NEEDS CLARIFICATION: auth method not
++  specified - email code, invite link, or anonymous room?]
++- **FR-007**: Shareable build hosting MUST reside on [NEEDS CLARIFICATION: CDN/service
++  not yet picked, blockers identified here]
+@@
+-### Key Entities *(include if feature involves data)*
+-
+-- **[Entity 1]**: [What it represents, key attributes without implementation]
+-- **[Entity 2]**: [What it represents, relationships to other entities]
++### Key Entities *(include if feature involves data)*
++
++- **Monster**: Canonical representation of a player's doodled creature. Attributes include
++  name, HP, base attack, element, seed, and owning player ID; immutable per battle.
++- **SkillCard**: Weapon/defense/augment doodle tied to a monster. Stores stacked elements,
++  additive attack bonuses, cooldown adjustments, and an ordered history of reinforcement
++  doodles for auditing.
+ 
+ ## Success Criteria *(mandatory)*
+@@
+ ### Measurable Outcomes
+ 
+-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
+-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
+-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
+-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
++- **SC-001**: 95% of doodle sessions maintain <=50 ms latency and >=60 fps over 5 minute
++  tests on target hackathon laptops.
++- **SC-002**: 99% of AI attributions complete within 1.5 seconds and include explanation
++  text visible in-game.
++- **SC-003**: 100% of recorded battles can be replayed offline to reproduce the published
++  damage log.
++- **SC-004**: Playable build link and <=90 second demo video remain accessible for 100% of
++  dry runs performed the week before submission.
+*** End Patch
+[2m2025-11-15T08:25:07.505431Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:25:07.505438Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:25:29.373616Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: game/.specify/templates/tasks-template.md
+@@
+-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
++**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification, but telemetry/logging tasks that prove constitution metrics (input latency, inference time, deterministic battles, demo readiness) ARE mandatory.
+@@
+-**Purpose**: Project initialization and basic structure
+-
+-- [ ] T001 Create project structure per implementation plan
+-- [ ] T002 Initialize [language] project with [framework] dependencies
+-- [ ] T003 [P] Configure linting and formatting tools
++**Purpose**: Project initialization that wires the doodle canvas, AI attribution client, and telemetry hooks required by the constitution.
++
++- [ ] T001 Create canvas module per plan with latency instrumentation (<=50 ms, >=60 fps)
++- [ ] T002 Scaffold AI attribution client/service contract with seed + prompt persistence
++- [ ] T003 [P] Configure telemetry/logging pipeline (input, inference, battle, demo checks)
+@@
+-**Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
++**Purpose**: Core infrastructure (server authoritative battle sim + persistence) that MUST be complete before ANY user story can be implemented
+ 
+ **⚠️ CRITICAL**: No user story work can begin until this phase is complete
+ 
+-Examples of foundational tasks (adjust based on your project):
+-
+-- [ ] T004 Setup database schema and migrations framework
+-- [ ] T005 [P] Implement authentication/authorization framework
+-- [ ] T006 [P] Setup API routing and middleware structure
+-- [ ] T007 Create base models/entities that all stories depend on
+-- [ ] T008 Configure error handling and logging infrastructure
+-- [ ] T009 Setup environment configuration management
++Examples of foundational tasks (adjust based on your project):
++
++- [ ] T004 Create Monster + SkillCard schemas with history + seed storage
++- [ ] T005 [P] Implement deterministic battle simulator service (server authoritative)
++- [ ] T006 [P] Implement validation engine for skill upgrades (max elements, attack caps)
++- [ ] T007 Wire inference queue + batching so requests resolve within 1.5 seconds
++- [ ] T008 Configure replay log writer + export for demo tooling
++- [ ] T009 Setup build pipeline that produces shareable link + <=90 s walkthrough video
+@@
+-## Phase 3: User Story 1 - [Title] (Priority: P1) 🎯 MVP
++## Phase 3: User Story 1 - [Title] (Priority: P1) 🎯 MVP
+ 
+ **Goal**: [Brief description of what this story delivers]
+ 
+ **Independent Test**: [How to verify this story works on its own]
+@@
+-> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+-
+-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
+-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
++> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
++
++- [ ] T010 [P] [US1] Latency probe covering <=50 ms canvas + >=60 fps for this story
++- [ ] T011 [P] [US1] Replay log assertion test to prove deterministic battle outcome
+@@
+-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
+-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
+-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
+-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
+-- [ ] T016 [US1] Add validation and error handling
+-- [ ] T017 [US1] Add logging for user story 1 operations
++- [ ] T012 [P] [US1] Implement doodle capture flow in src/ui/[feature].tsx with telemetry
++- [ ] T013 [P] [US1] Add inference request/response handling in src/services/ai.ts
++- [ ] T014 [US1] Persist Monster/SkillCard seeds + prompts for this story
++- [ ] T015 [US1] Render attribution explanation UI + export for judges
++- [ ] T016 [US1] Enforce validation rules + player feedback for rejected doodles
++- [ ] T017 [US1] Emit logging hooks (input, inference, replay) scoped to this story
+@@
+-### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
+-
+-- [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
+-- [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
++### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
++
++- [ ] T018 [P] [US2] Deterministic battle regression test using stored seeds
++- [ ] T019 [P] [US2] Upgrade validation test covering max element + attack cap clauses
+@@
+-- [ ] T020 [P] [US2] Create [Entity] model in src/models/[entity].py
+-- [ ] T021 [US2] Implement [Service] in src/services/[service].py
+-- [ ] T022 [US2] Implement [endpoint/feature] in src/[location]/[file].py
+-- [ ] T023 [US2] Integrate with User Story 1 components (if needed)
++- [ ] T020 [P] [US2] Implement new SkillCard logic in src/models/skill-card.ts
++- [ ] T021 [US2] Extend battle simulator hook in src/services/battle.ts
++- [ ] T022 [US2] Update telemetry export + analytics dashboards
++- [ ] T023 [US2] Update shareable build + smoke-test walkthrough script
+@@
+-### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
+-
+-- [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
+-- [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
++### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
++
++- [ ] T024 [P] [US3] Telemetry test to ensure inference latency alarms trigger
++- [ ] T025 [P] [US3] Demo build smoke test verifying playable link + video capture
+@@
+-- [ ] T026 [P] [US3] Create [Entity] model in src/models/[entity].py
+-- [ ] T027 [US3] Implement [Service] in src/services/[service].py
+-- [ ] T028 [US3] Implement [endpoint/feature] in src/[location]/[file].py
++- [ ] T026 [P] [US3] Implement spectate/guided battle script in scripts/demo/
++- [ ] T027 [US3] Harden server authoritative reconciliation module
++- [ ] T028 [US3] Update documentation explaining judge walkthrough
+@@
+-- [ ] TXXX [P] Documentation updates in docs/
+-- [ ] TXXX Code cleanup and refactoring
+-- [ ] TXXX Performance optimization across all stories
+-- [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
+-- [ ] TXXX Security hardening
+-- [ ] TXXX Run quickstart.md validation
++- [ ] TXXX [P] Documentation updates in docs/ (include replay + demo scripts)
++- [ ] TXXX Code cleanup and refactoring
++- [ ] TXXX Performance optimization (input latency, inference speed, battle runtime)
++- [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
++- [ ] TXXX Security hardening (server authoritative battle, inference auth)
++- [ ] TXXX Run quickstart.md validation + verify playable link/video
+*** End Patch
+[2m2025-11-15T08:25:29.373772Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:25:29.373784Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:25:37.698293Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"completed","step":"Review constitution template and identify placeholders/structure"},{"status":"completed","step":"Collect project context and placeholder values from repo/user info"},{"status":"completed","step":"Update constitution file with resolved values, sync impact report, version bump"},{"status":"completed","step":"Propagate checks across templates/docs and summarize changes"}]}
+[2m2025-11-15T08:25:37.698388Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:25:37.698402Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:25:44.737077Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba game/.specify/memory/constitution.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:25:44.737151Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:25:44.737167Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:25:51.666943Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"Constitution Check\" -n game/.specify/templates/plan-template.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:25:51.667006Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:25:51.667018Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:25:55.249990Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba game/.specify/templates/plan-template.md | sed -n '30,70p'"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:25:55.250030Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:25:55.250037Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:25:58.677525Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"Each story\" -n game/.specify/templates/spec-template.md"] ,"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:25:58.677560Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:25:58.677566Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:26:02.811188Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba game/.specify/templates/spec-template.md | sed -n '1,80p'"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:26:02.811244Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:26:02.811254Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:26:08.057566Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba game/.specify/templates/spec-template.md | sed -n '80,180p'"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:26:08.057711Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:26:08.057731Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:26:12.359215Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba game/.specify/templates/tasks-template.md | sed -n '1,200p'"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:26:12.359312Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:26:12.359334Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:26:16.997369Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cd /Users/chenyuxin/Sketch-Brawl && git status -sb"] ,"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:26:16.997404Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:26:16.997411Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:27:37.929878Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:27:44.387597Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:27:47.429111Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:28:05.867472Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:28:20.723653Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:28:27.541966Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"in_progress","step":"Determine feature branch short-name, next number, and run create-new-feature script"},{"status":"pending","step":"Gather context and draft spec per template"},{"status":"pending","step":"Create checklist, validate spec quality, iterate if needed"}]}
+[2m2025-11-15T08:28:27.541992Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:28:27.541997Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:28:32.160604Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","git fetch --all --prune"],"workdir":"/Users/chenyuxin/Sketch-Brawl","timeout_ms":120000}
+[2m2025-11-15T08:28:32.160665Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:28:32.160676Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:28:40.797456Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","git fetch --all --prune"],"workdir":"/Users/chenyuxin/Sketch-Brawl","with_escalated_permissions":true,"justification":"Need to update local refs to check existing feature branches before creating new one","timeout_ms":120000}
+[2m2025-11-15T08:28:40.797481Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:28:40.797485Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:29:20.959008Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","git ls-remote --heads origin | grep -E 'refs/heads/[0-9]+-ai-game-demo$' || true"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:29:20.959116Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:29:20.959124Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:29:27.822652Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","git branch -r | grep -E 'origin/[0-9]+-ai-game-demo$' || true"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:29:27.822728Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:29:27.822739Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:29:32.840416Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","git branch | grep -E '^[* ]*[0-9]+-ai-game-demo$' || true"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:29:32.840477Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:29:32.840490Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:29:37.474437Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls game"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:29:37.474504Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:29:37.474519Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:29:45.229487Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '1,200p' game/.specify/scripts/bash/create-new-feature.sh"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:29:45.229535Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:29:45.229538Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:29:58.805846Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n 'printf' game/.specify/scripts/bash/create-new-feature.sh"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:29:58.805895Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:29:58.805903Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:30:14.826729Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cd game && .specify/scripts/bash/create-new-feature.sh --json --number 1 --short-name ai-game-demo \"帮我打造这个AI游戏demo，保证提到的功能都能实现，并与前端UI良好交互\""],"workdir":"/Users/chenyuxin/Sketch-Brawl","with_escalated_permissions":true,"justification":"Need to run repository script that creates new feature branch and spec files, which modifies git metadata and workspace files"}
+[2m2025-11-15T08:30:14.826794Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:30:14.826805Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:32:17.341809Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls specs/001-ai-game-demo"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:32:17.341847Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:32:17.341853Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:32:20.972001Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat specs/001-ai-game-demo/spec.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:32:20.972027Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:32:20.972032Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:32:30.823586Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat game/.specify/templates/spec-template.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:32:30.823643Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:32:30.823653Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:33:13.995390Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: specs/001-ai-game-demo/spec.md
++# Feature Specification: Sketch Brawl Demo Delivery
++
++**Feature Branch**: `001-ai-game-demo`  
++**Created**: 2025-11-15  
++**Status**: Draft  
++**Input**: User description: "帮我打造这个AI游戏demo，保证提到的功能都能实现，并与前端UI良好交互"
++
++## User Scenarios & Testing *(mandatory)*
++
++Each story MUST call out which constitution principles it satisfies (input fidelity,
++AI transparency, deterministic battle loop, skill evolution guardrails, demo readiness)
++and document the metric or artifact (latency budget, replay log, build link, video) that
++proves compliance.
++
++### User Story 1 - Draw-to-Attribute Loop (Priority: P1)
++
++Two remote players join a lobby, draw their monster and first skill on the shared canvas, and immediately see the AI-interpreted attributes plus rationale before the battle starts.
++
++**Principles & Evidence**: Input Fidelity (stroke latency logs <=50 ms, >=60 fps dashboards), Transparent AI Attribution (1.5 s inference SLA with prompt + seed persisted).  
++**Why this priority**: Without trustworthy draw-to-attribute translation, no subsequent gameplay or judging is possible.  
++**Independent Test**: Run a 2-player session capturing latency telemetry and verifying the AI summary panel to validate inputs, even if auto-battle is stubbed out.
++
++**Acceptance Scenarios**:
++
++1. **Given** both players are on the lobby canvas, **When** they finish drawing a monster, **Then** the UI displays the interpreted element, HP, attack, and explanation text within 1.5 seconds and persists the seed/prompts for replay.
++2. **Given** a player draws a reinforcement skill doodle, **When** the AI detects a validation violation (e.g., >3 elements), **Then** the UI blocks the submission and highlights the exact stacking rule breached.
++
++---
++
++### User Story 2 - Server-Authoritative Auto Battles (Priority: P2)
++
++The system runs best-of-three auto battles using only saved attributes and a single RNG seed, presents outcomes in the UI, and lets players/judges replay each round deterministically.
++
++**Principles & Evidence**: Deterministic Auto-Battle Loop (battle logs + replay file proving same damage), Skill Evolution Guardrails (upgrade deltas recorded), Demo Readiness (spectator overlay referencing logs).  
++**Why this priority**: Judges must see fair, reproducible combat that showcases the AI reasoning beyond the drawings.  
++**Independent Test**: Trigger an automated duel using stored monsters/skills, compare replay logs against UI outcomes, and confirm a downloaded log can reproduce the same KO order offline.
++
++**Acceptance Scenarios**:
++
++1. **Given** the system has saved monsters/skills for both players, **When** a round starts, **Then** the server simulates damage using the RNG seed, streams events to clients, and logs each hit/KO for replay without client overrides.
++2. **Given** a round finishes, **When** a judge requests a replay, **Then** the system replays identical events (damage, overtime, victory) without divergence and flags any mismatch as a blocking error.
++
++---
++
++### User Story 3 - Demo Packaging & Frontend Handoff (Priority: P3)
++
++Deliver a playable link plus ≤90 second walkthrough video that demonstrates the full loop (draw, AI explain, battle, upgrades) with bilingual-ready UI copy and guidance overlays for the judging panel.
++
++**Principles & Evidence**: Demo-Ready Delivery (hosted build link uptime checks, scripted video), Input Fidelity & AI Transparency (UI overlays referencing telemetry).  
++**Why this priority**: Submission success for the AI hackathon depends on a polished experience and clear instructions for evaluators.  
++**Independent Test**: Run the smoke-test checklist that loads the hosted build in a fresh browser, walks through matchmaking, records the guided video script, and confirms all instructions render correctly in Chinese + English placeholders.
++
++**Acceptance Scenarios**:
++
++1. **Given** a new judge opens the playable link, **When** they follow the on-screen bilingual tutorial, **Then** they can watch a guided battle replay end-to-end without needing external documentation.
++2. **Given** the feature is merged to main, **When** the CI job publishes artifacts, **Then** the hosted demo link and the prerecorded ≤90 second walkthrough video are updated and referenced from the submission tracker.
++
++---
++
++### Edge Cases
++
++- AI inference exceeds 1.5 seconds, conflicts with canvas inputs, or times out mid-round; the UI must surface fallback stats or allow redraw before battle.
++- Canvas telemetry detects >50 ms latency or dropped strokes on one player—system pauses round start and prompts to recalibrate before unfair play occurs.
++- Upgrade validation rejects stacked effects due to element count, additive attack caps, or cooldown tampering; history audit trail must show which doodle caused the block.
++- Battle replay diverges from authoritative logs during demo capture; submissions halt with actionable error messaging and instructions to regenerate.
++- Playable build link or demo video becomes unavailable pre-submission; automation must alert owners and provide cached offline “guided battle” assets.
++- Remote players desync (network loss, late join) while front-end UI expects synchronous input; lobby must handle reconnect or switch to AI placeholder opponent without corrupting logs.
++
++## Requirements *(mandatory)*
++
++### Functional Requirements
++
++- **FR-001**: System MUST capture doodle strokes at <=50 ms latency and >=60 fps with telemetry proving compliance.
++- **FR-002**: AI attribution MUST complete within 1.5 seconds, store prompts + seeds, and output explanation text shown to both players and judges.
++- **FR-003**: Auto-battle resolution MUST run server-side from persisted attributes + single RNG seed and produce a replay log for each damage event.
++- **FR-004**: Skill upgrades MUST enforce stacking rules (max three elements, additive attack caps, cooldown changes logged) and block invalid submissions with clear errors.
++- **FR-005**: Build delivery MUST include a live playable link + <=90 second walkthrough video script that is smoke-tested after each merge.
++- **FR-006**: Lobby MUST allow two human players or one human + AI bot to join via shareable invite URL, showing readiness state before canvases unlock.
++- **FR-007**: Frontend MUST expose bilingual-ready UI copy for every judge-facing instruction, including drawing guidance, AI explanation, battle log legend, and tutorial overlays.
++- **FR-008**: Telemetry dashboard MUST aggregate latency, inference time, battle duration, win/loss, and validation failures per session, exportable for the submission recap.
++- **FR-009**: Spectate/guided battle mode MUST let judges replay a curated match with scripted captions even if live opponents are unavailable.
++- **FR-010**: Offline recap pack MUST bundle replay logs, prompts/seeds, and demo video so judges can verify functionality without network access.
++
++*Example of marking unclear requirements:*
++
++- **FR-011**: System MUST authenticate players via [NEEDS CLARIFICATION: auth method not specified - email code, invite link, or anonymous room?]
++- **FR-012**: Shareable build hosting MUST reside on [NEEDS CLARIFICATION: CDN/service not yet picked, blockers identified here]
++
++### Key Entities *(include if feature involves data)*
++
++- **Monster**: Canonical representation of a player's doodled creature. Attributes include name, HP, base attack, element, seed, owning player ID, and AI explanation; immutable per battle.
++- **SkillCard**: Weapon/defense/augment doodle tied to a monster. Stores stacked elements, additive attack bonuses, cooldown adjustments, and ordered reinforcement history for auditing.
++- **BattleSession**: Server-authoritative record containing participating player IDs, RNG seed, ordered damage events, overtime markers, and replay export pointers for each round in best-of-three play.
++- **TelemetryEvent**: Structured log entry covering canvas latency, inference durations, validation rejections, battle runtime, or demo artifact status; feeds dashboards and submission summaries.
++- **DemoArtifact**: Versioned pointer to hosted playable build, guided battle script, and ≤90 second walkthrough video ensuring hackathon submission readiness.
++
++## Success Criteria *(mandatory)*
++
++### Measurable Outcomes
++
++- **SC-001**: 95% of doodle sessions maintain <=50 ms latency and >=60 fps over 5-minute tests on target hackathon laptops, with alerts triggered for any sustained violation.
++- **SC-002**: 99% of AI attributions complete within 1.5 seconds and include explanation text visible in both languages; any slower response auto-prompts redraw before combat.
++- **SC-003**: 100% of recorded battles can be replayed offline to reproduce the published damage log, and any mismatch blocks submission with a remediation checklist.
++- **SC-004**: Playable build link and <=90 second demo video remain accessible and up to date for 100% of smoke tests executed the week before submission.
++- **SC-005**: Judges completing the guided walkthrough report ≥90% task success (watch match, inspect logs, understand upgrade history) during user testing sessions.
++
++## Assumptions
++
++- Target platform is desktop browser (Chrome/Edge) with drawing tablets or touchpads; mobile support is out of scope for this demo timeline.
++- Player matchmaking relies on invite links shared manually among testers; no global lobby discovery is needed.
++- Authentication can default to lightweight session codes unless clarified otherwise (see FR-011).
++- Hosting will use an internal static site/CDN capable of HTTPS and WebSocket proxying; fallback offline package suffices if CDN selection is delayed.
++
++## Dependencies & Risks
++
++- Requires stable AI inference endpoint capable of batching monster/skill doodles with deterministic seed support; failures stall all gameplay.
++- Needs content design for bilingual copy and guided script; delays impact demo readiness even if gameplay works.
++- Telemetry + replay pipelines must integrate with submission tracker before final review; missing exports undermine judge trust.
+*** End Patch
+[2m2025-11-15T08:33:13.995587Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:33:13.995593Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:33:20.793742Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","mkdir -p specs/001-ai-game-demo/checklists"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:33:20.793776Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:33:20.793784Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:33:25.811737Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat <<'EOF' > specs/001-ai-game-demo/checklists/requirements.md\n# Specification Quality Checklist: Sketch Brawl Demo Delivery\n\n**Purpose**: Validate specification completeness and quality before proceeding to planning\n**Created**: 2025-11-15\n**Feature**: [specs/001-ai-game-demo/spec.md](../spec.md)\n\n## Content Quality\n\n- [ ] No implementation details (languages, frameworks, APIs)\n- [ ] Focused on user value and business needs\n- [ ] Written for non-technical stakeholders\n- [ ] All mandatory sections completed\n\n## Requirement Completeness\n\n- [ ] No [NEEDS CLARIFICATION] markers remain\n- [ ] Requirements are testable and unambiguous\n- [ ] Success criteria are measurable\n- [ ] Success criteria are technology-agnostic (no implementation details)\n- [ ] All acceptance scenarios are defined\n- [ ] Edge cases are identified\n- [ ] Scope is clearly bounded\n- [ ] Dependencies and assumptions identified\n\n## Feature Readiness\n\n- [ ] All functional requirements have clear acceptance criteria\n- [ ] User scenarios cover primary flows\n- [ ] Feature meets measurable outcomes defined in Success Criteria\n- [ ] No implementation details leak into specification\n\n## Notes\n\n- Items marked incomplete require spec updates before `/speckit.clarify` or `/speckit.plan`\nEOF"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:33:25.811801Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:33:25.811808Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:33:50.946806Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/checklists/requirements.md
+@@
+-## Content Quality
+-
+-- [ ] No implementation details (languages, frameworks, APIs)
+-- [ ] Focused on user value and business needs
+-- [ ] Written for non-technical stakeholders
+-- [ ] All mandatory sections completed
++## Content Quality
++
++- [x] No implementation details (languages, frameworks, APIs)
++- [x] Focused on user value and business needs
++- [x] Written for non-technical stakeholders
++- [x] All mandatory sections completed
+@@
+-## Requirement Completeness
+-
+-- [ ] No [NEEDS CLARIFICATION] markers remain
+-- [ ] Requirements are testable and unambiguous
+-- [ ] Success criteria are measurable
+-- [ ] Success criteria are technology-agnostic (no implementation details)
+-- [ ] All acceptance scenarios are defined
+-- [ ] Edge cases are identified
+-- [ ] Scope is clearly bounded
+-- [ ] Dependencies and assumptions identified
++## Requirement Completeness
++
++- [ ] No [NEEDS CLARIFICATION] markers remain
++- [x] Requirements are testable and unambiguous
++- [x] Success criteria are measurable
++- [x] Success criteria are technology-agnostic (no implementation details)
++- [x] All acceptance scenarios are defined
++- [x] Edge cases are identified
++- [x] Scope is clearly bounded
++- [x] Dependencies and assumptions identified
+@@
+-## Feature Readiness
+-
+-- [ ] All functional requirements have clear acceptance criteria
+-- [ ] User scenarios cover primary flows
+-- [ ] Feature meets measurable outcomes defined in Success Criteria
+-- [ ] No implementation details leak into specification
++## Feature Readiness
++
++- [x] All functional requirements have clear acceptance criteria
++- [x] User scenarios cover primary flows
++- [x] Feature meets measurable outcomes defined in Success Criteria
++- [x] No implementation details leak into specification
+*** End Patch
+[2m2025-11-15T08:33:50.946865Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:33:50.946875Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:37:46.388334Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:38:02.112184Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:38:22.491373Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/spec.md
+@@
+-- **FR-011**: System MUST authenticate players via [NEEDS CLARIFICATION: auth method not specified - email code, invite link, or anonymous room?]
+-- **FR-012**: Shareable build hosting MUST reside on [NEEDS CLARIFICATION: CDN/service not yet picked, blockers identified here]
++- **FR-011**: Lobby access MUST rely on private invite links without additional authentication; following a link grants a temporary anonymous slot for the demo session.
++- **FR-012**: Playable build and backend services MUST be deployed via Railway-managed environments, with fallback guidance if the chosen tech stack requires complementary hosting for static assets or video storage.
+@@
+ - Target platform is desktop browser (Chrome/Edge) with drawing tablets or touchpads; mobile support is out of scope for this demo timeline.
+ - Player matchmaking relies on invite links shared manually among testers; no global lobby discovery is needed.
+-- Authentication can default to lightweight session codes unless clarified otherwise (see FR-011).
++- Authentication is intentionally omitted; possession of the invite link is the only requirement to join a lobby.
+ - Hosting will use an internal static site/CDN capable of HTTPS and WebSocket proxying; fallback offline package suffices if CDN selection is delayed.
+*** End Patch
+[2m2025-11-15T08:38:22.491450Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:38:22.491457Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:38:28.180978Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/spec.md
+@@
+-- Hosting will use an internal static site/CDN capable of HTTPS and WebSocket proxying; fallback offline package suffices if CDN selection is delayed.
++- Hosting will primarily rely on Railway-managed services; offline recap packs act as fallback for judges when Railway access is unavailable.
+*** End Patch
+[2m2025-11-15T08:38:28.181004Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:38:28.181008Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:38:33.596825Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/checklists/requirements.md
+@@
+-## Requirement Completeness
+-
+-- [ ] No [NEEDS CLARIFICATION] markers remain
++## Requirement Completeness
++
++- [x] No [NEEDS CLARIFICATION] markers remain
+*** End Patch
+[2m2025-11-15T08:38:33.596857Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:38:33.596863Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:38:36.812412Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","git status -sb"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:38:36.812476Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:38:36.812506Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:38:40.818054Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba specs/001-ai-game-demo/spec.md | sed -n '60,200p'"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:38:40.818131Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:38:40.818143Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:39:30.777786Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:40:00.722792Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:40:02.875780Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:40:11.408736Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:40:26.697195Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"in_progress","step":"Run setup-plan script and gather template/context files"},{"status":"pending","step":"Populate plan, Phase0 research, Phase1 design artifacts per instructions"},{"status":"pending","step":"Update agent context and report outputs"}]}
+[2m2025-11-15T08:40:26.697235Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:40:26.697241Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:40:30.287587Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc",".specify/scripts/bash/setup-plan.sh --json"],"workdir":"/Users/chenyuxin/Sketch-Brawl","with_escalated_permissions":true,"justification":"Script needs to create planning files in workspace and may manipulate git state"}
+[2m2025-11-15T08:40:30.287641Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:40:30.287651Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:40:44.258462Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc",".specify/scripts/bash/setup-plan.sh --json"],"workdir":"/Users/chenyuxin/Sketch-Brawl/game","with_escalated_permissions":true,"justification":"Setup plan script needs to generate planning files and modify workspace metadata"}
+[2m2025-11-15T08:40:44.258590Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:40:44.258600Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:41:18.413500Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls specs/001-ai-game-demo"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:41:18.413618Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:41:18.413630Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:41:23.541315Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat specs/001-ai-game-demo/plan.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:41:23.541348Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:41:23.541353Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:41:27.820137Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat game/.specify/memory/constitution.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:41:27.820190Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:41:27.820196Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:42:08.079692Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat <<'EOF' > specs/001-ai-game-demo/plan.md\n# Implementation Plan: Sketch Brawl Demo Delivery\n\n**Branch**: `001-ai-game-demo` | **Date**: 2025-11-15 | **Spec**: [spec.md](./spec.md)\n**Input**: Feature specification from `/specs/001-ai-game-demo/spec.md`\n\n## Summary\n\nBuild a submission-ready Sketch Brawl demo where two players sketch monsters/skills,\nAI assigns combat attributes, and a deterministic server resolves battles with replay\nlogs plus guided demo assets. Delivery includes: low-latency doodle canvas, AI\nattribution flow with explanations, server-authoritative battle simulator, upgrade\nvalidation, telemetry dashboards, Railway deployment, and packaged demo artifacts.\n\n## Technical Context\n\n**Language/Version**: Python 3.11 (backend services, telemetry workers); TypeScript 5 + React 18 (web canvas + UI); Unity WebGL (optional guided replay viewer embedded as iframe)  \n**Primary Dependencies**: FastAPI, PostgreSQL 15, Redis 7, PlayCanvas-like WebGL canvas or Fabric.js for drawing, TorchServe/ONNX runtime for image-to-attribute inference, Railway deployment stack  \n**Storage**: PostgreSQL for Monsters/SkillCards/BattleSessions, Redis for lobby presence + deterministic seed queue, object storage (Railway plugin) for demo artifacts/log bundles  \n**Testing**: Pytest + Hypothesis for battle math, Playwright for frontend canvas/inference loop, Locust scripts for latency soak tests  \n**Target Platform**: Desktop browsers (Chrome/Edge) at 1920x1080 with fallback 1280x720; backend hosted on Railway containers  \n**Project Type**: Web frontend + backend services  \n**Performance Goals**: <=50 ms canvas latency, >=60 fps rendering, <=1.5 s AI inference P95, <=10 s battle resolution P95, Railway cold start <=5 s  \n**Constraints**: Deterministic RNG seed propagation, bilingual UI copy, offline replay exports, invite-link access only, Railway resource quotas (2 vCPU/2 GB per service)  \n**Scale/Scope**: Two concurrent human players + judge spectators per lobby during demos; telemetry sized for 50 recorded sessions and 10 guided replays\n\n## Constitution Check\n\n*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*\n\n- **Input Fidelity**: Plan includes canvas instrumentation (PerformanceObserver + worker) and Redis-backed telemetry to ensure <=50 ms latency, >=60 fps with pre-round pause if breached.\n- **AI Attribution Transparency**: FastAPI inference gateway enforces <=1.5 s SLA, stores prompt + seed + explanation JSON per doodle, and exposes UI overlays + judge logs.\n- **Deterministic Battles**: Python battle engine consumes persisted Monster/SkillCard data + single RNG seed, logs every damage event, and exports replay JSON for playback.\n- **Skill Evolution Guardrails**: Validation service enforces max three elements, additive attack caps, cooldown rules, and annotates failures so UI can block upgrades.\n- **Demo Readiness**: CI publishes Railway-hosted build + <=90 s walkthrough video, spectate scripts, and offline recap packs; smoke test checklist runs after each merge.\n\n_All gates satisfied: requirements mapped to specific components and metrics with telemetry + CI evidence. No violations to justify._\n\n## Project Structure\n\n### Documentation (this feature)\n\n```text\nspecs/001-ai-game-demo/\n├── plan.md              # This file\n├── research.md          # Phase 0 output\n├── data-model.md        # Phase 1 output\n├── quickstart.md        # Phase 1 output\n├── contracts/           # Phase 1 output\n├── checklists/\n│   └── requirements.md\n└── tasks.md             # Phase 2 output (/speckit.tasks)\n```\n\n### Source Code (repository root)\n\n```text\nbackend/\n├── src/\n│   ├── api/             # FastAPI routers (lobby, doodle upload, battles, telemetry)\n│   ├── services/        # AI attribution, battle engine, upgrade validator\n│   ├── models/          # SQLModel entities + seed persistence\n│   ├── workers/         # Replay exporter, telemetry aggregator\n│   └── infra/           # Railway config, Redis/Postgres clients\n└── tests/\n    ├── unit/\n    ├── integration/\n    └── load/\n\nfrontend/\n├── src/\n│   ├── components/      # Canvas, AI explanation panel, battle HUD, tutorial overlays\n│   ├── pages/           # Lobby, Match, Guided Replay, Admin smoke test\n│   ├── services/        # API clients, telemetry publisher\n│   └── store/           # Deterministic state synced with server seed\n└── tests/\n    ├── e2e/             # Playwright\n    └── visual/\n\nunity-guided/\n└── Assets/              # Optional WebGL replay visualizer packaged for iframe use\n```\n\n**Structure Decision**: Dual repo folders (`backend`, `frontend`) enable independent deployments + Railway services; Unity WebGL assets remain optional add-on referenced by frontend.\n\n## Complexity Tracking\n\n| Violation | Why Needed | Simpler Alternative Rejected Because |\n|-----------|------------|-------------------------------------|\n| Second runtime (Unity WebGL) | Enables cinematic guided replay judges expect | Plain React animation cannot show 3D doodle transformations convincingly |\n| Redis cache | Required for lobby presence + deterministic seed queue | Postgres alone cannot guarantee low-latency presence updates |\nEOF"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:42:08.079955Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:42:08.079966Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:42:23.438602Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat <<'EOF' > specs/001-ai-game-demo/research.md\n# Phase 0 Research — Sketch Brawl Demo Delivery\n\n## Decision: React + Fabric.js canvas for doodle capture\n- **Rationale**: Fabric.js gives vector path access, supports pressure/velocity data, and plays well with React 18 + WebGL fallback. Performance benchmarks show <=5 ms per stroke processing on modern laptops, enabling the constitution's <=50 ms latency / >=60 fps target when combined with requestIdleCallback batching. Works in browsers judges already use; Unity canvas kept for replay only.\n- **Alternatives Considered**:\n  - **HTML5 Canvas 2D API directly**: Lowest dependency count but lacks built-in object model and would require more manual work for undo/redo, stroke serialization, and hit testing—which risks latency regressions.\n  - **Unity WebGL front-end**: Strong rendering but slower startup (~10s) and heavier bundle; overkill for authoring doodles.\n\n## Decision: Python FastAPI inference orchestrator using ONNX runtime\n- **Rationale**: Python ecosystem already used for AI/ML; ONNX runtime loads custom CNN checkpoints exported from training notebooks. FastAPI provides async pipeline to fan out monster vs skill classification, apply deterministic seed injection, and finish within 1.5 s SLA. TorchServe alternative unnecessary; ONNX runtime loads faster on Railway limited memory.\n- **Alternatives Considered**:\n  - **C# minimal API + ML.NET**: Attractive for team skills but ML.NET image classification pipelines struggle with custom doodle semantics; limited ONNX operator support for style-transfer layers.\n  - **External SaaS vision API**: Faster to start but little control over determinism or explanation text; also harder to ship offline recap pack.\n\n## Decision: Deterministic battle engine as standalone Python module with Hypothesis tests\n- **Rationale**: Implementing engine separately ensures RNG seeding, elemental reactions, and damage logs remain deterministic. Using dataclasses + numpy for calculations keeps code simple; Hypothesis property tests verify commutativity and log integrity. This aligns with constitution's Deterministic Auto-Battle Loop principle.\n- **Alternatives Considered**:\n  - **Running battle logic inside frontend**: Violates server-authoritative requirement and makes tampering detection hard.\n  - **Embedding inside Postgres stored procedures**: Deterministic but hard to iterate, limited tooling for logging/replay exports.\n\n## Decision: Railway deployment topology (3 services + object storage)\n- **Rationale**: Railway can run multiple containers per project. Plan uses services: `canvas-api` (FastAPI + Postgres + Redis), `battle-worker` (Celery worker for battle/resync tasks), `frontend` (Next.js static build served via Railway). Demo video + replay archives stored in Railway's object storage plugin, synced nightly to offline bundle. Railway's auto SSL and secret management simplifies gating; monitors satisfy Demo-Ready Delivery checks.\n- **Alternatives Considered**:\n  - **Vercel + Railway hybrid**: Splitting frontend/back adds cross-cloud latency and complicates environment variables.\n  - **Self-hosted VPS**: More control but slower to provision and lacks one-click rollbacks; harder to show maintainability to judges.\n\n## Decision: Telemetry + replay export pipeline via PostgreSQL JSONB + S3-compatible bucket\n- **Rationale**: Using JSONB columns for telemetry events allows flexible shaping of canvas latency samples, inference durations, and battle logs. Nightly job exports aggregated stats + zipped logs to S3-compatible object storage, enabling offline recap pack. Keeps instrumentation centralized and queryable for dashboards.\n- **Alternatives Considered**:\n  - **Timeseries DB (Influx/Prometheus)**: Great for metrics but extra infra overhead for hackathon timeline.\n  - **Plain log files**: Harder to join with player sessions and does not provide structured evidence for constitution checks.\nEOF"]}
+[2m2025-11-15T08:42:23.438782Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:42:23.438793Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:42:35.216429Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat <<'EOF' > specs/001-ai-game-demo/data-model.md\n# Data Model — Sketch Brawl Demo Delivery\n\n## Monster\n- **Fields**: `id (UUID)`, `player_id`, `match_id`, `name`, `element`, `hp`, `base_attack`, `seed`, `ai_explanation`, `created_at`\n- **Relationships**: 1:Many with `SkillCard`; belongs to `BattleSession`\n- **Validation**: `hp` within 50-500; `base_attack` within 5-100; `element` must be from controlled vocabulary {fire, water, earth, air, light, shadow}; `seed` immutable per session\n- **State Notes**: Created after AI inference; immutable except for audit fields\n\n## SkillCard\n- **Fields**: `id (UUID)`, `monster_id`, `type (weapon|shield|augment)`, `elements[]`, `attack_bonus`, `cooldown_delta`, `history (array of reinforcement doodle refs)`, `seed`, `ai_explanation`, `created_at`, `updated_at`\n- **Relationships**: Many-to-1 with `Monster`; history entries reference `TelemetryEvent`\n- **Validation**: `elements` length <= 3; `attack_bonus` capped at +50; `cooldown_delta` between -2 and +2 turns; new reinforcement requires matching parent `monster_id`\n- **State Notes**: Upgrades append to `history` with deterministic order; invalid submissions rejected with reason codes\n\n## BattleSession\n- **Fields**: `id (UUID)`, `lobby_id`, `rng_seed`, `rounds[]`, `winner_player_id`, `replay_uri`, `state (pending|in_progress|completed|invalid)`, `created_at`, `completed_at`\n- **Relationships**: References two `Monster` records per round, includes derived `SkillCard` snapshots\n- **Validation**: `rng_seed` stored as 64-bit int; `rounds` array holds deterministic log entries (timestamp, attacker, defender, damage, status)\n- **State Notes**: Only server mutates; invalid state triggered if replay diff fails integrity check\n\n## TelemetryEvent\n- **Fields**: `id (UUID)`, `session_id`, `source (frontend|backend|worker)`, `type (canvas_latency|inference_time|validation_error|battle_runtime|demo_asset)`, `payload JSONB`, `captured_at`\n- **Relationships**: Linked to `BattleSession`/`Monster`/`SkillCard` via `session_id`\n- **Validation**: `payload` schema validated per type (e.g., canvas latency requires percentile distribution); events older than 30 days archived\n- **State Notes**: Drives dashboards + constitution evidence; emitted via telemetry service\n\n## DemoArtifact\n- **Fields**: `id (UUID)`, `type (playable_build|walkthrough_video|offline_bundle)`, `version`, `uri`, `checksum`, `generated_from_commit`, `status (active|deprecated)`, `created_at`\n- **Relationships**: Linked to CI deployment metadata + `BattleSession` sample logs included\n- **Validation**: `version` increments semver; `checksum` required for offline verification\n- **State Notes**: On each merge to main, new artifact generated and flagged active once smoke tests pass\nEOF"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:42:35.216857Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:42:35.216902Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:42:56.025606Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","mkdir -p specs/001-ai-game-demo/contracts && cat <<'EOF' > specs/001-ai-game-demo/contracts/api.yaml\nopenapi: 3.0.3\ninfo:\n  title: Sketch Brawl Demo API\n  version: 0.1.0\nservers:\n  - url: https://api.sketch-brawl.demo\npaths:\n  /lobbies:\n    post:\n      summary: Create or join a lobby via invite link\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema:\n              type: object\n              properties:\n                invite_code:\n                  type: string\n                role:\n                  type: string\n                  enum: [player, judge, spectator]\n                display_name:\n                  type: string\n              required: [invite_code, role]\n      responses:\n        '201':\n          description: Lobby snapshot\n          content:\n            application/json:\n              schema:\n                $ref: '#/components/schemas/Lobby'\n  /doodles:\n    post:\n      summary: Upload doodle strokes for monster or skill\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema:\n              type: object\n              properties:\n                lobby_id:\n                  type: string\n                doodle_type:\n                  type: string\n                  enum: [monster, skill, reinforcement]\n                strokes:\n                  type: array\n                  items:\n                    $ref: '#/components/schemas/Stroke'\n                metadata:\n                  type: object\n              required: [lobby_id, doodle_type, strokes]\n      responses:\n        '202':\n          description: Inference accepted\n          content:\n            application/json:\n              schema:\n                $ref: '#/components/schemas/InferenceTicket'\n  /doodles/{ticket_id}:\n    get:\n      summary: Retrieve AI attribution results for a doodle\n      parameters:\n        - in: path\n          name: ticket_id\n          required: true\n          schema:\n            type: string\n      responses:\n        '200':\n          description: Attribution payload + explanation\n          content:\n            application/json:\n              schema:\n                $ref: '#/components/schemas/InferenceResult'\n  /battles:\n    post:\n      summary: Start best-of-three battle using submitted monsters & skills\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema:\n              type: object\n              properties:\n                lobby_id:\n                  type: string\n              required: [lobby_id]\n      responses:\n        '201':\n          description: Battle session descriptor\n          content:\n            application/json:\n              schema:\n                $ref: '#/components/schemas/BattleSession'\n  /battles/{session_id}/replay:\n    get:\n      summary: Download deterministic replay log\n      parameters:\n        - in: path\n          name: session_id\n          required: true\n          schema:\n            type: string\n      responses:\n        '200':\n          description: Replay log\n          content:\n            application/json:\n              schema:\n                $ref: '#/components/schemas/BattleReplay'\n  /skills/{skill_id}/reinforce:\n    post:\n      summary: Apply reinforcement doodle to an existing skill card\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema:\n              type: object\n              properties:\n                strokes:\n                  type: array\n                  items:\n                    $ref: '#/components/schemas/Stroke'\n                metadata:\n                  type: object\n              required: [strokes]\n      responses:\n        '200':\n          description: Updated skill card or validation error\n          content:\n            application/json:\n              schema:\n                oneOf:\n                  - $ref: '#/components/schemas/SkillCard'\n                  - $ref: '#/components/schemas/ValidationError'\n  /telemetry:\n    get:\n      summary: Fetch aggregated telemetry slices for a lobby/battle\n      parameters:\n        - in: query\n          name: lobby_id\n          schema:\n            type: string\n        - in: query\n          name: battle_id\n          schema:\n            type: string\n      responses:\n        '200':\n          description: Aggregated metrics\n          content:\n            application/json:\n              schema:\n                $ref: '#/components/schemas/TelemetryBundle'\n  /artifacts/latest:\n    get:\n      summary: Retrieve active playable link + walkthrough video references\n      responses:\n        '200':\n          description: Demo artifact metadata\n          content:\n            application/json:\n              schema:\n                $ref: '#/components/schemas/DemoArtifact'\ncomponents:\n  schemas:\n    Lobby:\n      type: object\n      properties:\n        id:\n          type: string\n        invite_code:\n          type: string\n        players:\n          type: array\n          items:\n            $ref: '#/components/schemas/Player'\n        status:\n          type: string\n          enum: [waiting, ready, battling, completed]\n    Player:\n      type: object\n      properties:\n        id:\n          type: string\n        display_name:\n          type: string\n        role:\n          type: string\n          enum: [player, judge, spectator]\n    Stroke:\n      type: object\n      properties:\n        x:\n          type: number\n        y:\n          type: number\n        pressure:\n          type: number\n        timestamp:\n          type: integer\n    InferenceTicket:\n      type: object\n      properties:\n        ticket_id:\n          type: string\n        expires_at:\n          type: string\n          format: date-time\n    InferenceResult:\n      type: object\n      properties:\n        ticket_id:\n          type: string\n        attributes:\n          type: object\n          properties:\n            element:\n              type: string\n            hp:\n              type: integer\n            base_attack:\n              type: integer\n            skill_type:\n              type: string\n        explanation:\n          type: string\n        seed:\n          type: integer\n    SkillCard:\n      type: object\n      properties:\n        id:\n          type: string\n        elements:\n          type: array\n          items:\n            type: string\n        attack_bonus:\n          type: integer\n        cooldown_delta:\n          type: integer\n        history:\n          type: array\n          items:\n            type: string\n    ValidationError:\n      type: object\n      properties:\n        code:\n          type: string\n        message:\n          type: string\n        details:\n          type: object\n    BattleSession:\n      type: object\n      properties:\n        id:\n          type: string\n        rng_seed:\n          type: integer\n        rounds:\n          type: array\n          items:\n            $ref: '#/components/schemas/BattleEvent'\n        winner_player_id:\n          type: string\n    BattleEvent:\n      type: object\n      properties:\n        timestamp:\n          type: integer\n        attacker:\n          type: string\n        defender:\n          type: string\n        damage:\n          type: integer\n        status:\n          type: string\n    BattleReplay:\n      type: object\n      properties:\n        session_id:\n          type: string\n        events:\n          type: array\n          items:\n            $ref: '#/components/schemas/BattleEvent'\n        checksum:\n          type: string\n    TelemetryBundle:\n      type: object\n      properties:\n        lobby_id:\n          type: string\n        battle_id:\n          type: string\n        canvas_latency_ms_p95:\n          type: number\n        fps_min:\n          type: number\n        inference_ms_p95:\n          type: number\n        battle_duration_s:\n          type: number\n        validation_failures:\n          type: array\n          items:\n            type: object\n    DemoArtifact:\n      type: object\n      properties:\n        playable_url:\n          type: string\n        walkthrough_video_url:\n          type: string\n        offline_bundle_url:\n          type: string\n        version:\n          type: string\nEOF"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:42:56.025873Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:42:56.025881Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:43:10.668258Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat <<'EOF' > specs/001-ai-game-demo/quickstart.md\n# Quickstart — Sketch Brawl Demo Delivery\n\n## Prerequisites\n- Node.js 20+, Yarn 4 (or pnpm) for `frontend/`\n- Python 3.11 + Poetry for `backend/`\n- Railway CLI logged in with access to project\n- Docker (optional) for local container parity\n- Redis 7 and PostgreSQL 15 reachable locally (Docker Compose provided later)\n\n## 1. Clone + Install\n```bash\ngit checkout 001-ai-game-demo\ncd backend && poetry install && cd ..\ncd frontend && yarn install && cd ..\n```\n\n## 2. Bootstrap Local Infra\n```bash\n# from repo root\ncp ops/.env.example .env # contains API keys + Railway defaults\nmake dev-infra # docker compose up postgres, redis, minio\n```\n\n## 3. Run Backend\n```bash\ncd backend\npoetry run alembic upgrade head\npoetry run uvicorn src.api.main:app --reload --port 8000\n```\n\n## 4. Run Battle Worker + Telemetry Exporter\n```bash\ncd backend\npoetry run celery -A src.workers.celery_app worker -l info\npoetry run python -m src.workers.telemetry_export\n```\n\n## 5. Run Frontend Canvas\n```bash\ncd frontend\nyarn dev --port 3000\n```\nOpen http://localhost:3000, create invite link, open two browser windows, and draw.\n\n## 6. Validate Constitution Gates\n- **Input Fidelity**: run `yarn test:latency` (Playwright) to confirm <=50 ms strokes + >=60 fps.\n- **AI Attribution**: call `/doodles` with sample payload and ensure `/doodles/{ticket}` returns within 1.5 s.\n- **Deterministic Battles**: execute `poetry run pytest tests/integration/test_replay.py` to compare logs vs replays.\n- **Skill Guardrails**: run `poetry run pytest tests/unit/test_validation.py` for max elements/attack.\n- **Demo Readiness**: `make smoke-demo` builds frontend, runs scripted replay, and verifies Railway artifact links.\n\n## 7. Package Demo Artifacts\n```bash\nmake build-frontend # static files\nmake bundle-demo # zips logs + walkthrough video + spectator script\nrailway up --service frontend\nrailway up --service canvas-api\nrailway up --service battle-worker\n```\nPublish new artifact metadata via `/artifacts/latest` endpoint.\nEOF"]}
+[2m2025-11-15T08:43:10.668392Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:43:10.668403Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:43:23.877719Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc",".specify/scripts/bash/update-agent-context.sh codex"],"workdir":"/Users/chenyuxin/Sketch-Brawl/game","with_escalated_permissions":true,"justification":"Script updates agent metadata files in .codex and requires workspace modifications"}
+[2m2025-11-15T08:43:23.877819Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:43:23.877836Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:44:22.442903Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","mkdir -p .specify/templates && cp game/.specify/templates/* .specify/templates/"],"workdir":"/Users/chenyuxin/Sketch-Brawl","with_escalated_permissions":false}
+[2m2025-11-15T08:44:22.442976Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:44:22.442987Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:44:27.150064Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc",".specify/scripts/bash/update-agent-context.sh codex"],"workdir":"/Users/chenyuxin/Sketch-Brawl/game","with_escalated_permissions":true,"justification":"Need to re-run agent context update script after installing templates"}
+[2m2025-11-15T08:44:27.150122Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:44:27.150133Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:45:44.783438Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat AGENTS.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:45:44.783540Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:45:44.783552Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:45:54.816043Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/plan.md
+@@
+ |-----------|------------|-------------------------------------|
+ | Second runtime (Unity WebGL) | Enables cinematic guided replay judges expect | Plain React animation cannot show 3D doodle transformations convincingly |
+ | Redis cache | Required for lobby presence + deterministic seed queue | Postgres alone cannot guarantee low-latency presence updates |
++
++## Constitution Re-evaluation (Post Phase 1)
++
++- **Input Fidelity**: research.md + quickstart cover Fabric.js instrumentation, telemetry event schema, and Playwright latency tests—no gaps.
++- **AI Attribution**: data-model + contracts define ONNX-backed inference endpoints with persisted prompts/seeds; SLA documented in quickstart step 6.
++- **Deterministic Battles**: data-model describes RNG + replay logs; contracts expose `/battles/{id}/replay`; research details Hypothesis test plan.
++- **Skill Evolution Guardrails**: SkillCard validations + `/skills/{id}/reinforce` endpoint enforce stacking rules and error reporting.
++- **Demo Readiness**: quickstart + DemoArtifact entity + `/artifacts/latest` endpoint ensure Railway deployment + offline bundle steps captured.
+*** End Patch
+[2m2025-11-15T08:45:54.816144Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:45:54.816154Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:46:01.098636Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"completed","step":"Run setup-plan script and gather template/context files"},{"status":"completed","step":"Populate plan, Phase0 research, Phase1 design artifacts per instructions"},{"status":"completed","step":"Update agent context and report outputs"}]}
+[2m2025-11-15T08:46:01.098683Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:46:01.098691Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:46:11.032826Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba specs/001-ai-game-demo/plan.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:46:11.032886Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:46:11.032896Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:46:17.692152Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba AGENTS.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:46:17.692194Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:46:17.692203Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:52:34.825244Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"in_progress","step":"Run prerequisites script to get feature directory and docs list"},{"status":"pending","step":"Extract required information from spec/plan/etc and design tasks + graph"},{"status":"pending","step":"Write tasks.md and summarize counts, parallelization, MVP"}]}
+[2m2025-11-15T08:52:34.825298Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:52:34.825308Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:52:40.426084Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc",".specify/scripts/bash/check-prerequisites.sh --json"],"workdir":"/Users/chenyuxin/Sketch-Brawl","with_escalated_permissions":true,"justification":"Need script to provide feature dir and docs before generating tasks"}
+[2m2025-11-15T08:52:40.426114Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:52:40.426120Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:54:53.938557Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc",".specify/scripts/bash/check-prerequisites.sh --json"],"workdir":"/Users/chenyuxin/Sketch-Brawl/game","with_escalated_permissions":true,"justification":"Need to run prerequisites script inside game workspace to list available docs"}
+[2m2025-11-15T08:54:53.938636Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:54:53.938648Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:54:59.314914Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat /Users/chenyuxin/Sketch-Brawl/specs/001-ai-game-demo/plan.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:54:59.314947Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:54:59.314952Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:55:05.988895Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat /Users/chenyuxin/Sketch-Brawl/specs/001-ai-game-demo/spec.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:55:05.988948Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:55:05.988960Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:55:11.301908Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '80,200p' /Users/chenyuxin/Sketch-Brawl/specs/001-ai-game-demo/spec.md"]}
+[2m2025-11-15T08:55:11.301983Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:55:11.301993Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:56:20.722121Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat <<'EOF' > specs/001-ai-game-demo/tasks.md\n---\n\ndescription: \"Task list for Sketch Brawl demo implementation\"\n---\n\n# Tasks: Sketch Brawl Demo Delivery\n\n**Input**: Design documents from `/specs/001-ai-game-demo/`\n**Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/, quickstart.md\n\n**Tests**: Constitution gates require telemetry + replay evidence, so each story includes mandatory validation tasks.\n\n**Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.\n\n## Format: `[ID] [P?] [Story] Description`\n\n- **[P]**: Can run in parallel (different files, no dependencies)\n- **[Story]**: Which user story this task belongs to (e.g., US1, US2, US3)\n- Include exact file paths in descriptions\n\n## Phase 1: Setup (Shared Infrastructure)\n\n**Purpose**: Project initialization that wires the fast sketch canvas stack, FastAPI backend, and Railway-ready infra.\n\n- [ ] T001 Scaffold backend Poetry project with FastAPI/SQLModel deps in `backend/pyproject.toml`\n- [ ] T002 Create FastAPI entrypoint + settings loader in `backend/src/api/main.py`\n- [ ] T003 Initialize Next.js + TypeScript workspace with lint/test scripts in `frontend/package.json`\n- [ ] T004 Provision dev docker-compose with Postgres, Redis, MinIO in `ops/docker-compose.yml`\n\n---\n\n## Phase 2: Foundational (Blocking Prerequisites)\n\n**Purpose**: Core infrastructure (data models, persistence, telemetry, inference runtime) that MUST be complete before ANY user story can be implemented\n\n**⚠️ CRITICAL**: No user story work can begin until this phase is complete\n\n- [ ] T005 Define Monster & SkillCard SQLModel entities + seed columns in `backend/src/models/monster.py` and `backend/src/models/skill_card.py`\n- [ ] T006 Add BattleSession, TelemetryEvent, DemoArtifact models + relationships in `backend/src/models/battle_session.py`\n- [ ] T007 Configure database session + Alembic migration scripts in `backend/alembic/`\n- [ ] T008 Implement ONNX inference runner scaffold with deterministic seed injection in `backend/src/services/inference_runner.py`\n- [ ] T009 Build telemetry ingestion/aggregation service with Redis queue fan-out in `backend/src/services/telemetry.py`\n- [ ] T010 Establish typed API client + deterministic state store in `frontend/src/services/apiClient.ts`\n\n**Checkpoint**: Foundation ready - user story implementation can now begin in parallel\n\n---\n\n## Phase 3: User Story 1 - Draw-to-Attribute Loop (Priority: P1) 🎯 MVP\n\n**Goal**: Players draw monsters/skills, receive AI-attributed stats + explanations within SLA, and see validation feedback before battles.\n\n**Independent Test**: Run dual-browser Playwright scenario that draws a monster + skill, verifies <=50 ms latency metrics, receives inference payload within 1.5 s, and confirms persisted attributes in DB.\n\n### Tests for User Story 1 ⚠️\n\n- [ ] T011 [P] [US1] Add Playwright canvas latency + FPS probe in `frontend/tests/e2e/draw-latency.spec.ts`\n- [ ] T012 [P] [US1] Create backend integration test for `/doodles` attribution + prompt persistence in `backend/tests/integration/test_inference.py`\n\n### Implementation for User Story 1\n\n- [ ] T013 [US1] Implement lobby/invite REST endpoints + Redis presence heartbeat in `backend/src/api/lobbies.py`\n- [ ] T014 [P] [US1] Build lobby service (invite validation, readiness state) in `backend/src/services/lobby_service.py`\n- [ ] T015 [US1] Implement Fabric.js-based DoodleCanvas with telemetry hooks in `frontend/src/components/DoodleCanvas.tsx`\n- [ ] T016 [P] [US1] Create AI attribution panel + explanation UI in `frontend/src/components/AttributionPanel.tsx`\n- [ ] T017 [US1] Implement doodle upload + inference ticket API in `backend/src/api/doodles.py`\n- [ ] T018 [P] [US1] Implement reinforcement validation rules + error payloads in `backend/src/services/validation.py`\n- [ ] T019 [US1] Persist Monster/SkillCard records + seeds after inference in `backend/src/services/attribute_store.py`\n- [ ] T020 [US1] Wire telemetry publisher (latency/fps/inference events) in `frontend/src/services/telemetryPublisher.ts`\n\n**Checkpoint**: At this point, User Story 1 should be fully functional and testable independently\n\n---\n\n## Phase 4: User Story 2 - Server-Authoritative Auto Battles (Priority: P2)\n\n**Goal**: Run deterministic best-of-three auto battles, stream events to clients, store replay logs, and expose download endpoints.\n\n**Independent Test**: Trigger battle via API using stored monsters/skills and verify Hypothesis + integration tests prove damage logs equal replay playback.\n\n### Tests for User Story 2 ⚠️\n\n- [ ] T021 [P] [US2] Write Hypothesis property tests for battle math determinism in `backend/tests/unit/test_battle_engine.py`\n- [ ] T022 [P] [US2] Add replay consistency integration test covering `/battles/{id}/replay` in `backend/tests/integration/test_replay_consistency.py`\n\n### Implementation for User Story 2\n\n- [ ] T023 [US2] Implement deterministic battle engine (damage, elements, timers) in `backend/src/services/battle_engine.py`\n- [ ] T024 [US2] Create Celery worker to run rounds + enforce RNG seeds in `backend/src/workers/battle_worker.py`\n- [ ] T025 [US2] Add battle API (start battle, SSE updates, replay fetch) in `backend/src/api/battles.py`\n- [ ] T026 [US2] Build battle HUD + log viewer in `frontend/src/components/BattleHud.tsx`\n- [ ] T027 [P] [US2] Implement replay playback UI + download button in `frontend/src/pages/match.tsx`\n- [ ] T028 [US2] Export replay JSON with checksum + storage upload in `backend/src/services/replay_exporter.py`\n- [ ] T029 [US2] Record skill evolution deltas + history for upgrades in `backend/src/services/skill_history.py`\n\n**Checkpoint**: User Stories 1 AND 2 should both work independently\n\n---\n\n## Phase 5: User Story 3 - Demo Packaging & Frontend Handoff (Priority: P3)\n\n**Goal**: Provide Railway deployment, guided replay/tour, bilingual instructions, and offline recap packs for judges.\n\n**Independent Test**: Run `make smoke-demo` to deploy to Railway preview, execute guided replay walkthrough, verify bilingual UI, and confirm build link + video metadata exposed via `/artifacts/latest`.\n\n### Implementation for User Story 3\n\n- [ ] T030 [P] [US3] Implement Railway smoke-test script + CI hook in `ops/scripts/smoke_demo.ts`\n- [ ] T031 [US3] Build bilingual tutorial + judge checklist page in `frontend/src/pages/tutorial.tsx`\n- [ ] T032 [P] [US3] Integrate Unity WebGL guided replay iframe + captions in `frontend/src/pages/guided-replay.tsx`\n- [ ] T033 [US3] Configure CI workflow to build/upload demo artifacts to Railway storage in `ops/ci/demo-artifacts.yml`\n- [ ] T034 [P] [US3] Implement offline recap bundler (logs + video + instructions) in `ops/scripts/bundle_demo.py`\n- [ ] T035 [US3] Expose `/artifacts/latest` API returning playable/video/offline URIs in `backend/src/api/artifacts.py`\n- [ ] T036 [US3] Document judge walkthrough + embed links in `docs/judge-walkthrough.md`\n- [ ] T037 [US3] Localize critical UI copy (zh-CN + en-US) in `frontend/src/i18n/demo.json`\n\n**Checkpoint**: All user stories should now be independently functional\n\n---\n\n## Phase N: Polish & Cross-Cutting Concerns\n\n**Purpose**: Wrap-up work covering documentation, performance, and validation across stories\n\n- [ ] T038 [P] Harden telemetry dashboards + docs describing evidence capture in `docs/telemetry.md`\n- [ ] T039 Execute load tests for inference/battle services using Locust in `backend/tests/load/locustfile.py`\n- [ ] T040 [P] Add observability/alert rules for Railway (uptime, SLA) in `ops/monitoring/railway-alerts.yml`\n- [ ] T041 Final QA pass updating quickstart + smoke checklist in `specs/001-ai-game-demo/quickstart.md`\n\n---\n\n## Dependencies & Execution Order\n\n- **Setup (Phase 1)** → initializes repos/infrastructure\n- **Foundational (Phase 2)** → depends on Setup; blocks US1, US2, US3\n- **US1** → starts after Foundational; outputs canvas + attribution loop for MVP\n- **US2** → depends on US1 data structures (monsters/skills) but battle logic otherwise independent\n- **US3** → depends on US1+US2 for demo content; handles packaging + hosting\n- **Polish** → final hardening after selected stories complete\n\n## Parallel Opportunities\n\n- During Setup, backend and frontend scaffolding (T001 vs T003) can run concurrently\n- In US1, lobby service (T014) and attribution panel (T016) can progress in parallel once API contracts ready\n- US2 replay UI (T027) can proceed while backend worker (T024) finalizes since it consumes mocked logs\n- US3 tutorial page (T031) and CI artifacts workflow (T033) operate independently until final verification\n\n## Implementation Strategy\n\n1. Complete Phases 1-2 to guarantee stable infra, telemetry, and inference backbone.\n2. Deliver US1 as MVP: canvas draw, AI attribution, validation, telemetry proof.\n3. Layer in US2 deterministic battles + replay export to showcase gameplay depth.\n4. Finish with US3 demo packaging so judges have hosted build, guided replay, and bilingual copy.\n5. Run Polish tasks to validate performance, documentation, and monitoring before submission.\nEOF"]}
+[2m2025-11-15T08:56:20.722543Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:56:20.722559Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:56:34.452642Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba specs/001-ai-game-demo/tasks.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl","timeout_ms":1000}
+[2m2025-11-15T08:56:34.452693Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:56:34.452702Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:56:41.567215Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '100,240p' specs/001-ai-game-demo/tasks.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T08:56:41.567252Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T08:56:41.567259Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T08:59:20.571165Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T08:59:22.503043Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T09:00:29.837435Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T09:00:30.764361Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)

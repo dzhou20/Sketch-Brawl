@@ -1,0 +1,326 @@
+openapi: 3.0.3
+info:
+  title: Sketch Brawl Demo API
+  version: 0.1.0
+servers:
+  - url: https://api.sketch-brawl.demo
+paths:
+  /lobbies:
+    post:
+      summary: Create or join a lobby via invite link
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                invite_code:
+                  type: string
+                role:
+                  type: string
+                  enum: [player, judge, spectator]
+                display_name:
+                  type: string
+              required: [invite_code, role]
+      responses:
+        '201':
+          description: Lobby snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+  /doodles:
+    post:
+      summary: Upload doodle strokes for monster or skill
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lobby_id:
+                  type: string
+                doodle_type:
+                  type: string
+                  enum: [monster, skill, reinforcement]
+                strokes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Stroke'
+                metadata:
+                  type: object
+              required: [lobby_id, doodle_type, strokes]
+      responses:
+        '202':
+          description: Inference accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InferenceTicket'
+  /doodles/{ticket_id}:
+    get:
+      summary: Retrieve AI attribution results for a doodle
+      parameters:
+        - in: path
+          name: ticket_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Attribution payload + explanation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InferenceResult'
+  /battles:
+    post:
+      summary: Start best-of-three battle using submitted monsters & skills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lobby_id:
+                  type: string
+              required: [lobby_id]
+      responses:
+        '201':
+          description: Battle session descriptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BattleSession'
+  /battles/{session_id}/replay:
+    get:
+      summary: Download deterministic replay log
+      parameters:
+        - in: path
+          name: session_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Replay log
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BattleReplay'
+  /skills/{skill_id}/reinforce:
+    post:
+      summary: Apply reinforcement doodle to an existing skill card
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                strokes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Stroke'
+                metadata:
+                  type: object
+              required: [strokes]
+      responses:
+        '200':
+          description: Updated skill card or validation error
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/SkillCard'
+                  - $ref: '#/components/schemas/ValidationError'
+  /telemetry:
+    get:
+      summary: Fetch aggregated telemetry slices for a lobby/battle
+      parameters:
+        - in: query
+          name: lobby_id
+          schema:
+            type: string
+        - in: query
+          name: battle_id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Aggregated metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelemetryBundle'
+  /artifacts/latest:
+    get:
+      summary: Retrieve active playable link + walkthrough video references
+      responses:
+        '200':
+          description: Demo artifact metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemoArtifact'
+components:
+  schemas:
+    Lobby:
+      type: object
+      properties:
+        id:
+          type: string
+        invite_code:
+          type: string
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+        status:
+          type: string
+          enum: [waiting, ready, battling, completed]
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+        display_name:
+          type: string
+        role:
+          type: string
+          enum: [player, judge, spectator]
+    Stroke:
+      type: object
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+        pressure:
+          type: number
+        timestamp:
+          type: integer
+    InferenceTicket:
+      type: object
+      properties:
+        ticket_id:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+    InferenceResult:
+      type: object
+      properties:
+        ticket_id:
+          type: string
+        attributes:
+          type: object
+          properties:
+            element:
+              type: string
+            hp:
+              type: integer
+            base_attack:
+              type: integer
+            skill_type:
+              type: string
+        explanation:
+          type: string
+        seed:
+          type: integer
+    SkillCard:
+      type: object
+      properties:
+        id:
+          type: string
+        elements:
+          type: array
+          items:
+            type: string
+        attack_bonus:
+          type: integer
+        cooldown_delta:
+          type: integer
+        history:
+          type: array
+          items:
+            type: string
+    ValidationError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+    BattleSession:
+      type: object
+      properties:
+        id:
+          type: string
+        rng_seed:
+          type: integer
+        rounds:
+          type: array
+          items:
+            $ref: '#/components/schemas/BattleEvent'
+        winner_player_id:
+          type: string
+    BattleEvent:
+      type: object
+      properties:
+        timestamp:
+          type: integer
+        attacker:
+          type: string
+        defender:
+          type: string
+        damage:
+          type: integer
+        status:
+          type: string
+    BattleReplay:
+      type: object
+      properties:
+        session_id:
+          type: string
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/BattleEvent'
+        checksum:
+          type: string
+    TelemetryBundle:
+      type: object
+      properties:
+        lobby_id:
+          type: string
+        battle_id:
+          type: string
+        canvas_latency_ms_p95:
+          type: number
+        fps_min:
+          type: number
+        inference_ms_p95:
+          type: number
+        battle_duration_s:
+          type: number
+        validation_failures:
+          type: array
+          items:
+            type: object
+    DemoArtifact:
+      type: object
+      properties:
+        playable_url:
+          type: string
+        walkthrough_video_url:
+          type: string
+        offline_bundle_url:
+          type: string
+        version:
+          type: string
