@@ -149,14 +149,19 @@ export function DoodleCanvas({
   };
 
   const pollInference = async (ticketId: string) => {
-    for (let i = 0; i < 10; i += 1) {
+    for (;;) {
       const response = await apiClient.getInference(ticketId);
-      if (response.payload) {
+      if (response.ready && response.payload) {
         return response.payload;
       }
-      await wait(500);
+      const waitingCopy = response.waiting_for
+        ? response.waiting_for === 'both'
+          ? 'Waiting for both players…'
+          : `Waiting for Player ${response.waiting_for}…`
+        : 'Waiting for players…';
+      setStatus(waitingCopy);
+      await wait(1000);
     }
-    throw new Error('Inference timeout');
   };
 
   const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

@@ -4,7 +4,7 @@ from __future__ import annotations
 import uuid
 from typing import Any, Literal
 
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from src.infra.database import get_engine
 from src.models.monster import Monster, SkillCard
@@ -29,6 +29,9 @@ class AttributeStore:
         metadata = metadata or {}
         player_slot = metadata.get("player_slot") or metadata.get("player") or "A"
         player_id = f"{lobby_id}:{player_slot}" if ":" not in str(player_slot) else player_slot
+        attributes["player_slot"] = player_slot
+        attributes["lobby_id"] = lobby_id
+        attributes["doodle_type"] = doodle_type
 
         with Session(self._engine) as session:
             if doodle_type == "monster":
@@ -80,6 +83,45 @@ class AttributeStore:
                     session.refresh(skill)
                     attributes["skill_id"] = skill.id
         return attributes
+
+    def ready_for_client(self, payload: dict[str, Any]) -> tuple[bool, str | None]:
+        doodle_type = payload.get("doodle_type")
+        if doodle_type != "monster":
+            return True, None
+        lobby_id = payload.get("lobby_id")
+        if not lobby_id:
+            return True, None
+        missing = self._missing_monster_slots(lobby_id)
+        if not missing:
+            return True, None
+        if len(missing) == 1:
+            return False, next(iter(missing))
+        return False, "both"
+
+    def _missing_monster_slots(self, lobby_id: str) -> set[str]:
+        slots = self._current_monster_slots(lobby_id)
+        required = {"A", "B"}
+        if slots.issuperset(required):
+            return set()
+        return required - slots
+
+    def _current_monster_slots(self, lobby_id: str) -> set[str]:
+        with Session(self._engine) as session:
+            stmt = (
+                select(Monster.player_id)
+                .where(Monster.match_id == lobby_id)
+                .order_by(Monster.id.desc())
+            )
+            player_ids = [row[0] if isinstance(row, tuple) else row for row in session.exec(stmt).all()]
+        return {self._player_slot(pid) for pid in player_ids if pid}
+
+    @staticmethod
+    def _player_slot(player_id: str | None) -> str:
+        if not player_id:
+            return "A"
+        if ":" in player_id:
+            return player_id.split(":", 1)[1]
+        return player_id
 
     def _apply_reinforcement(
         self,

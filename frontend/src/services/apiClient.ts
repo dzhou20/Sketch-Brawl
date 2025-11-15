@@ -11,6 +11,13 @@ type DoodlePayload = {
   snapshot?: string;
 };
 
+export type InferenceResult = {
+  ticket_id: string;
+  payload: Record<string, unknown> | null;
+  ready: boolean;
+  waiting_for: string | null;
+};
+
 export type BattleEvent = {
   round: number;
   turn: number;
@@ -84,7 +91,7 @@ export const apiClient = {
     return res.json();
   },
 
-  async getInference(ticketId: string) {
+  async getInference(ticketId: string): Promise<InferenceResult> {
     const res = await fetch(`/api/proxy/doodles/${ticketId}`);
     if (!res.ok) throw new Error('inference fetch failed');
     return res.json();

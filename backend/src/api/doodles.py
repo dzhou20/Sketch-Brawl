@@ -41,7 +41,9 @@ class InferenceTicket(BaseModel):
 
 class InferenceResult(BaseModel):
     ticket_id: str
-    payload: dict[str, Any]
+    payload: dict[str, Any] | None
+    ready: bool
+    waiting_for: str | None = None
 
 
 def _store():
@@ -124,7 +126,15 @@ async def submit_doodle(request: DoodleRequest) -> InferenceTicket:
 
 @router.get("/{ticket_id}", response_model=InferenceResult)
 async def get_doodle(ticket_id: str) -> InferenceResult:
-    payload = _store().get_ticket(ticket_id)
+    store = _store()
+    payload = store.get_ticket(ticket_id)
     if not payload:
         raise HTTPException(status_code=404, detail="ticket not found")
-    return InferenceResult(ticket_id=ticket_id, payload=payload)
+    ready, waiting_for = store.ready_for_client(payload)
+    result_payload = payload if ready else None
+    return InferenceResult(
+        ticket_id=ticket_id,
+        payload=result_payload,
+        ready=ready,
+        waiting_for=waiting_for,
+    )
