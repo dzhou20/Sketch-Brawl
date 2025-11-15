@@ -1,8 +1,9 @@
 """Service layer for orchestrating hot-seat battles."""
 from __future__ import annotations
 
-import random
 import json
+import logging
+import random
 from typing import Any, Dict, List, Optional
 
 from sqlmodel import Session, select
@@ -18,8 +19,10 @@ class BattleService:
     def __init__(self) -> None:
         self._engine = get_engine()
         self._timeline_builder = BattleTimelineBuilder()
+        self._logger = logging.getLogger("service.battle")
 
     def start_battle(self, lobby_id: str, seed: Optional[int] = None) -> Dict[str, Any]:
+        self._logger.info("battle.start lobby=%s seed=%s", lobby_id, seed)
         with Session(self._engine) as session:
             monsters = self._load_latest_monsters(session, lobby_id)
             if len(monsters) < 2:
@@ -47,9 +50,17 @@ class BattleService:
             session.refresh(battle_row)
             response = dict(payload)
             response["battle_id"] = battle_row.id
+            self._logger.info(
+                "battle.completed lobby=%s seed=%s winner=%s battle_id=%s",
+                lobby_id,
+                rng_seed,
+                result.winner_slot,
+                battle_row.id,
+            )
             return response
 
     def get_battle(self, battle_id: int) -> Optional[BattleSession]:
+        self._logger.info("battle.fetch battle_id=%s", battle_id)
         with Session(self._engine) as session:
             return session.get(BattleSession, battle_id)
 

@@ -19,10 +19,22 @@ except ImportError:  # pragma: no cover - handled at runtime
     SessionOptions = None  # type: ignore[assignment]
 
 
+FALLBACK_ELEMENTS = ["metal", "wood", "water", "fire", "earth"]
+MONSTER_ADJECTIVES = ["Rusty", "Hyper", "Sleepy", "Neon", "Ancient", "Bouncy"]
+MONSTER_FORMS = ["Bunny", "Golem", "Sprite", "Beetle", "Lizard", "Wisp"]
+MONSTER_TITLES = ["Bot", "Beast", "Construct", "Spirit", "Guardian", "Oddity"]
+MOVE_VERBS = ["Carrot", "Nebula", "Gear", "Burrow", "Ripple", "Spark"]
+MOVE_FORMS = ["Kick", "Shield", "Bash", "Drill", "Beam", "Screen"]
+SKILL_NOUNS = ["Pulse", "Barrier", "Torrent", "Hammer", "Loop"]
+SKILL_ADJECTIVES = ["Chaotic", "Gleaming", "Whispering", "Irritated", "Stoic"]
+SKILL_PHRASES = ["Echo Burst", "Shiny Wall", "Void Hop", "Grumpy Pulse"]
+
+
 class InferenceRunner:
     """Uses Gemini when configured, ONNX otherwise, and stubs as final fallback."""
 
     def __init__(self) -> None:
+        self._logger = logging.getLogger("service.inference")
         settings = get_settings()
         self._gemini: GeminiClient | None = None
         if settings.gemini_api_key:
@@ -57,6 +69,13 @@ class InferenceRunner:
             "stroke_traits": self._stroke_traits(strokes),
             "variety_target": self._variety_target(schema_hint, seed),
         }
+        self._logger.info(
+            "inference.predict schema=%s seed=%s strokes=%d target=%s",
+            schema_hint,
+            seed,
+            len(strokes),
+            metadata.get("target") if metadata else None,
+        )
         if self._gemini is not None:
             try:
                 result = self._gemini.generate_attributes(
@@ -66,19 +85,23 @@ class InferenceRunner:
                     metadata=prompt_meta,
                     snapshot=snapshot,
                 )
-                logger = logging.getLogger("battle.inference")
-                logger.info(
-                    "Gemini success schema=%s seed=%s element=%s hp=%s atk=%s",
+                self._logger.info(
+                    "inference.gemini_success schema=%s seed=%s element=%s hp=%s atk=%s",
                     schema_hint,
                     seed,
                     result["element"],
-                    result["hp"],
-                    result["base_attack"],
+                    result.get("hp"),
+                    result.get("base_attack") or result.get("attack_bonus"),
                 )
                 self._record_history(schema_hint, result)
                 return result
             except GeminiError as exc:
-                print(f"[gemini] falling back to ONNX/stub: {exc}")
+                self._logger.warning(
+                    "inference.gemini_failed schema=%s seed=%s reason=%s",
+                    schema_hint,
+                    seed,
+                    exc,
+                )
 
         if self._session is not None:
             latent = self._strokes_to_tensor(strokes)
@@ -96,29 +119,24 @@ class InferenceRunner:
                 "explanation": f"onnx-seed-{seed}",
                 "variance": float(abs(raw[3]) if len(raw) > 3 else 0.1),
             }
+            self._logger.info(
+                "inference.onnx_success schema=%s seed=%s element=%s hp=%s atk=%s",
+                schema_hint,
+                seed,
+                element,
+                result.get("hp"),
+                result.get("base_attack"),
+            )
             self._record_history(schema_hint, result)
             return result
 
-        # fallback stub
-        rng = np.random.default_rng(seed)
-        density = self._density(strokes)
-        element = self._decode_element(density, seed)
-        hp = int(np.clip(200 + density * 3, 50, 500))
-        base_attack = int(np.clip(40 + density * 0.6, 5, 100))
-        explanation = f"seed={seed} density={density} strokes={len(strokes)}"
-        payload = {
-            "element": element,
-            "hp": hp,
-            "base_attack": base_attack,
-            "seed": seed,
-            "explanation": explanation,
-            "variance": float(rng.random()),
-        }
-        if schema_hint.startswith("Skill"):
-            payload["skill_type"] = rng.choice(["attack", "defense"])
-            payload["attack_bonus"] = base_attack
-        else:
-            payload["skill_type"] = "weapon"
+        payload = self._build_stub_payload(schema_hint, strokes, seed)
+        self._logger.info(
+            "inference.stub schema=%s seed=%s element=%s",
+            schema_hint,
+            seed,
+            payload.get("element"),
+        )
         self._record_history(schema_hint, payload)
         return payload
 
@@ -149,9 +167,171 @@ class InferenceRunner:
         return accum * 10
 
     def _decode_element(self, value: float, seed: int) -> str:
-        elements = ["fire", "water", "earth", "air", "light", "shadow"]
-        idx = int(abs(value + seed)) % len(elements)
-        return elements[idx]
+        idx = int(abs(value + seed)) % len(FALLBACK_ELEMENTS)
+        return FALLBACK_ELEMENTS[idx]
+
+    def _build_stub_payload(
+        self,
+        schema_hint: str,
+        strokes: list[dict[str, Any]],
+        seed: int,
+    ) -> dict[str, Any]:
+        rng = np.random.default_rng(seed)
+        density = self._density(strokes)
+        element = self._decode_element(density, seed)
+        stroke_count = len(strokes)
+        if schema_hint == "Monster":
+            return self._fallback_monster_payload(rng, element, density, seed, stroke_count)
+        if schema_hint == "Skill":
+            return self._fallback_skill_payload(rng, element, density, seed, stroke_count)
+        if schema_hint == "Monster_Enhance":
+            return self._fallback_monster_enhance_payload(rng, element, density, seed, stroke_count)
+        return self._fallback_skill_enhance_payload(rng, element, density, seed, stroke_count)
+
+    def _fallback_monster_payload(
+        self,
+        rng: np.random.Generator,
+        element: str,
+        density: float,
+        seed: int,
+        stroke_count: int,
+    ) -> dict[str, Any]:
+        hp = int(np.clip(160 + density * 2, 50, 500))
+        attack = int(np.clip(40 + density * 0.7, 5, 100))
+        defense = int(np.clip(35 + density * 0.6, 5, 120))
+        name = self._compose_monster_name(rng, element)
+        species = self._compose_species(rng)
+        descriptor = "dense" if density > 20 else "minimal"
+        description = f"A {descriptor} {species.lower()} outlined by {stroke_count} strokes."
+        moves = [
+            self._compose_move(rng, element, attack, defense, hp, idx)
+            for idx in range(2)
+        ]
+        return {
+            "element": element,
+            "hp": hp,
+            "base_attack": attack,
+            "defense": defense,
+            "name": name,
+            "species": species,
+            "description": description,
+            "moves": moves,
+            "seed": seed,
+            "explanation": f"Stubbed from seed={seed} density={density:.1f}.",
+        }
+
+    def _fallback_skill_payload(
+        self,
+        rng: np.random.Generator,
+        element: str,
+        density: float,
+        seed: int,
+        stroke_count: int,
+    ) -> dict[str, Any]:
+        skill_type = rng.choice(["attack", "defense"])
+        base_power = int(np.clip(30 + density, 5, 120))
+        card_name = f"{rng.choice(SKILL_ADJECTIVES)} {rng.choice(SKILL_NOUNS)}"
+        move_name = rng.choice(SKILL_PHRASES)
+        description = (
+            f"{move_name} channels {element} energy from {stroke_count} quick strokes."
+        )
+        return {
+            "element": element,
+            "skill_type": skill_type,
+            "attack_bonus": base_power,
+            "name": card_name,
+            "move_name": move_name,
+            "description": description,
+            "seed": seed,
+            "cooldown_delta": 0,
+            "explanation": f"Stubbed skill (seed={seed}) with {skill_type} flavor.",
+        }
+
+    def _fallback_monster_enhance_payload(
+        self,
+        rng: np.random.Generator,
+        element: str,
+        density: float,
+        seed: int,
+        stroke_count: int,
+    ) -> dict[str, Any]:
+        hp_delta = int(np.clip(rng.normal(loc=5, scale=4), -10, 25))
+        attack_delta = int(np.clip(rng.normal(loc=3, scale=3), -5, 15))
+        defense_delta = int(np.clip(rng.normal(loc=4, scale=3), -5, 15))
+        name = f"{rng.choice(MONSTER_ADJECTIVES)} {rng.choice(MONSTER_FORMS)} Evo"
+        explanation = (
+            f"Extra strokes ({stroke_count}) hinted at more plating, so stats shift modestly."
+        )
+        return {
+            "element": element,
+            "hp": hp_delta,
+            "base_attack": attack_delta,
+            "defense": defense_delta,
+            "name": name,
+            "seed": seed,
+            "explanation": explanation,
+        }
+
+    def _fallback_skill_enhance_payload(
+        self,
+        rng: np.random.Generator,
+        element: str,
+        density: float,
+        seed: int,
+        stroke_count: int,
+    ) -> dict[str, Any]:
+        skill_type = rng.choice(["attack", "defense"])
+        power_delta = int(
+            np.clip(rng.normal(loc=6 if skill_type == "attack" else 4, scale=4), -5, 25)
+        )
+        new_name = f"{rng.choice(SKILL_ADJECTIVES)} {rng.choice(SKILL_NOUNS)}+"
+        new_move = f"{rng.choice(MOVE_VERBS)} {rng.choice(MOVE_FORMS)} Redux"
+        explanation = (
+            f"New overlay lines ({stroke_count}) tweak the move toward {skill_type} plays."
+        )
+        return {
+            "element": element,
+            "skill_type": skill_type,
+            "attack_bonus": power_delta,
+            "name": new_name,
+            "move_name": new_move,
+            "seed": seed,
+            "explanation": explanation,
+        }
+
+    def _compose_monster_name(self, rng: np.random.Generator, element: str) -> str:
+        adj = rng.choice(MONSTER_ADJECTIVES)
+        form = rng.choice(MONSTER_FORMS)
+        return f"{adj} {element.title()} {form}"
+
+    def _compose_species(self, rng: np.random.Generator) -> str:
+        form = rng.choice(MONSTER_FORMS)
+        title = rng.choice(MONSTER_TITLES)
+        return f"{form} {title}"
+
+    def _compose_move(
+        self,
+        rng: np.random.Generator,
+        element: str,
+        attack: int,
+        defense: int,
+        hp: int,
+        index: int,
+    ) -> dict[str, Any]:
+        verb = rng.choice(MOVE_VERBS)
+        noun = rng.choice(MOVE_FORMS)
+        kind = rng.choice(["physical", "ranged", "buff", "debuff"])
+        base_power = int(np.clip(attack + rng.integers(-10, 15), 10, 60))
+        return {
+            "name": f"{verb} {noun}",
+            "description": f"A {kind} burst that leans on {element} energy.",
+            "kind": kind,
+            "element": element,
+            "power": base_power,
+            "attack": max(1, attack - index * 3),
+            "defense": max(1, defense - index * 2),
+            "health": max(1, hp // (index + 2)),
+        }
 
     def _schema_hint(
         self, doodle_type: Optional[DoodleType], metadata: Optional[Dict[str, Any]]

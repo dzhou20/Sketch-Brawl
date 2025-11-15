@@ -1,6 +1,7 @@
 """Doodle upload + inference endpoints."""
 from __future__ import annotations
 
+import logging
 import time
 from datetime import datetime
 from typing import Any
@@ -14,6 +15,7 @@ from src.services.telemetry import TelemetryEvent, get_telemetry_service
 from src.services.validation import ValidationError, validate_reinforcement
 
 router = APIRouter()
+logger = logging.getLogger("api.doodles")
 
 
 class Stroke(BaseModel):
@@ -52,6 +54,13 @@ def _telemetry():
 
 @router.post("", status_code=202, response_model=InferenceTicket)
 async def submit_doodle(request: DoodleRequest) -> InferenceTicket:
+    logger.info(
+        "doodles.submit start lobby=%s type=%s strokes=%d seed=%s",
+        request.lobby_id,
+        request.doodle_type,
+        len(request.strokes),
+        request.seed,
+    )
     if request.doodle_type == "reinforcement" and request.metadata:
         try:
             validate_reinforcement(request.metadata)
@@ -60,14 +69,28 @@ async def submit_doodle(request: DoodleRequest) -> InferenceTicket:
 
     runner = get_runner()
     start = time.perf_counter()
-    attributes = runner.predict(
+    try:
+        attributes = runner.predict(
         [stroke.model_dump() for stroke in request.strokes],
         request.seed or int(start),
         doodle_type=request.doodle_type,
         metadata=request.metadata,
         snapshot=request.snapshot,
     )
+    except Exception:
+        logger.exception(
+            "doodles.submit inference_error lobby=%s type=%s", request.lobby_id, request.doodle_type
+        )
+        raise
     elapsed = (time.perf_counter() - start) * 1000
+    logger.info(
+        "doodles.submit inference_ok lobby=%s type=%s elapsed_ms=%.2f element=%s seed=%s",
+        request.lobby_id,
+        request.doodle_type,
+        elapsed,
+        attributes.get("element"),
+        attributes.get("seed"),
+    )
 
     persisted = _store().persist(
         request.lobby_id,
@@ -77,6 +100,14 @@ async def submit_doodle(request: DoodleRequest) -> InferenceTicket:
         snapshot=request.snapshot,
     )
     ticket_id = _store().save_ticket(persisted)
+    logger.info(
+        "doodles.submit persisted lobby=%s type=%s ticket=%s monster_id=%s skill_id=%s",
+        request.lobby_id,
+        request.doodle_type,
+        ticket_id,
+        persisted.get("monster_id"),
+        persisted.get("skill_id"),
+    )
 
     _telemetry().publish(
         TelemetryEvent(
