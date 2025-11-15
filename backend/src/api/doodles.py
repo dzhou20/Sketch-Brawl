@@ -59,7 +59,12 @@ async def submit_doodle(request: DoodleRequest) -> InferenceTicket:
 
     runner = get_runner()
     start = time.perf_counter()
-    attributes = runner.predict([stroke.model_dump() for stroke in request.strokes], request.seed or int(start))
+    attributes = runner.predict(
+        [stroke.model_dump() for stroke in request.strokes],
+        request.seed or int(start),
+        doodle_type=request.doodle_type,
+        metadata=request.metadata,
+    )
     elapsed = (time.perf_counter() - start) * 1000
 
     persisted = _store().persist(request.lobby_id, request.doodle_type, attributes)

@@ -1,12 +1,14 @@
 """Deterministic doodle-to-attribute inference with Gemini/ONNX fallbacks."""
 from __future__ import annotations
 
+import logging
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict, Optional
 
 import numpy as np
 
 from src.config import get_settings
+from src.services.attribute_store import DoodleType
 from src.services.gemini_client import GeminiClient, GeminiError
 
 try:  # pragma: no cover - optional dependency
@@ -33,10 +35,32 @@ class InferenceRunner:
                 opts.log_severity_level = 3
                 self._session = InferenceSession(str(model_path), sess_options=opts)
 
-    def predict(self, strokes: list[dict[str, Any]], seed: int) -> dict[str, Any]:
+    def predict(
+        self,
+        strokes: list[dict[str, Any]],
+        seed: int,
+        doodle_type: Optional[DoodleType] = None,
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> dict[str, Any]:
+        schema_hint = self._schema_hint(doodle_type, metadata)
         if self._gemini is not None:
             try:
-                return self._gemini.generate_attributes(strokes, seed)
+                result = self._gemini.generate_attributes(
+                    strokes,
+                    seed,
+                    schema_hint=schema_hint,
+                    metadata=metadata or {},
+                )
+                logger = logging.getLogger("battle.inference")
+                logger.info(
+                    "Gemini success schema=%s seed=%s element=%s hp=%s atk=%s",
+                    schema_hint,
+                    seed,
+                    result["element"],
+                    result["hp"],
+                    result["base_attack"],
+                )
+                return result
             except GeminiError as exc:
                 print(f"[gemini] falling back to ONNX/stub: {exc}")
 
@@ -64,15 +88,20 @@ class InferenceRunner:
         hp = int(np.clip(200 + density * 3, 50, 500))
         base_attack = int(np.clip(40 + density * 0.6, 5, 100))
         explanation = f"seed={seed} density={density} strokes={len(strokes)}"
-        return {
+        payload = {
             "element": element,
             "hp": hp,
             "base_attack": base_attack,
-            "skill_type": rng.choice(["weapon", "shield", "augment"]),
             "seed": seed,
             "explanation": explanation,
             "variance": float(rng.random()),
         }
+        if schema_hint.startswith("Skill"):
+            payload["skill_type"] = rng.choice(["attack", "defense"])
+            payload["attack_bonus"] = base_attack
+        else:
+            payload["skill_type"] = "weapon"
+        return payload
 
     def _resolve_model_path(self) -> Path | None:
         candidates = [
@@ -104,6 +133,16 @@ class InferenceRunner:
         elements = ["fire", "water", "earth", "air", "light", "shadow"]
         idx = int(abs(value + seed)) % len(elements)
         return elements[idx]
+
+    def _schema_hint(
+        self, doodle_type: Optional[DoodleType], metadata: Optional[Dict[str, Any]]
+    ) -> str:
+        if doodle_type == "monster":
+            return "Monster"
+        if doodle_type == "reinforcement":
+            target = (metadata or {}).get("target", "skill")
+            return "Monster_Enhance" if target == "monster" else "Skill_Enhance"
+        return "Skill"
 
 
 _runner: InferenceRunner | None = None

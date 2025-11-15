@@ -3272,3 +3272,686 @@
 [2m2025-11-15T13:05:55.714393Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
 [2m2025-11-15T13:08:01.378443Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
 [2m2025-11-15T13:08:04.718520Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:09:16.561615Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:09:21.955802Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:09:24.846531Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:09:34.375634Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:09:37.248226Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:10:36.564117Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:11:29.310453Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:11:36.356070Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/inference_runner.py
+@@
+-        if self._gemini is not None:
++        if self._gemini is not None:
+             try:
+-                return self._gemini.generate_attributes(strokes, seed)
++                result = self._gemini.generate_attributes(strokes, seed)
++                logger = logging.getLogger("battle.inference")
++                logger.info("Gemini success seed=%s element=%s hp=%s atk=%s", seed, result["element"], result["hp"], result["base_attack"])
++                return result
+*** End Patch
+[2m2025-11-15T13:11:36.356309Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:11:36.356350Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:11:46.841143Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/inference_runner.py
+@@
+-from pathlib import Path
+-from typing import Any
+-
+-import numpy as np
+-from config import get_settings
+-from services.gemini_client import GeminiClient, GeminiError
+-from services.attribute_store import DoodleType, get_attribute_store
+-from services.validation import ValidationError, validate_reinforcement
++from pathlib import Path
++from typing import Any
++import logging
++
++import numpy as np
++from config import get_settings
++from services.gemini_client import GeminiClient, GeminiError
++from services.attribute_store import DoodleType, get_attribute_store
++from services.validation import ValidationError, validate_reinforcement
+*** End Patch
+[2m2025-11-15T13:11:46.841187Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:11:46.841214Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:11:54.356222Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '1,80p' backend/src/services/inference_runner.py"]}
+[2m2025-11-15T13:11:54.356249Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:11:54.356254Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:12:01.484349Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/inference_runner.py
+@@
+-from pathlib import Path
+-from typing import Any
+-
+-import numpy as np
+-
+-from src.config import get_settings
+-from src.services.gemini_client import GeminiClient, GeminiError
++import logging
++from pathlib import Path
++from typing import Any
++
++import numpy as np
++
++from src.config import get_settings
++from src.services.gemini_client import GeminiClient, GeminiError
+*** End Patch
+[2m2025-11-15T13:12:01.484378Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:12:01.484382Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:12:09.961279Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/inference_runner.py
+@@
+-                result = self._gemini.generate_attributes(strokes, seed)
+-                logger = logging.getLogger("battle.inference")
+-                logger.info("Gemini success seed=%s element=%s hp=%s atk=%s", seed, result["element"], result["hp"], result["base_attack"])
+-                return result
++                result = self._gemini.generate_attributes(strokes, seed)
++                logger = logging.getLogger("battle.inference")
++                logger.info(
++                    "Gemini success seed=%s element=%s hp=%s atk=%s",
++                    seed,
++                    result["element"],
++                    result["hp"],
++                    result["base_attack"],
++                )
++                return result
+*** End Patch
+[2m2025-11-15T13:12:09.961331Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:12:09.961338Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:12:15.795220Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cd backend && poetry run uvicorn src.api.main:app --host 127.0.0.1 --port 8000"],"timeout_ms":120000}
+[2m2025-11-15T13:12:15.795508Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:12:15.795526Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:18:30.878186Z[0m [32m INFO[0m ERR: The image format could not be determined
+[2m2025-11-15T13:18:41.846918Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:18:49.424368Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T14:02:38.281201Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T14:02:39.150254Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T14:04:03.883291Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T14:04:05.573705Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T14:04:06.300554Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T14:04:15.563464Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"prompt\" -g '*.md'"],"workdir":"/Users/chenyuxin/Sketch-Brawl","timeout_ms":120000}
+[2m2025-11-15T14:04:15.564925Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:04:15.564982Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:04:24.285472Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls doc"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T14:04:24.285552Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:04:24.285573Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:04:32.290151Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls doc/AI-game"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T14:04:32.290268Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:04:32.290282Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:04:39.741401Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","file doc/AI-game"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T14:04:39.741447Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:04:39.741455Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:04:46.889594Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","find . -iname '*prompt*.md'"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T14:04:46.889679Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:04:46.889690Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:04:54.623684Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat 'System+Prompt+2ac0c4613418808c8d6dd8e9f9c2059c.md'"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T14:04:54.623746Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:04:54.623756Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:05:06.601189Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '1,200p' backend/src/services/gemini_client.py"]}
+[2m2025-11-15T14:05:06.601211Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:05:06.601215Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:05:22.326598Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"generate_attributes\" -n backend/src -g '*.py'"]}
+[2m2025-11-15T14:05:22.326638Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:05:22.326648Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:05:35.499922Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '1,160p' backend/src/api/doodles.py"]}
+[2m2025-11-15T14:05:35.499957Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:05:35.499963Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:05:51.381965Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '1,200p' backend/src/services/attribute_store.py"]}
+[2m2025-11-15T14:05:51.381989Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:05:51.381993Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:06:31.546883Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/inference_runner.py
+@@
+-from pathlib import Path
+-from typing import Any
+-import logging
+-
+-import numpy as np
+-
+-from src.config import get_settings
+-from src.services.gemini_client import GeminiClient, GeminiError
+-
+-try:  # pragma: no cover - optional dependency
+-    from onnxruntime import InferenceSession, SessionOptions
+-except ImportError:  # pragma: no cover - handled at runtime
+-    InferenceSession = None  # type: ignore[assignment]
+-    SessionOptions = None  # type: ignore[assignment]
+-
+-
+-class InferenceRunner:
+-    """Uses Gemini when configured, ONNX otherwise, and stubs as final fallback."""
+-
+-    def __init__(self) -> None:
+-        settings = get_settings()
+-        self._gemini: GeminiClient | None = None
+-        if settings.gemini_api_key:
+-            self._gemini = GeminiClient(settings.gemini_api_key, settings.gemini_model)
+-
+-        self._session = None
+-        if self._gemini is None and InferenceSession is not None:
+-            model_path = self._resolve_model_path()
+-            if model_path is not None:
+-                opts = SessionOptions()
+-                opts.log_severity_level = 3
+-                self._session = InferenceSession(str(model_path), sess_options=opts)
+-
+-    def predict(self, strokes: list[dict[str, Any]], seed: int) -> dict[str, Any]:
+-        if self._gemini is not None:
+-            try:
+-                result = self._gemini.generate_attributes(strokes, seed)
+-                logger = logging.getLogger("battle.inference")
+-                logger.info(
+-                    "Gemini success seed=%s element=%s hp=%s atk=%s",
+-                    seed,
+-                    result["element"],
+-                    result["hp"],
+-                    result["base_attack"],
+-                )
+-                return result
+-            except GeminiError as exc:
+-                print(f"[gemini] falling back to ONNX/stub: {exc}")
+-
+-        if self._session is not None:
+-            latent = self._strokes_to_tensor(strokes)
+-            outputs = self._session.run(None, {"input": latent})
+-            raw = outputs[0][0]
+-            element = self._decode_element(raw[0], seed)
+-            hp = int(np.clip(raw[1] * 500, 50, 500))
+-            base_attack = int(np.clip(raw[2] * 100, 5, 100))
+-            return {
+-                "element": element,
+-                "hp": hp,
+-                "base_attack": base_attack,
+-                "skill_type": "weapon",
+-                "seed": seed,
+-                "explanation": f"onnx-seed-{seed}",
+-                "variance": float(abs(raw[3]) if len(raw) > 3 else 0.1),
+-            }
+-
+-        # fallback stub
+-        rng = np.random.default_rng(seed)
+-        density = self._density(strokes)
+-        element = self._decode_element(density, seed)
+-        hp = int(np.clip(200 + density * 3, 50, 500))
+-        base_attack = int(np.clip(40 + density * 0.6, 5, 100))
+-        explanation = f"seed={seed} density={density} strokes={len(strokes)}"
+-        return {
+-            "element": element,
+-            "hp": hp,
+-            "base_attack": base_attack,
+-            "skill_type": rng.choice(["weapon", "shield", "augment"]),
+-            "seed": seed,
+-            "explanation": explanation,
+-            "variance": float(rng.random()),
+-        }
+-
+-    def _resolve_model_path(self) -> Path | None:
+-        candidates = [
+-            Path("backend/models/doodle-classifier.onnx"),
+-            Path("models/doodle-classifier.onnx"),
+-        ]
+-        for candidate in candidates:
+-            if candidate.exists():
+-                return candidate
+-        return None
+-
+-    def _strokes_to_tensor(self, strokes: list[dict[str, Any]]) -> np.ndarray:
+-        tensor = np.zeros((1, 64, 64), dtype=np.float32)
+-        for stroke in strokes:
+-            x = int(stroke.get("x", 0)) % 64
+-            y = int(stroke.get("y", 0)) % 64
+-            tensor[0, y, x] = min(1.0, tensor[0, y, x] + 0.1)
+-        return tensor
+-
+-    def _density(self, strokes: list[dict[str, Any]]) -> float:
+-        if not strokes:
+-            return 0.0
+-        accum = 0.0
+-        for stroke in strokes:
+-            accum += float(stroke.get("pressure") or 0.5)
+-        return accum * 10
+-
+-    def _decode_element(self, value: float, seed: int) -> str:
+-        elements = ["fire", "water", "earth", "air", "light", "shadow"]
+-        idx = int(abs(value + seed)) % len(elements)
+-        return elements[idx]
+-
+-
+-_runner: InferenceRunner | None = None
+-
+-
+-def get_runner() -> InferenceRunner:
+-    global _runner
+-    if _runner is None:
+-        _runner = InferenceRunner()
+-    return _runner
+*** End Patch
+[2m2025-11-15T14:06:31.547035Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:06:31.547041Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:06:49.179384Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/inference_runner.py
+@@
+-"""Deterministic doodle-to-attribute inference with Gemini/ONNX fallbacks."""
+-from __future__ import annotations
+-
+-from pathlib import Path
+-from typing import Any
+-import logging
+-
+-import numpy as np
+-
+-from src.config import get_settings
+-from src.services.gemini_client import GeminiClient, GeminiError
++"""Deterministic doodle-to-attribute inference with Gemini/ONNX fallbacks."""
++from __future__ import annotations
++
++import logging
++from pathlib import Path
++from typing import Any, Dict, Optional
++
++import numpy as np
++
++from src.config import get_settings
++from src.services.attribute_store import DoodleType
++from src.services.gemini_client import GeminiClient, GeminiError
+*** End Patch
+[2m2025-11-15T14:06:49.179437Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:06:49.179444Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:06:54.065646Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T14:06:55.109321Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '1,40p' backend/src/services/inference_runner.py"]}
+[2m2025-11-15T14:06:55.109352Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:06:55.109358Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:07:03.289155Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/inference_runner.py
+@@
+-from typing import Any
++from typing import Any, Dict, Optional
+@@
+-from src.services.gemini_client import GeminiClient, GeminiError
++from src.services.attribute_store import DoodleType
++from src.services.gemini_client import GeminiClient, GeminiError
+*** End Patch
+[2m2025-11-15T14:07:03.289219Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:07:03.289230Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:07:16.932623Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/inference_runner.py
+@@
+-    def predict(self, strokes: list[dict[str, Any]], seed: int) -> dict[str, Any]:
++    def predict(
++        self,
++        strokes: list[dict[str, Any]],
++        seed: int,
++        doodle_type: Optional[DoodleType] = None,
++        metadata: Optional[Dict[str, Any]] = None,
++    ) -> dict[str, Any]:
++        schema_hint = self._schema_hint(doodle_type, metadata)
+         if self._gemini is not None:
+             try:
+-                result = self._gemini.generate_attributes(strokes, seed)
++                result = self._gemini.generate_attributes(
++                    strokes,
++                    seed,
++                    schema_hint=schema_hint,
++                    metadata=metadata or {},
++                )
+                 logger = logging.getLogger("battle.inference")
+                 logger.info(
+-                    "Gemini success seed=%s element=%s hp=%s atk=%s",
++                    "Gemini success schema=%s seed=%s element=%s hp=%s atk=%s",
++                    schema_hint,
+                     seed,
+                     result["element"],
+                     result["hp"],
+@@
+-        return {
+-            "element": element,
+-            "hp": hp,
+-            "base_attack": base_attack,
+-            "skill_type": rng.choice(["weapon", "shield", "augment"]),
+-            "seed": seed,
+-            "explanation": explanation,
+-            "variance": float(rng.random()),
+-        }
++        payload = {
++            "element": element,
++            "hp": hp,
++            "base_attack": base_attack,
++            "seed": seed,
++            "explanation": explanation,
++            "variance": float(rng.random()),
++        }
++        if schema_hint.startswith("Skill"):
++            payload["skill_type"] = rng.choice(["attack", "defense"])
++            payload["attack_bonus"] = base_attack
++        else:
++            payload["skill_type"] = "weapon"
++        return payload
+@@
+     def _decode_element(self, value: float, seed: int) -> str:
+         elements = ["fire", "water", "earth", "air", "light", "shadow"]
+         idx = int(abs(value + seed)) % len(elements)
+         return elements[idx]
++
++    def _schema_hint(
++        self, doodle_type: Optional[DoodleType], metadata: Optional[Dict[str, Any]]
++    ) -> str:
++        if doodle_type == "monster":
++            return "Monster"
++        if doodle_type == "reinforcement":
++            target = (metadata or {}).get("target", "skill")
++            return "Monster_Enhance" if target == "monster" else "Skill_Enhance"
++        return "Skill"
+*** End Patch
+[2m2025-11-15T14:07:16.932683Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:07:16.932689Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:07:38.603546Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/api/doodles.py
+@@
+-    attributes = runner.predict([stroke.model_dump() for stroke in request.strokes], request.seed or int(start))
++    attributes = runner.predict(
++        [stroke.model_dump() for stroke in request.strokes],
++        request.seed or int(start),
++        doodle_type=request.doodle_type,
++        metadata=request.metadata,
++    )
+*** End Patch
+[2m2025-11-15T14:07:38.603591Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:07:38.603597Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:07:56.633624Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/gemini_client.py
+@@
+-"""Gemini API client for doodle-to-attribute inference."""
+-from __future__ import annotations
+-
+-import json
+-from typing import Any
+-
+-import httpx
+-from pydantic import BaseModel, Field, ValidationError
+-
+-
+-class GeminiError(RuntimeError):
+-    """Raised when Gemini API fails."""
+-
+-
+-class GeminiAttributes(BaseModel):
+-    element: str = Field(default="fire")
+-    hp: int = Field(default=200, ge=50, le=500)
+-    base_attack: int = Field(default=50, ge=5, le=100)
+-    skill_type: str = Field(default="weapon")
+-    explanation: str = Field(default="Generated by Gemini")
+-
+-
+-class GeminiClient:
+-    def __init__(self, api_key: str, model: str) -> None:
+-        self._api_key = api_key
+-        self._model = model
+-        self._base_url = "https://generativelanguage.googleapis.com/v1beta"
+-        self._client = httpx.Client(timeout=40)
+-
+-    def generate_attributes(self, strokes: list[dict[str, Any]], seed: int) -> dict[str, Any]:
+-        body = {
+-            "contents": [
+-                {
+-                    "role": "user",
+-                    "parts": [
+-                        {
+-                            "text": self._prompt(strokes, seed),
+-                        }
+-                    ],
+-                }
+-            ],
+-            "generationConfig": {
+-                "temperature": 0.2,
+-                "topP": 0.95,
+-                "topK": 32,
+-            },
+-        }
+-
+-        url = f"{self._base_url}/models/{self._model}:generateContent"
+-        response = self._client.post(url, params={"key": self._api_key}, json=body)
+-        if response.status_code >= 400:
+-            raise GeminiError(f"Gemini error {response.status_code}: {response.text}")
+-        payload = response.json()
+-        text = (
+-            payload.get("candidates", [{}])[0]
+-            .get("content", {})
+-            .get("parts", [{}])[0]
+-            .get("text", "")
+-        )
+-        return self._parse_attributes(text, seed)
+-
+-    def _prompt(self, strokes: list[dict[str, Any]], seed: int) -> str:
+-        return (
+-            "You rate drawn monsters for a deterministic AI battle game. "
+-            "Respond ONLY with compact JSON containing keys "
+-            'element, hp, base_attack, skill_type, explanation. '
+-            "hp must be 50-500, base_attack 5-100. "
+-            f"Seed: {seed}. Stroke summary: {strokes[:40]}"
+-        )
+-
+-    def _parse_attributes(self, text: str, seed: int) -> dict[str, Any]:
+-        cleaned = self._strip_fence(text)
+-        try:
+-            attrs = GeminiAttributes.model_validate_json(cleaned)
+-        except ValidationError as exc:
+-            raise GeminiError(f"Gemini output invalid: {cleaned}") from exc
+-        except json.JSONDecodeError as exc:
+-            raise GeminiError(f"Gemini output not JSON: {cleaned}") from exc
+-
+-        return {
+-            "element": attrs.element,
+-            "hp": max(50, min(500, int(attrs.hp))),
+-            "base_attack": max(5, min(100, int(attrs.base_attack))),
+-            "skill_type": attrs.skill_type or "weapon",
+-            "seed": seed,
+-            "explanation": attrs.explanation,
+-        }
+-
+-    def _strip_fence(self, text: str) -> str:
+-        stripped = text.strip()
+-        if stripped.startswith("```"):
+-            lines = stripped.splitlines()
+-            if len(lines) >= 2:
+-                if lines[0].startswith("```"):
+-                    lines = lines[1:]
+-                if lines and lines[-1].startswith("```"):
+-                    lines = lines[:-1]
+-                stripped = "\n".join(lines)
+-            else:
+-                stripped = stripped.strip("`")
+-        return stripped.strip()
+*** End Patch
+[2m2025-11-15T14:07:56.633937Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:07:56.635864Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:08:03.295727Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '1,200p' backend/src/services/gemini_client.py"]}
+[2m2025-11-15T14:08:03.295823Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:08:03.295837Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:08:35.382533Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat <<'EOF' > backend/src/services/gemini_client.py\n\"\"\"Gemini API client for doodle-to-attribute inference.\"\"\"\nfrom __future__ import annotations\n\nimport json\nfrom pathlib import Path\nfrom typing import Any, Dict\n\nimport httpx\nfrom pydantic import BaseModel, Field, ValidationError\n\nPROMPT_DOC = Path(__file__).resolve().parents[2] / \"System+Prompt+2ac0c4613418808c8d6dd8e9f9c2059c.md\"\ntry:\n    BASE_SYSTEM_PROMPT = PROMPT_DOC.read_text(encoding=\"utf-8\")\nexcept FileNotFoundError:\n    BASE_SYSTEM_PROMPT = \"You are an art critic that outputs JSON stats for monsters and skills.\"\n\n\nclass GeminiError(RuntimeError):\n    \"\"\"Raised when Gemini API fails.\"\"\"\n\n\nclass MonsterResponse(BaseModel):\n    element: str\n    health: int = Field(ge=50, le=500)\n    attack: int = Field(ge=5, le=100)\n    defense: int = Field(default=20, ge=0, le=100)\n    name: str | None = None\n    explanation: str\n\n\nclass SkillResponse(BaseModel):\n    kind: str\n    element: str\n    power: int = Field(ge=5, le=80)\n    name: str | None = None\n    move_name: str | None = None\n    explanation: str\n\n\nclass MonsterEnhanceResponse(BaseModel):\n    add_element: str | None = None\n    add_health: int\n    add_attack: int\n    add_defense: int\n    new_name: str | None = None\n    explanation: str\n\n\nclass SkillEnhanceResponse(BaseModel):\n    add_kind: str\n    add_element: str | None = None\n    add_power: int\n    new_name: str | None = None\n    new_move_name: str | None = None\n    explanation: str\n\n\nclass GeminiClient:\n    def __init__(self, api_key: str, model: str) -> None:\n        self._api_key = api_key\n        self._model = model\n        self._base_url = \"https://generativelanguage.googleapis.com/v1beta\"\n        self._client = httpx.Client(timeout=40)\n\n    def generate_attributes(\n        self,\n        strokes: list[dict[str, Any]],\n        seed: int,\n        schema_hint: str,\n        metadata: Dict[str, Any] | None = None,\n    ) -> dict[str, Any]:\n        body = {\n            \"contents\": [\n                {\n                    \"role\": \"user\",\n                    \"parts\": [\n                        {\n                            \"text\": self._prompt(strokes, seed, schema_hint, metadata or {}),\n                        }\n                    ],\n                }\n            ],\n            \"generationConfig\": {\n                \"temperature\": 0.2,\n                \"topP\": 0.95,\n                \"topK\": 32,\n            },\n        }\n\n        url = f\"{self._base_url}/models/{self._model}:generateContent\"\n        response = self._client.post(url, params={\"key\": self._api_key}, json=body)\n        if response.status_code >= 400:\n            raise GeminiError(f\"Gemini error {response.status_code}: {response.text}\")\n        payload = response.json()\n        text = (\n            payload.get(\"candidates\", [{}])[0]\n            .get(\"content\", {})\n            .get(\"parts\", [{}])[0]\n            .get(\"text\", \"\")\n        )\n        return self._parse_attributes(text, seed, schema_hint)\n\n    def _prompt(\n        self,\n        strokes: list[dict[str, Any]],\n        seed: int,\n        schema_hint: str,\n        metadata: Dict[str, Any],\n    ) -> str:\n        summary = self._summarize_strokes(strokes)\n        return (\n            f\"{BASE_SYSTEM_PROMPT}\\n\\n\"\n            \"### Current Doodle Context\\n\"\n            f\"Schema: {schema_hint}\\n\"\n            f\"Seed: {seed}\\n\"\n            f\"Metadata: {json.dumps(metadata, ensure_ascii=False)}\\n\"\n            f\"Stroke Summary: {summary}\\n\\n\"\n            \"Respond with JSON matching the schema above.\"\n        )\n\n    def _parse_attributes(self, text: str, seed: int, schema_hint: str) -> dict[str, Any]:\n        cleaned = self._strip_fence(text)\n        try:\n            if schema_hint == \"Skill\":\n                attrs = SkillResponse.model_validate_json(cleaned)\n                return {\n                    \"element\": attrs.element,\n                    \"skill_type\": attrs.kind,\n                    \"attack_bonus\": attrs.power,\n                    \"name\": attrs.name or \"Unnamed Skill\",\n                    \"move_name\": attrs.move_name or \"Unnamed Move\",\n                    \"seed\": seed,\n                    \"explanation\": attrs.explanation,\n                }\n            if schema_hint == \"Monster_Enhance\":\n                attrs = MonsterEnhanceResponse.model_validate_json(cleaned)\n                return {\n                    \"element\": attrs.add_element or \"fire\",\n                    \"hp\": attrs.add_health,\n                    \"base_attack\": attrs.add_attack,\n                    \"defense\": attrs.add_defense,\n                    \"name\": attrs.new_name or \"Enhanced Monster\",\n                    \"seed\": seed,\n                    \"explanation\": attrs.explanation,\n                }\n            if schema_hint == \"Skill_Enhance\":\n                attrs = SkillEnhanceResponse.model_validate_json(cleaned)\n                return {\n                    \"element\": attrs.add_element or \"fire\",\n                    \"skill_type\": attrs.add_kind,\n                    \"attack_bonus\": attrs.add_power,\n                    \"name\": attrs.new_name or \"Enhanced Skill\",\n                    \"move_name\": attrs.new_move_name or \"Enhanced Move\",\n                    \"seed\": seed,\n                    \"explanation\": attrs.explanation,\n                }\n            attrs = MonsterResponse.model_validate_json(cleaned)\n            return {\n                \"element\": attrs.element,\n                \"hp\": max(50, min(500, int(attrs.health))),\n                \"base_attack\": max(5, min(100, int(attrs.attack))),\n                \"defense\": attrs.defense,\n                \"name\": attrs.name or \"Unnamed Monster\",\n                \"seed\": seed,\n                \"explanation\": attrs.explanation,\n            }\n        except (ValidationError, json.JSONDecodeError) as exc:\n            raise GeminiError(f\"Gemini output invalid: {cleaned}\") from exc\n\n    def _summarize_strokes(self, strokes: list[dict[str, Any]]) -> str:\n        sample = strokes[:20]\n        try:\n            return json.dumps(sample, ensure_ascii=False)\n        except TypeError:\n            return str(sample)\n\n    def _strip_fence(self, text: str) -> str:\n        stripped = text.strip()\n        if stripped.startswith(\"```\"):\n            lines = stripped.splitlines()\n            if len(lines) >= 2:\n                if lines[0].startswith(\"```\"):\n                    lines = lines[1:]\n                if lines and lines[-1].startswith(\"```\"):\n                    lines = lines[:-1]\n                stripped = \"\\n\".join(lines)\n            else:\n                stripped = stripped.strip(\"`\")\n        return stripped.strip()\nEOF"]}
+[2m2025-11-15T14:08:35.382869Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:08:35.382886Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:09:09.214127Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: backend/src/services/prompt_manager.py
++"""Reusable prompt builder for Gemini."""
++from __future__ import annotations
++
++import json
++import os
++from functools import lru_cache
++from pathlib import Path
++from typing import Any, Dict, List
++
++
++DEFAULT_PROMPT_PATH = Path("System+Prompt+2ac0c4613418808c8d6dd8e9f9c2059c.md")
++FALLBACK_PROMPT = "You rate doodles for a deterministic battle demo. Output JSON per the schema."
++
++
++@lru_cache
++def _load_base_prompt() -> str:
++    custom_path = os.getenv("GEMINI_PROMPT_PATH")
++    candidate_paths: List[Path] = []
++    if custom_path:
++        candidate_paths.append(Path(custom_path))
++    candidate_paths.append(DEFAULT_PROMPT_PATH)
++
++    for path in candidate_paths:
++        if path.is_absolute() and path.exists():
++            return path.read_text(encoding="utf-8")
++        if not path.is_absolute():
++            repo_path = Path(__file__).resolve().parents[2] / path
++            if repo_path.exists():
++                return repo_path.read_text(encoding="utf-8")
++    return FALLBACK_PROMPT
++
++
++def build_prompt(
++    schema_hint: str,
++    strokes: List[Dict[str, Any]],
++    seed: int,
++    metadata: Dict[str, Any],
++) -> str:
++    base = _load_base_prompt()
++    summary = _summarize_strokes(strokes)
++    return (
++        f"{base}\n\n"
++        "### Current Doodle Context\n"
++        f"Schema: {schema_hint}\n"
++        f"Seed: {seed}\n"
++        f"Metadata: {json.dumps(metadata, ensure_ascii=False)}\n"
++        f"Stroke Summary: {summary}\n\n"
++        "Respond with JSON that matches the schema exactly."
++    )
++
++
++def _summarize_strokes(strokes: List[Dict[str, Any]]) -> str:
++    sample = strokes[:20]
++    try:
++        return json.dumps(sample, ensure_ascii=False)
++    except TypeError:
++        return str(sample)
+*** End Patch
+[2m2025-11-15T14:09:09.214186Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:09:09.214192Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:09:19.250390Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/gemini_client.py
+@@
+-from pathlib import Path
+-from typing import Any, Dict
+-
+-import httpx
+-from pydantic import BaseModel, Field, ValidationError
+-
+-PROMPT_DOC = Path(__file__).resolve().parents[2] / "System+Prompt+2ac0c4613418808c8d6dd8e9f9c2059c.md"
+-try:
+-    BASE_SYSTEM_PROMPT = PROMPT_DOC.read_text(encoding="utf-8")
+-except FileNotFoundError:
+-    BASE_SYSTEM_PROMPT = "You are an art critic that outputs JSON stats for monsters and skills."
++from typing import Any, Dict
++
++import httpx
++from pydantic import BaseModel, Field, ValidationError
++
++from src.services.prompt_manager import build_prompt
+@@
+-    def _prompt(
+-        self,
+-        strokes: list[dict[str, Any]],
+-        seed: int,
+-        schema_hint: str,
+-        metadata: Dict[str, Any],
+-    ) -> str:
+-        summary = self._summarize_strokes(strokes)
+-        return (
+-            f"{BASE_SYSTEM_PROMPT}\n\n"
+-            "### Current Doodle Context\n"
+-            f"Schema: {schema_hint}\n"
+-            f"Seed: {seed}\n"
+-            f"Metadata: {json.dumps(metadata, ensure_ascii=False)}\n"
+-            f"Stroke Summary: {summary}\n\n"
+-            "Respond with JSON matching the schema above."
+-        )
++    def _prompt(
++        self,
++        strokes: list[dict[str, Any]],
++        seed: int,
++        schema_hint: str,
++        metadata: Dict[str, Any],
++    ) -> str:
++        return build_prompt(schema_hint, strokes, seed, metadata)
+@@
+-    def _summarize_strokes(self, strokes: list[dict[str, Any]]) -> str:
+-        sample = strokes[:20]
+-        try:
+-            return json.dumps(sample, ensure_ascii=False)
+-        except TypeError:
+-            return str(sample)
+-
+*** End Patch
+[2m2025-11-15T14:09:19.250456Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:09:19.250463Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:09:26.232252Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n 'json' backend/src/services/gemini_client.py"]}
+[2m2025-11-15T14:09:26.232309Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:09:26.232320Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:13:02.815333Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T14:13:06.125878Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T14:15:41.205345Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T14:15:54.944282Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/prompt_manager.py
+@@
+ def build_prompt(
+     schema_hint: str,
+     strokes: List[Dict[str, Any]],
+     seed: int,
+     metadata: Dict[str, Any],
+ ) -> str:
+     base = _load_base_prompt()
+     summary = _summarize_strokes(strokes)
+     return (
+         f"{base}\n\n"
+         "### Current Doodle Context\n"
+         f"Schema: {schema_hint}\n"
+         f"Seed: {seed}\n"
+         f"Metadata: {json.dumps(metadata, ensure_ascii=False)}\n"
+         f"Stroke Summary: {summary}\n\n"
+-        "Respond with JSON that matches the schema exactly."
++        "Respond with JSON that matches the schema exactly. DO NOT wrap the payload "
++        "inside additional objects (no root keys like “monster” or “skill”). "
++        "Do not include extra narrative fields."
+     )
+*** End Patch
+[2m2025-11-15T14:15:54.944421Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:15:54.944469Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T14:16:04.980071Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: backend/src/services/gemini_client.py
+@@
+     def _parse_attributes(self, text: str, seed: int, schema_hint: str) -> dict[str, Any]:
+         cleaned = self._strip_fence(text)
++        cleaned = self._maybe_unwrap(cleaned, schema_hint)
+         try:
+             if schema_hint == "Skill":
+@@
+         except (ValidationError, json.JSONDecodeError) as exc:
+             raise GeminiError(f"Gemini output invalid: {cleaned}") from exc
++        except ValidationError as exc:
++            raise GeminiError(f"Gemini output invalid: {cleaned}") from exc
+ 
+@@
+         return stripped.strip()
++
++    def _maybe_unwrap(self, text: str, schema_hint: str) -> str:
++        """Some generations add a root key ("monster": {...}). Unwrap if detected."""
++        stripped = text.strip()
++        try:
++            payload = json.loads(stripped)
++        except json.JSONDecodeError:
++            return stripped
++
++        key = schema_hint.lower()
++        if key in payload and isinstance(payload[key], dict):
++            return json.dumps(payload[key], ensure_ascii=False)
++        return stripped
+*** End Patch
+[2m2025-11-15T14:16:04.980176Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T14:16:04.980196Z[0m [32m INFO[0m tool gate released
