@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0a0a0a;
+  color: #fafafa;
+}
+
+a {
+  color: #8be9fd;
+  text-decoration: none;
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.match-layout {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.toolbar button {
+  margin-right: 0.5rem;
+}
+
+.toolbar .active {
+  background: #8be9fd;
+  color: #0a0a0a;
+}
+
+.workbench {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.doodle-canvas canvas {
+  border: 2px solid #444;
+  border-radius: 12px;
+  touch-action: none;
+}
+
+.attribution-panel {
+  background: #141414;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.attribution-panel .row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #2a2a2a;
+  padding: 0.5rem 0;
+}
+
+.attribution-panel dt {
+  font-weight: 600;
+}

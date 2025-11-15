@@ -1,0 +1,58 @@
+# OS artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# Editors/IDEs
+.vscode/
+.idea/
+*.iml
+
+# Node/TypeScript
+node_modules/
+dist/
+build/
+coverage/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+.next/
+.vite/
+.env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+*.env
+
+# Redis/Postgres data
+postgres-data/
+redis-data/
+
+# Docker
+*.pid
+*.seed
+Dockerfile.local
+
+# Unity/WebGL
+unity-guided/Library/
+unity-guided/Temp/
+unity-guided/Build/
+unity-guided/Logs/
+
+# Railway artifacts
+railway/
+
+# Specs/tools
+.specify/cache/

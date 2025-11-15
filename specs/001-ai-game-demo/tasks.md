@@ -22,10 +22,10 @@ description: "Task list for Sketch Brawl demo implementation"
 
 **Purpose**: Project initialization that wires the fast sketch canvas stack, FastAPI backend, and Railway-ready infra.
 
-- [ ] T001 Scaffold backend Poetry project with FastAPI/SQLModel deps in `backend/pyproject.toml`
-- [ ] T002 Create FastAPI entrypoint + settings loader in `backend/src/api/main.py`
-- [ ] T003 Initialize Next.js + TypeScript workspace with lint/test scripts in `frontend/package.json`
-- [ ] T004 Provision dev docker-compose with Postgres, Redis, MinIO in `ops/docker-compose.yml`
+- [X] T001 Scaffold backend Poetry project with FastAPI/SQLModel deps in `backend/pyproject.toml`
+- [X] T002 Create FastAPI entrypoint + settings loader in `backend/src/api/main.py`
+- [X] T003 Initialize Next.js + TypeScript workspace with lint/test scripts in `frontend/package.json`
+- [X] T004 Provision dev docker-compose with Postgres, Redis, MinIO in `ops/docker-compose.yml`
 
 ---
 
@@ -35,12 +35,12 @@ description: "Task list for Sketch Brawl demo implementation"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T005 Define Monster & SkillCard SQLModel entities + seed columns in `backend/src/models/monster.py` and `backend/src/models/skill_card.py`
-- [ ] T006 Add BattleSession, TelemetryEvent, DemoArtifact models + relationships in `backend/src/models/battle_session.py`
-- [ ] T007 Configure database session + Alembic migration scripts in `backend/alembic/`
-- [ ] T008 Implement ONNX inference runner scaffold with deterministic seed injection in `backend/src/services/inference_runner.py`
-- [ ] T009 Build telemetry ingestion/aggregation service with Redis queue fan-out in `backend/src/services/telemetry.py`
-- [ ] T010 Establish typed API client + deterministic state store in `frontend/src/services/apiClient.ts`
+- [X] T005 Define Monster & SkillCard SQLModel entities + seed columns in `backend/src/models/monster.py` and `backend/src/models/skill_card.py`
+- [X] T006 Add BattleSession, TelemetryEvent, DemoArtifact models + relationships in `backend/src/models/battle_session.py`
+- [X] T007 Configure database session + Alembic migration scripts in `backend/alembic/`
+- [X] T008 Implement ONNX inference runner scaffold with deterministic seed injection in `backend/src/services/inference_runner.py`
+- [X] T009 Build telemetry ingestion/aggregation service with Redis queue fan-out in `backend/src/services/telemetry.py`
+- [X] T010 Establish typed API client + deterministic state store in `frontend/src/services/apiClient.ts`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -54,19 +54,19 @@ description: "Task list for Sketch Brawl demo implementation"
 
 ### Tests for User Story 1 ⚠️
 
-- [ ] T011 [P] [US1] Add Playwright canvas latency + FPS probe in `frontend/tests/e2e/draw-latency.spec.ts`
-- [ ] T012 [P] [US1] Create backend integration test for `/doodles` attribution + prompt persistence in `backend/tests/integration/test_inference.py`
+- [X] T011 [P] [US1] Add Playwright canvas latency + FPS probe in `frontend/tests/e2e/draw-latency.spec.ts`
+- [X] T012 [P] [US1] Create backend integration test for `/doodles` attribution + prompt persistence in `backend/tests/integration/test_inference.py`
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] Implement lobby/invite REST endpoints + Redis presence heartbeat in `backend/src/api/lobbies.py`
-- [ ] T014 [P] [US1] Build lobby service (invite validation, readiness state) in `backend/src/services/lobby_service.py`
-- [ ] T015 [US1] Implement Fabric.js-based DoodleCanvas with telemetry hooks in `frontend/src/components/DoodleCanvas.tsx`
-- [ ] T016 [P] [US1] Create AI attribution panel + explanation UI in `frontend/src/components/AttributionPanel.tsx`
-- [ ] T017 [US1] Implement doodle upload + inference ticket API in `backend/src/api/doodles.py`
-- [ ] T018 [P] [US1] Implement reinforcement validation rules + error payloads in `backend/src/services/validation.py`
-- [ ] T019 [US1] Persist Monster/SkillCard records + seeds after inference in `backend/src/services/attribute_store.py`
-- [ ] T020 [US1] Wire telemetry publisher (latency/fps/inference events) in `frontend/src/services/telemetryPublisher.ts`
+- [X] T013 [US1] Implement lobby/invite REST endpoints + Redis presence heartbeat in `backend/src/api/lobbies.py`
+- [X] T014 [P] [US1] Build lobby service (invite validation, readiness state) in `backend/src/services/lobby_service.py`
+- [X] T015 [US1] Implement Fabric.js-based DoodleCanvas with telemetry hooks in `frontend/src/components/DoodleCanvas.tsx`
+- [X] T016 [P] [US1] Create AI attribution panel + explanation UI in `frontend/src/components/AttributionPanel.tsx`
+- [X] T017 [US1] Implement doodle upload + inference ticket API in `backend/src/api/doodles.py`
+- [X] T018 [P] [US1] Implement reinforcement validation rules + error payloads in `backend/src/services/validation.py`
+- [X] T019 [US1] Persist Monster/SkillCard records + seeds after inference in `backend/src/services/attribute_store.py`
+- [X] T020 [US1] Wire telemetry publisher (latency/fps/inference events) in `frontend/src/services/telemetryPublisher.ts`
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
