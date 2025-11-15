@@ -11,6 +11,16 @@ from typing import Any, Dict, List
 DEFAULT_PROMPT_PATH = Path("System+Prompt+2ac0c4613418808c8d6dd8e9f9c2059c.md")
 FALLBACK_PROMPT = "You rate doodles for a deterministic battle demo. Output JSON per the schema."
 
+DIVERSITY_GUIDANCE = (
+    "### Diversity Rules\n"
+    "- Base every choice on the player's latest doodle plus the metadata below. "
+    "Reference what you see in the stroke summary when you justify decisions.\n"
+    "- Choose the element that best matches the doodle's strokes and shapes; "
+    "do not default to a single element. If multiple elements fit, pick the one that increases variety.\n"
+    "- Vary health/attack/defense distributions (or power adjustments) within allowed ranges so results feel distinct yet grounded in the drawing.\n"
+    "- Give every name/move_name a fresh quirky spin tied to the doodle. Re-using previous wording is discouraged.\n"
+)
+
 SCHEMA_MARKERS: Dict[str, List[str]] = {
     "Monster": ["### **Monster Schema**", "### Monster constraints"],
     "Skill": ["### **Skill Schema**", "### Skill constraints"],
@@ -20,6 +30,8 @@ SCHEMA_MARKERS: Dict[str, List[str]] = {
 
 COMMON_SECTION_MARKERS: List[str] = [
     "## 2. Stroke interpretation guidance",
+    "## 3. Validation constraints",
+    "### Elements & advantage cycle",
     "## 4. Tone of explanations",
 ]
 
@@ -93,6 +105,7 @@ def build_prompt(
     prompt_parts = [schema_block]
     if common_block:
         prompt_parts.append(common_block)
+    prompt_parts.append(DIVERSITY_GUIDANCE)
     prompt_parts.append(
         "### Current Doodle Context\n"
         f"Schema: {schema_hint}\n"
