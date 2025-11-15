@@ -3061,3 +3061,214 @@
 [2m2025-11-15T12:42:29.794844Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
 [2m2025-11-15T12:42:31.518766Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
 [2m2025-11-15T12:45:00.399972Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:47:21.108107Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:47:36.987931Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc",".specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks"],"workdir":"/Users/chenyuxin/Sketch-Brawl","with_escalated_permissions":true,"justification":"Need feature directory info and docs list before updating tasks"}
+[2m2025-11-15T12:47:36.987978Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T12:47:36.987995Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T12:48:02.399905Z[0m [32m INFO[0m interrupt received: abort current task, if any
+[2m2025-11-15T12:51:21.793837Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:51:24.613665Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:52:03.447576Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:52:05.175611Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:52:07.321627Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:52:13.238844Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:52:35.242964Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc",".specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks"],"workdir":"/Users/chenyuxin/Sketch-Brawl","with_escalated_permissions":true,"justification":"Need feature dir/tasks info before modifying tasks"}
+[2m2025-11-15T12:52:35.243157Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T12:52:35.243177Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T12:52:46.052091Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls .specify/scripts/bash"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T12:52:46.052118Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T12:52:46.052122Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T12:52:52.104132Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","game/.specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks"],"workdir":"/Users/chenyuxin/Sketch-Brawl","with_escalated_permissions":true,"justification":"Need feature dir/tasks info from speckit script"}
+[2m2025-11-15T12:52:52.104280Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T12:52:52.104290Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T12:54:34.851000Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat specs/001-ai-game-demo/spec.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T12:54:34.851104Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T12:54:34.851127Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T12:54:44.338394Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat specs/001-ai-game-demo/tasks.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T12:54:44.338443Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T12:54:44.338455Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T12:55:11.550934Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/spec.md
+@@
+-### User Story 2 - Server-Authoritative Auto Battles (Priority: P2)
+-
+-The system runs best-of-three auto battles using only saved attributes and a single RNG seed, presents outcomes in the UI, and lets players/judges replay each round deterministically.
+-
+-**Principles & Evidence**: Deterministic Auto-Battle Loop (battle logs + replay file proving same damage), Skill Evolution Guardrails (upgrade deltas recorded), Demo Readiness (spectator overlay referencing logs).  
+-**Why this priority**: Judges must see fair, reproducible combat that showcases the AI reasoning beyond the drawings.  
+-**Independent Test**: Trigger an automated duel using stored monsters/skills, compare replay logs against UI outcomes, and confirm a downloaded log can reproduce the same KO order offline.
+-
+-**Acceptance Scenarios**:
+-
+-1. **Given** the system has saved monsters/skills for both players, **When** a round starts, **Then** the server simulates damage using the RNG seed, streams events to clients, and logs each hit/KO for replay without client overrides.
+-2. **Given** a round finishes, **When** a judge requests a replay, **Then** the system replays identical events (damage, overtime, victory) without divergence and flags any mismatch as a blocking error.
++### User Story 2 - Server-Authoritative Auto Battles (Priority: P2)
++
++The system runs best-of-three auto battles using only saved attributes and a single RNG seed, streams each damage event to the UI, and shows inline round summaries so judges can verify outcomes without downloading replays.
++
++**Principles & Evidence**: Deterministic Auto-Battle Loop (server log mirrors UI timeline), Skill Evolution Guardrails (upgrade deltas recorded), Demo Readiness (spectator HUD referencing live events).  
++**Why this priority**: Judges must see fair, reproducible combat with clear on-screen evidence even in a lightweight demo.  
++**Independent Test**: Trigger an automated duel using stored monsters/skills, assert the battle log emitted by the API matches the UI summary timeline, and verify results remain deterministic when re-running with the same seed.
++
++**Acceptance Scenarios**:
++
++1. **Given** the system has saved monsters/skills for both players, **When** a round starts, **Then** the server simulates damage using the RNG seed, streams events to clients, and logs each hit/KO so the on-screen timeline reflects the authoritative source.
++2. **Given** a round finishes, **When** a judge expands the inline summary, **Then** the UI shows the same KO order, damage totals, and overtime flags recorded by the server log with no need to download a replay file.
+*** End Patch
+[2m2025-11-15T12:55:11.551066Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T12:55:11.551075Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T12:55:27.126299Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/tasks.md
+@@
+-## Phase 4: User Story 2 - Server-Authoritative Auto Battles (Priority: P2)
+-
+-**Goal**: Run deterministic best-of-three auto battles, stream events to clients, store replay logs, and expose download endpoints.
+-
+-**Independent Test**: Trigger battle via API using stored monsters/skills and verify Hypothesis + integration tests prove damage logs equal replay playback.
++## Phase 4: User Story 2 - Server-Authoritative Auto Battles (Priority: P2)
++
++**Goal**: Run deterministic best-of-three auto battles, stream events to clients, and surface inline summaries so judges can verify outcomes without replay downloads.
++
++**Independent Test**: Trigger battle via API using stored monsters/skills and verify Hypothesis + integration tests prove the server event log matches the UI timeline for identical seeds.
+@@
+-### Tests for User Story 2 ⚠️
+-
+-- [ ] T021 [P] [US2] Write Hypothesis property tests for battle math determinism in `backend/tests/unit/test_battle_engine.py`
+-- [ ] T022 [P] [US2] Add replay consistency integration test covering `/battles/{id}/replay` in `backend/tests/integration/test_replay_consistency.py`
++### Tests for User Story 2 ⚠️
++
++- [ ] T021 [P] [US2] Write Hypothesis property tests for battle math determinism in `backend/tests/unit/test_battle_engine.py`
++- [ ] T022 [P] [US2] Add integration test ensuring `/battles` event stream + summary timeline stay in sync for identical seeds in `backend/tests/integration/test_battle_summary.py`
+@@
+-- [ ] T023 [US2] Implement deterministic battle engine (damage, elements, timers) in `backend/src/services/battle_engine.py`
+-- [ ] T024 [US2] Create Celery worker to run rounds + enforce RNG seeds in `backend/src/workers/battle_worker.py`
+-- [ ] T025 [US2] Add battle API (start battle, SSE updates, replay fetch) in `backend/src/api/battles.py`
+-- [ ] T026 [US2] Build battle HUD + log viewer in `frontend/src/components/BattleHud.tsx`
+-- [ ] T027 [P] [US2] Implement replay playback UI + download button in `frontend/src/pages/match.tsx`
+-- [ ] T028 [US2] Export replay JSON with checksum + storage upload in `backend/src/services/replay_exporter.py`
+-- [ ] T029 [US2] Record skill evolution deltas + history for upgrades in `backend/src/services/skill_history.py`
++- [ ] T023 [US2] Implement deterministic battle engine (damage, elements, timers) in `backend/src/services/battle_engine.py`
++- [ ] T024 [US2] Create Celery worker to run rounds + enforce RNG seeds in `backend/src/workers/battle_worker.py`
++- [ ] T025 [US2] Add battle API (start battle, SSE updates, inline summaries) in `backend/src/api/battles.py`
++- [ ] T026 [US2] Build battle HUD + log viewer in `frontend/src/components/BattleHud.tsx`
++- [ ] T027 [P] [US2] Render inline battle timeline + judge summary panel in `frontend/src/pages/match.tsx`
++- [ ] T028 [US2] Persist battle timeline + summary payloads for `/battles/{id}` in `backend/src/services/battle_timeline.py`
++- [ ] T029 [US2] Record skill evolution deltas + history for upgrades in `backend/src/services/skill_history.py`
+*** End Patch
+[2m2025-11-15T12:55:27.126434Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T12:55:27.126445Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T12:56:14.187548Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:56:16.352670Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:56:32.544453Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:56:33.997217Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:56:47.710099Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/spec.md
+@@
+-The system runs best-of-three auto battles using only saved attributes and a single RNG seed, streams each damage event to the UI, and shows inline round summaries so judges can verify outcomes without downloading replays.
++The system runs best-of-three auto battles using the exact Monster + SkillCard state produced by User Story 1, streams each damage event to the UI, and shows inline round summaries (see `doc/AI-game` mock) so judges can verify outcomes without downloading replays.
+@@
+-1. **Given** the system has saved monsters/skills for both players, **When** a round starts, **Then** the server simulates damage using the RNG seed, streams events to clients, and logs each hit/KO so the on-screen timeline reflects the authoritative source.
++1. **Given** the system has saved monsters/skills for both players, **When** a round starts, **Then** the server simulates damage using the RNG seed, streams events to clients, and logs each hit/KO so the on-screen timeline (matching the mock in `doc/AI-game`) reflects the authoritative source.
+*** End Patch
+[2m2025-11-15T12:56:47.710187Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T12:56:47.710198Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T12:56:55.979650Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/tasks.md
+@@
+-- [ ] T023 [US2] Implement deterministic battle engine (damage, elements, timers) in `backend/src/services/battle_engine.py`
+-- [ ] T024 [US2] Create Celery worker to run rounds + enforce RNG seeds in `backend/src/workers/battle_worker.py`
+-- [ ] T025 [US2] Add battle API (start battle, SSE updates, inline summaries) in `backend/src/api/battles.py`
+-- [ ] T026 [US2] Build battle HUD + log viewer in `frontend/src/components/BattleHud.tsx`
+-- [ ] T027 [P] [US2] Render inline battle timeline + judge summary panel in `frontend/src/pages/match.tsx`
+-- [ ] T028 [US2] Persist battle timeline + summary payloads for `/battles/{id}` in `backend/src/services/battle_timeline.py`
++- [ ] T023 [US2] Implement deterministic battle engine (damage, elements, timers) in `backend/src/services/battle_engine.py` that consumes existing Monster/SkillCard records from US1
++- [ ] T024 [US2] Create Celery worker to run rounds + enforce RNG seeds in `backend/src/workers/battle_worker.py`
++- [ ] T025 [US2] Add battle API (start battle, SSE updates, inline summaries) in `backend/src/api/battles.py` reusing stored Monster/SkillCard state
++- [ ] T026 [US2] Build battle HUD + log viewer in `frontend/src/components/BattleHud.tsx` following `doc/AI-game` mock and referencing US1 monster data
++- [ ] T027 [P] [US2] Render inline battle timeline + judge summary panel in `frontend/src/pages/match.tsx` pulling from `/battles` stream
++- [ ] T028 [US2] Persist battle timeline + summary payloads for `/battles/{id}` in `backend/src/services/battle_timeline.py`
+*** End Patch
+[2m2025-11-15T12:56:55.979739Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T12:56:55.979745Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T12:58:37.155726Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:58:38.737551Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:59:23.118496Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T12:59:25.040020Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:01:46.205880Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","docker compose -f ops/docker-compose.yml up --build postgres redis minio backend"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T13:01:46.205941Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:01:46.205948Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:02:18.128185Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:03:16.458575Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:03:18.108681Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:03:19.984928Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:03:25.922053Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","game/.specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T13:03:25.922092Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:03:25.922099Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:03:34.236688Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat specs/001-ai-game-demo/spec.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T13:03:34.236725Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:03:34.236732Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:03:40.011881Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat specs/001-ai-game-demo/tasks.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T13:03:40.011909Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:03:40.011914Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:03:53.300747Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/spec.md
+@@
+-### User Story 2 - Server-Authoritative Auto Battles (Priority: P2)
+-
+-The system runs best-of-three auto battles using the exact Monster + SkillCard state produced by User Story 1, streams each damage event to the UI, and shows inline round summaries (see `doc/AI-game` mock) so judges can verify outcomes without downloading replays.
+-
+-**Principles & Evidence**: Deterministic Auto-Battle Loop (server log mirrors UI timeline), Skill Evolution Guardrails (upgrade deltas recorded), Demo Readiness (spectator HUD referencing live events).  
+-**Why this priority**: Judges must see fair, reproducible combat with clear on-screen evidence even in a lightweight demo.  
+-**Independent Test**: Trigger an automated duel using stored monsters/skills, assert the battle log emitted by the API matches the UI summary timeline, and verify results remain deterministic when re-running with the same seed.
+-
+-**Acceptance Scenarios**:
+-
+-1. **Given** the system has saved monsters/skills for both players, **When** a round starts, **Then** the server simulates damage using the RNG seed, streams events to clients, and logs each hit/KO so the on-screen timeline (matching the mock in `doc/AI-game`) reflects the authoritative source.
+-2. **Given** a round finishes, **When** a judge expands the inline summary, **Then** the UI shows the same KO order, damage totals, and overtime flags recorded by the server log with no need to download a replay file.
++### User Story 2 - Hot-seat Auto Battles (Priority: P2)
++
++On a single device, Player A and Player B take turns drawing monsters/skills (via US1 flow), then launch a best-of-three server-authoritative battle; the UI streams events and renders round summaries per the `doc/AI-game` mock so judges can verify the outcome on the same screen with no downloads.
++
++**Principles & Evidence**: Deterministic Auto-Battle Loop (server log mirrors UI timeline), Skill Evolution Guardrails (upgrade deltas recorded), Demo Readiness (spectator HUD referencing live events).  
++**Why this priority**: Judges need to see a full PvP-looking loop even without networking; hot-seat makes it shippable for the demo while still proving determinism.  
++**Independent Test**: Run the full hot-seat flow locally: Player A draws → Player B draws → battle runs. Assert the battle log emitted by the API matches the UI timeline for identical seeds and that both players’ Monster/SkillCard records from US1 are reused without re-inference.
++
++**Acceptance Scenarios**:
++
++1. **Given** both player slots have saved monsters/skills, **When** the host device starts a round, **Then** the server simulates damage using the RNG seed, streams events to the same client, and logs each hit/KO so the on-screen timeline (matching `doc/AI-game`) reflects the authoritative source.
++2. **Given** a round finishes, **When** the judge expands the inline summary, **Then** the UI shows the same KO order, damage totals, and overtime flags recorded by the server log, proving determinism without needing replay downloads.
+*** End Patch
+[2m2025-11-15T13:03:53.301274Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:03:53.301289Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:04:05.369978Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-ai-game-demo/tasks.md
+@@
+-## Phase 4: User Story 2 - Server-Authoritative Auto Battles (Priority: P2)
+-
+-**Goal**: Run deterministic best-of-three auto battles, stream events to clients, and surface inline summaries so judges can verify outcomes without replay downloads.
+-
+-**Independent Test**: Trigger battle via API using stored monsters/skills and verify Hypothesis + integration tests prove the server event log matches the UI timeline for identical seeds.
++## Phase 4: User Story 2 - Hot-seat Auto Battles (Priority: P2)
++
++**Goal**: Support hot-seat PvP on a single device: players take turns drawing (US1 flow) and trigger deterministic battles that stream events + inline summaries matching the mock.
++
++**Independent Test**: Drive the hot-seat flow end-to-end on one machine, asserting the `/battles` event log equals the UI timeline and that both players’ Monster/SkillCard entries come from US1 without re-inference.
+@@
+-- [ ] T023 [US2] Implement deterministic battle engine (damage, elements, timers) in `backend/src/services/battle_engine.py` that consumes existing Monster/SkillCard records from US1
+-- [ ] T024 [US2] Create Celery worker to run rounds + enforce RNG seeds in `backend/src/workers/battle_worker.py`
+-- [ ] T025 [US2] Add battle API (start battle, SSE updates, inline summaries) in `backend/src/api/battles.py` reusing stored Monster/SkillCard state
+-- [ ] T026 [US2] Build battle HUD + log viewer in `frontend/src/components/BattleHud.tsx` following `doc/AI-game` mock and referencing US1 monster data
+-- [ ] T027 [P] [US2] Render inline battle timeline + judge summary panel in `frontend/src/pages/match.tsx` pulling from `/battles` stream
+-- [ ] T028 [US2] Persist battle timeline + summary payloads for `/battles/{id}` in `backend/src/services/battle_timeline.py`
++- [ ] T023 [US2] Implement deterministic battle engine (damage, elements, timers) in `backend/src/services/battle_engine.py` that consumes existing Monster/SkillCard records from US1
++- [ ] T024 [US2] Create Celery worker to run rounds + enforce RNG seeds in `backend/src/workers/battle_worker.py`
++- [ ] T025 [US2] Add battle API (start battle, SSE updates, inline summaries) in `backend/src/api/battles.py` reusing stored Monster/SkillCard state
++- [ ] T026 [US2] Build battle HUD + log viewer in `frontend/src/components/BattleHud.tsx` following `doc/AI-game` mock and referencing US1 monster data
++- [ ] T027 [P] [US2] Render inline battle timeline + judge summary panel in `frontend/src/pages/match.tsx` pulling from `/battles` stream
++- [ ] T028 [US2] Persist battle timeline + summary payloads for `/battles/{id}` in `backend/src/services/battle_timeline.py`
+*** End Patch
+[2m2025-11-15T13:04:05.370028Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T13:04:05.370032Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T13:05:55.714393Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:08:01.378443Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T13:08:04.718520Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)

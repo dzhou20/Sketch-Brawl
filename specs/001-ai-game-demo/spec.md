@@ -27,18 +27,18 @@ Two remote players join a lobby, draw their monster and first skill on the share
 
 ---
 
-### User Story 2 - Server-Authoritative Auto Battles (Priority: P2)
+### User Story 2 - Hot-seat Auto Battles (Priority: P2)
 
-The system runs best-of-three auto battles using only saved attributes and a single RNG seed, presents outcomes in the UI, and lets players/judges replay each round deterministically.
+On a single device, Player A and Player B take turns drawing monsters/skills (via US1 flow), then launch a best-of-three server-authoritative battle; the UI streams events and renders round summaries per the `doc/AI-game` mock so judges can verify the outcome on the same screen with no downloads.
 
-**Principles & Evidence**: Deterministic Auto-Battle Loop (battle logs + replay file proving same damage), Skill Evolution Guardrails (upgrade deltas recorded), Demo Readiness (spectator overlay referencing logs).  
-**Why this priority**: Judges must see fair, reproducible combat that showcases the AI reasoning beyond the drawings.  
-**Independent Test**: Trigger an automated duel using stored monsters/skills, compare replay logs against UI outcomes, and confirm a downloaded log can reproduce the same KO order offline.
+**Principles & Evidence**: Deterministic Auto-Battle Loop (server log mirrors UI timeline), Skill Evolution Guardrails (upgrade deltas recorded), Demo Readiness (spectator HUD referencing live events).  
+**Why this priority**: Judges need to see a full PvP-looking loop even without networking; hot-seat makes it shippable for the demo while still proving determinism.  
+**Independent Test**: Run the full hot-seat flow locally: Player A draws → Player B draws → battle runs. Assert the battle log emitted by the API matches the UI timeline for identical seeds and that both players’ Monster/SkillCard records from US1 are reused without re-inference.
 
 **Acceptance Scenarios**:
 
-1. **Given** the system has saved monsters/skills for both players, **When** a round starts, **Then** the server simulates damage using the RNG seed, streams events to clients, and logs each hit/KO for replay without client overrides.
-2. **Given** a round finishes, **When** a judge requests a replay, **Then** the system replays identical events (damage, overtime, victory) without divergence and flags any mismatch as a blocking error.
+1. **Given** both player slots have saved monsters/skills, **When** the host device starts a round, **Then** the server simulates damage using the RNG seed, streams events to the same client, and logs each hit/KO so the on-screen timeline (matching `doc/AI-game`) reflects the authoritative source.
+2. **Given** a round finishes, **When** the judge expands the inline summary, **Then** the UI shows the same KO order, damage totals, and overtime flags recorded by the server log, proving determinism without needing replay downloads.
 
 ---
 

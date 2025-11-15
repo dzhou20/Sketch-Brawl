@@ -72,25 +72,25 @@ description: "Task list for Sketch Brawl demo implementation"
 
 ---
 
-## Phase 4: User Story 2 - Server-Authoritative Auto Battles (Priority: P2)
+## Phase 4: User Story 2 - Hot-seat Auto Battles (Priority: P2)
 
-**Goal**: Run deterministic best-of-three auto battles, stream events to clients, store replay logs, and expose download endpoints.
+**Goal**: Support hot-seat PvP on a single device: players take turns drawing (US1 flow) and trigger deterministic battles that stream events + inline summaries matching the mock.
 
-**Independent Test**: Trigger battle via API using stored monsters/skills and verify Hypothesis + integration tests prove damage logs equal replay playback.
+**Independent Test**: Drive the hot-seat flow end-to-end on one machine, asserting the `/battles` event log equals the UI timeline and that both players’ Monster/SkillCard entries come from US1 without re-inference.
 
 ### Tests for User Story 2 ⚠️
 
 - [ ] T021 [P] [US2] Write Hypothesis property tests for battle math determinism in `backend/tests/unit/test_battle_engine.py`
-- [ ] T022 [P] [US2] Add replay consistency integration test covering `/battles/{id}/replay` in `backend/tests/integration/test_replay_consistency.py`
+- [ ] T022 [P] [US2] Add integration test ensuring `/battles` event stream + summary timeline stay in sync for identical seeds in `backend/tests/integration/test_battle_summary.py`
 
 ### Implementation for User Story 2
 
-- [ ] T023 [US2] Implement deterministic battle engine (damage, elements, timers) in `backend/src/services/battle_engine.py`
+- [ ] T023 [US2] Implement deterministic battle engine (damage, elements, timers) in `backend/src/services/battle_engine.py` that consumes existing Monster/SkillCard records from US1
 - [ ] T024 [US2] Create Celery worker to run rounds + enforce RNG seeds in `backend/src/workers/battle_worker.py`
-- [ ] T025 [US2] Add battle API (start battle, SSE updates, replay fetch) in `backend/src/api/battles.py`
-- [ ] T026 [US2] Build battle HUD + log viewer in `frontend/src/components/BattleHud.tsx`
-- [ ] T027 [P] [US2] Implement replay playback UI + download button in `frontend/src/pages/match.tsx`
-- [ ] T028 [US2] Export replay JSON with checksum + storage upload in `backend/src/services/replay_exporter.py`
+- [ ] T025 [US2] Add battle API (start battle, SSE updates, inline summaries) in `backend/src/api/battles.py` reusing stored Monster/SkillCard state
+- [ ] T026 [US2] Build battle HUD + log viewer in `frontend/src/components/BattleHud.tsx` following `doc/AI-game` mock and referencing US1 monster data
+- [ ] T027 [P] [US2] Render inline battle timeline + judge summary panel in `frontend/src/pages/match.tsx` pulling from `/battles` stream
+- [ ] T028 [US2] Persist battle timeline + summary payloads for `/battles/{id}` in `backend/src/services/battle_timeline.py`
 - [ ] T029 [US2] Record skill evolution deltas + history for upgrades in `backend/src/services/skill_history.py`
 
 **Checkpoint**: User Stories 1 AND 2 should both work independently
