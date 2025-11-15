@@ -8640,3 +8640,544 @@
 [2m2025-11-15T20:34:57.855709Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat game/.specify/memory/constitution.md"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
 [2m2025-11-15T20:34:57.855759Z[0m [32m INFO[0m waiting for tool gate
 [2m2025-11-15T20:34:57.855770Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:42:32.737166Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T20:42:34.703980Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T20:42:35.486673Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T20:42:38.309981Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T20:42:40.085675Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T20:42:41.889669Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T20:42:52.296356Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls doc"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T20:42:52.296417Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:42:52.296443Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:43:00.477044Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","pdftotext 'doc/Junction2025AI+UI+workflow.pdf' -"],"workdir":"/Users/chenyuxin/Sketch-Brawl","timeout_ms":10000}
+[2m2025-11-15T20:43:00.477164Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:43:00.477177Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:43:14.300575Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","python - <<'PY'\nimport sys\nfrom pathlib import Path\nfrom PyPDF2 import PdfReader\npath = Path('doc/Junction2025AI+UI+workflow.pdf')\nreader = PdfReader(path.open('rb'))\nfor i,page in enumerate(reader.pages,1):\n    text = page.extract_text()\n    print(f\"--- Page {i} ---\")\n    print(text)\nPY"],"workdir":"/Users/chenyuxin/Sketch-Brawl","timeout_ms":10000}
+[2m2025-11-15T20:43:14.300607Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:43:14.300613Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:43:25.656954Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","python3 - <<'PY'\nimport sys\nfrom pathlib import Path\nfrom PyPDF2 import PdfReader\npath = Path('doc/Junction2025AI+UI+workflow.pdf')\nreader = PdfReader(path.open('rb'))\nfor i,page in enumerate(reader.pages,1):\n    text = page.extract_text()\n    print(f\"--- Page {i} ---\")\n    print(text)\nPY"],"workdir":"/Users/chenyuxin/Sketch-Brawl","timeout_ms":10000}
+[2m2025-11-15T20:43:25.657063Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:43:25.657069Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:45:08.471140Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T20:46:25.669170Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T20:46:38.751564Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","apply_patch <<'PATCH'\n*** Begin Patch\n*** Update File: specs/001-ai-game-demo/plan.md\n@@\n ## Project Structure\n \n ### Documentation (this feature)\n@@\n **Structure Decision**: Dual repo folders (`backend`, `frontend`) enable independent deployments + Railway services; Unity WebGL assets remain optional add-on referenced by frontend.\n+\n+## End-to-End Flow Alignment (AI + UI)\n+\n+```\n+[Frontend Canvas]\n+  | strokes + seed + snapshot\n+  V\n+[Backend API: /doodles (monster/gear/reinforcement)]\n+  | validate + persist to Postgres\n+  | call Gemini/ONNX inference\n+  V\n+[AI Interpreter]\n+  | stats + explanation\n+  V\n+[Frontend shows attributes]\n+\n+Battle start →\n+[Backend Battle Engine]\n+  | load Monster/Gear from DB\n+  | simulate with RNG seed\n+  | emit telemetry events + store battle session\n+  V\n+[Frontend Battle HUD + Log]\n+\n+Upgrade →\n+repeat doodle pipeline, stored as reinforcement history (skill evolution) and factored into future battles.\n+```\n*** End Patch\nPATCH\n"]}
+[2m2025-11-15T20:46:38.751713Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:46:38.751758Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:46:44.737754Z[0m [32m INFO[0m ToolCall: shell {"command":["powershell","-Command",""]}
+[2m2025-11-15T20:46:44.737808Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:46:44.737818Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:46:55.081853Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","python3 - <<'PY'\nfrom pathlib import Path\npath = Path('specs/001-ai-game-demo/plan.md')\nprint(path.read_text())\nPY"]}
+[2m2025-11-15T20:46:55.081887Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:46:55.081893Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:47:10.726292Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","apply_patch <<'PATCH'\n*** Begin Patch\n*** Update File: specs/001-ai-game-demo/plan.md\n@@\n-**Structure Decision**: [Document the selected structure and reference the real\n-directories captured above]\n+**Structure Decision**: [Document the selected structure and reference the real\n+directories captured above]\n+\n+## End-to-End Flow Alignment (AI + UI)\n+\n+```\n+[Frontend Canvas]\n+  | strokes + seed + snapshot\n+  V\n+[Backend API: /doodles (monster / gear / reinforcement)]\n+  | validate + persist to Postgres\n+  | call Gemini/ONNX inference\n+  V\n+[AI Interpreter]\n+  | stats + explanation\n+  V\n+[Frontend displays monster/gear attributes]\n+\n+Battle start →\n+[Backend Battle Engine]\n+  | load monster/gear from DB\n+  | simulate via RNG seed\n+  | emit telemetry + store battle session\n+  V\n+[Frontend Battle HUD + Log]\n+\n+Upgrade → repeat the doodle pipeline; stored as reinforcement history that feeds future battles.\n+```\n*** End Patch\nPATCH\n"]}
+[2m2025-11-15T20:47:10.726369Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:47:10.727409Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:48:36.031703Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T20:48:54.473109Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","apply_patch <<'PATCH'\n*** Begin Patch\n*** Update File: specs/001-ai-game-demo/tasks.md\n@@\n - [X] T033 [US2] Document hot-seat workflow + skill reuse instructions in `specs/001-ai-game-demo/quickstart.md`\n+- [ ] T046 [US2] Implement \"AI thinking\" overlay + submission confirmation states in `frontend/src/pages/match.tsx` and related components to match the Junction workflow (monster/gear draws)\n+- [ ] T047 [US2] Add post-battle summary modal with \"ready to fight\" and \"back to main menu\" actions plus recap copy in `frontend/src/components/BattleHud.tsx`\n+- [ ] T048 [US2] Provide guided gear/upgrade step indicators and contextual copy (\"Draw your gear\", \"Upgrade your gear\") in `frontend/src/pages/match.tsx` so each phase mirrors the storyboard\n*** End Patch\nPATCH\n"]}
+[2m2025-11-15T20:48:54.473164Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:48:54.473171Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:49:30.196360Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T20:49:39.435503Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '200,340p' specs/001-ai-game-demo/tasks.md"]}
+[2m2025-11-15T20:49:39.435526Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:49:39.435530Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:49:46.501173Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba specs/001-ai-game-demo/tasks.md | sed -n '200,340p'"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T20:49:46.501199Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:49:46.501204Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T20:49:52.216095Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba specs/001-ai-game-demo/tasks.md"]}
+[2m2025-11-15T20:49:52.216263Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T20:49:52.216282Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:17:13.381614Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"in_progress","step":"Enhance frontend battle/draw flow (AI thinking overlay, guided upgrade screens, summary modal)"},{"status":"pending","step":"Adjust backend/frontend state handling + copy for new modals/flow"},{"status":"pending","step":"Update docs/tests if needed"}]}
+[2m2025-11-15T21:17:13.381898Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:17:13.381939Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:17:21.064340Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '1,200p' frontend/src/pages/match.tsx"],"workdir":"/Users/chenyuxin/Sketch-Brawl"}
+[2m2025-11-15T21:17:21.064381Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:17:21.064391Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:17:47.272639Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: frontend/src/components/DoodleCanvas.tsx
+@@
+-type Props = {
++type Props = {
+   lobbyId: string | null;
+   playerSlot: 'A' | 'B';
+   doodleType: DoodleType;
+   onResult: (payload: any) => void;
+   metadataOverrides?: Record<string, unknown>;
++  onSubmitStateChange?: (state: 'idle' | 'submitting' | 'complete') => void;
+ };
+@@
+-export function DoodleCanvas({
++export function DoodleCanvas({
+   lobbyId,
+   playerSlot,
+   doodleType,
+   onResult,
+   metadataOverrides,
++  onSubmitStateChange,
+ }: Props) {
+@@
+-    setStatus('Submitting doodle...');
++    setStatus('Submitting doodle...');
++    onSubmitStateChange?.('submitting');
+     try {
+@@
+-      setStatus('Inference complete');
++      setStatus('Inference complete');
++      onSubmitStateChange?.('complete');
+       clearCanvas();
+     } catch (error: any) {
+       setStatus(error?.message ?? 'Submission failed');
++      onSubmitStateChange?.('idle');
+     }
+   };
+*** End Patch
+[2m2025-11-15T21:17:47.272673Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:17:47.272677Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:18:17.266058Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: frontend/src/pages/match.tsx
+@@
+-const doodleOptions = ['monster', 'skill', 'reinforcement'] as const;
++const doodleOptions = ['monster', 'skill', 'reinforcement'] as const;
++
++const phaseCopy: Record<
++  (typeof doodleOptions)[number],
++  { title: string; subtitle: (slot: 'A' | 'B') => string }
++> = {
++  monster: {
++    title: 'Draw Your Monster',
++    subtitle: (slot) => `Player ${slot}, sketch your creature so the AI can reveal its power.`,
++  },
++  skill: {
++    title: 'Draw Your Gear',
++    subtitle: (slot) => `Player ${slot}, add a weapon or shield to define your fighting style.`,
++  },
++  reinforcement: {
++    title: 'Upgrade Your Gear',
++    subtitle: (slot) => `Player ${slot}, reinforce an existing skill to gain an edge next round.`,
++  },
++};
+@@
+   const [battleResult, setBattleResult] = useState<BattleResponse | null>(null);
+   const [liveEvents, setLiveEvents] = useState<BattleEvent[]>([]);
+   const [jobId, setJobId] = useState<string | null>(null);
+   const [error, setError] = useState<string | null>(null);
++  const [thinkingPlayer, setThinkingPlayer] = useState<'A' | 'B' | null>(null);
++  const [showSummary, setShowSummary] = useState(false);
+@@
+-  const handleInferenceResult = (result: Record<string, any>) => {
++  const handleInferenceResult = (result: Record<string, any>) => {
+     if (doodleType === 'monster') {
+       setLatestMonsters((prev) => ({ ...prev, [playerSlot]: result }));
+     } else if (doodleType === 'skill' || doodleType === 'reinforcement') {
+       setLatestSkills((prev) => {
+         const existing = prev[playerSlot] ?? {};
+         return { ...prev, [playerSlot]: { ...existing, ...result } };
+       });
+     }
+     setActivePayload(result);
++    setThinkingPlayer(null);
+   };
+@@
+-  const startStream = (battleId: number) => {
++  const startStream = (battleId: number) => {
+     setLiveEvents([]);
+     apiClient.subscribeBattleStream(battleId, (event) => {
+       setLiveEvents((prev) => [...prev, event]);
+     });
+   };
+@@
+-        <button onClick={() => apiClient.health()}>API Health</button>
+-        <button onClick={switchPlayer}>Switch Player ({playerSlot})</button>
++        <button onClick={() => apiClient.health()}>API Health</button>
++        <button onClick={switchPlayer}>Switch Player ({playerSlot})</button>
+         <button
+           onClick={async () => {
+             if (!lobbyId) return;
+             try {
+               setError(null);
+               setStatus('battling');
+               const battle = await apiClient.startBattle({ lobby_id: lobbyId });
+               setBattleResult(battle);
+-               startStream(battle.battle_id);
++              startStream(battle.battle_id);
++              setShowSummary(true);
+               setStatus('ready');
+             } catch (err) {
+               console.error(err);
+               setError((err as Error).message);
+               setStatus('ready');
+             }
+           }}
+         >
+           Start Battle
+@@
+               setStatus('queueing');
+               const ticket = await apiClient.startBattleAsync({ lobby_id: lobbyId });
+               setJobId(ticket.job_id);
+             } catch (err) {
+               console.error(err);
+@@
+       <div className="toolbar">
+         {doodleOptions.map((option) => (
+@@
+       <div className="workbench">
+@@
+         <DoodleCanvas
+           lobbyId={lobbyId}
+           playerSlot={playerSlot}
+           doodleType={doodleType}
+           onResult={handleInferenceResult}
+           metadataOverrides={metadataOverrides}
++          onSubmitStateChange={(state) => {
++            if (state === 'submitting') {
++              setThinkingPlayer(playerSlot);
++            } else if (state === 'idle') {
++              setThinkingPlayer(null);
++            }
++          }}
+         />
+@@
+       </div>
++      <StepIndicator
++        title={phaseCopy[doodleType].title}
++        subtitle={phaseCopy[doodleType].subtitle(playerSlot)}
++      />
++      {thinkingPlayer && (
++        <div className="ai-overlay">
++          <div className="ai-overlay-card">
++            <p className="eyebrow">AI thinking…</p>
++            <h2>Analyzing Player {thinkingPlayer}&rsquo;s doodle</h2>
++            <p>Give us a moment to interpret the strokes and create the perfect build.</p>
++          </div>
++        </div>
++      )}
++      {battleResult && showSummary && (
++        <BattleSummaryModal
++          battle={battleResult}
++          onUpgrade={() => {
++            setDoodleType('reinforcement');
++            setShowSummary(false);
++            setBattleResult(battleResult);
++          }}
++          onClose={() => setShowSummary(false)}
++        />
++      )}
+       {error && <p className="error">{error}</p>}
+     </div>
+   );
+ }
++
++function StepIndicator({ title, subtitle }: { title: string; subtitle: string }) {
++  return (
++    <section className="step-indicator">
++      <div>
++        <p className="eyebrow">current step</p>
++        <h2>{title}</h2>
++        <p>{subtitle}</p>
++      </div>
++    </section>
++  );
++}
++
++function BattleSummaryModal({
++  battle,
++  onUpgrade,
++  onClose,
++}: {
++  battle: BattleResponse;
++  onUpgrade: () => void;
++  onClose: () => void;
++}) {
++  const winner = battle.winner_slot;
++  return (
++    <div className="summary-backdrop">
++      <div className="summary-modal">
++        <p className="eyebrow">battle complete</p>
++        <h2>Player {winner} wins!</h2>
++        <p>
++          Ready for the next round? Reinforce your gear or head back to the lobby to start over. The
++          judges can review the recap log for every hit.
++        </p>
++        <div className="summary-actions">
++          <button onClick={onUpgrade}>Upgrade Gear</button>
++          <button className="secondary" onClick={onClose}>
++            Back to main menu
++          </button>
++        </div>
++      </div>
++    </div>
++  );
++}
+*** End Patch
+[2m2025-11-15T21:18:17.266460Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:18:17.266482Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:18:32.194990Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: frontend/src/styles/globals.css
+@@
++.eyebrow {
++  text-transform: uppercase;
++  letter-spacing: 0.2em;
++  font-size: 0.75rem;
++  color: #bdbdbd;
++}
+@@
+ .tutorial-header .eyebrow {
+-  text-transform: uppercase;
+-  letter-spacing: 0.2em;
+-  font-size: 0.75rem;
+-  color: #bdbdbd;
++  color: #bdbdbd;
+ }
+@@
+ .error {
+   color: #ff7675;
+   margin-top: 1rem;
+ }
+ 
++.step-indicator {
++  margin-top: 1.5rem;
++  border: 1px dashed #2c2c2c;
++  border-radius: 12px;
++  padding: 1rem;
++  background: #111;
++}
++
++.ai-overlay {
++  position: fixed;
++  inset: 0;
++  background: rgba(0, 0, 0, 0.8);
++  display: flex;
++  justify-content: center;
++  align-items: center;
++  z-index: 50;
++}
++
++.ai-overlay-card {
++  background: #161616;
++  border-radius: 16px;
++  padding: 2rem;
++  max-width: 420px;
++  text-align: center;
++  border: 1px solid #2c2c2c;
++}
++
++.summary-backdrop {
++  position: fixed;
++  inset: 0;
++  background: rgba(0, 0, 0, 0.75);
++  display: flex;
++  justify-content: center;
++  align-items: center;
++  z-index: 60;
++}
++
++.summary-modal {
++  background: #141414;
++  border-radius: 16px;
++  border: 1px solid #2c2c2c;
++  padding: 2rem;
++  max-width: 520px;
++  display: flex;
++  flex-direction: column;
++  gap: 1rem;
++}
++
++.summary-actions {
++  display: flex;
++  gap: 0.75rem;
++}
++
++.summary-actions button {
++  flex: 1;
++  padding: 0.65rem 1rem;
++  border-radius: 999px;
++  border: none;
++  cursor: pointer;
++  font-weight: 600;
++}
++
++.summary-actions button.secondary {
++  background: transparent;
++  color: #f7f7f7;
++  border: 1px solid #2c2c2c;
++}
+*** End Patch
+[2m2025-11-15T21:18:32.195054Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:18:32.195060Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:18:39.554700Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"\\.error\" -n frontend/src/styles/globals.css"]}
+[2m2025-11-15T21:18:39.554722Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:18:39.554727Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:18:59.024735Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '300,360p' frontend/src/styles/globals.css"]}
+[2m2025-11-15T21:18:59.024778Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:18:59.024818Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:19:09.796647Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: frontend/src/styles/globals.css
+@@
+ body {
+   margin: 0;
+   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+   background: #0a0a0a;
+   color: #fafafa;
+ }
+ 
++.eyebrow {
++  text-transform: uppercase;
++  letter-spacing: 0.2em;
++  font-size: 0.75rem;
++  color: #bdbdbd;
++}
++
+ a {
+   color: #8be9fd;
+   text-decoration: none;
+*** End Patch
+[2m2025-11-15T21:19:09.796711Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:19:09.796721Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:19:16.977758Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: frontend/src/styles/globals.css
+@@
+-.tutorial-header .eyebrow {
+-  text-transform: uppercase;
+-  letter-spacing: 0.2em;
+-  font-size: 0.75rem;
+-  color: #bdbdbd;
+-}
+-
+ .tutorial-header .subtitle {
+   max-width: 520px;
+   color: #d0d0d0;
+ }
+*** End Patch
+[2m2025-11-15T21:19:16.977829Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:19:16.977841Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:19:31.816638Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: frontend/src/styles/globals.css
+@@
+ .error {
+   color: #ff7675;
+   margin-top: 1rem;
+ }
++
++.step-indicator {
++  margin-top: 1.5rem;
++  border: 1px dashed #2c2c2c;
++  border-radius: 12px;
++  padding: 1rem;
++  background: #111;
++}
++
++.ai-overlay {
++  position: fixed;
++  inset: 0;
++  background: rgba(0, 0, 0, 0.8);
++  display: flex;
++  justify-content: center;
++  align-items: center;
++  z-index: 50;
++}
++
++.ai-overlay-card {
++  background: #161616;
++  border-radius: 16px;
++  padding: 2rem;
++  max-width: 420px;
++  text-align: center;
++  border: 1px solid #2c2c2c;
++}
++
++.summary-backdrop {
++  position: fixed;
++  inset: 0;
++  background: rgba(0, 0, 0, 0.75);
++  display: flex;
++  justify-content: center;
++  align-items: center;
++  z-index: 60;
++}
++
++.summary-modal {
++  background: #141414;
++  border-radius: 16px;
++  border: 1px solid #2c2c2c;
++  padding: 2rem;
++  max-width: 520px;
++  display: flex;
++  flex-direction: column;
++  gap: 1rem;
++}
++
++.summary-actions {
++  display: flex;
++  gap: 0.75rem;
++}
++
++.summary-actions button {
++  flex: 1;
++  padding: 0.65rem 1rem;
++  border-radius: 999px;
++  border: none;
++  cursor: pointer;
++  font-weight: 600;
++  background: #8be9fd;
++  color: #03131a;
++}
++
++.summary-actions button.secondary {
++  background: transparent;
++  color: #f7f7f7;
++  border: 1px solid #2c2c2c;
++}
+*** End Patch
+[2m2025-11-15T21:19:31.816688Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:19:31.816693Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:19:42.523170Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: frontend/src/pages/match.tsx
+@@
+-          onSubmitStateChange={(state) => {
+-            if (state === 'submitting') {
+-              setThinkingPlayer(playerSlot);
+-            } else if (state === 'idle') {
+-              setThinkingPlayer(null);
+-            }
+-          }}
++          onSubmitStateChange={(state) => {
++            if (state === 'submitting') {
++              setThinkingPlayer(playerSlot);
++            } else {
++              setThinkingPlayer(null);
++            }
++          }}
+         />
+*** End Patch
+[2m2025-11-15T21:19:42.523224Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:19:42.523231Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:19:49.540445Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: frontend/src/pages/match.tsx
+@@
+-        if (status.status === 'finished' && status.battle_id) {
++        if (status.status === 'finished' && status.battle_id) {
+           const battle = await apiClient.getBattle(status.battle_id);
+           setBattleResult(battle);
+           startStream(battle.battle_id);
+           setJobId(null);
++          setShowSummary(true);
+           setStatus('ready');
+*** End Patch
+[2m2025-11-15T21:19:49.540476Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:19:49.540480Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:19:58.655073Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cd /Users/chenyuxin/Sketch-Brawl/frontend && yarn typecheck"],"timeout_ms":180000}
+[2m2025-11-15T21:19:58.655367Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:19:58.655426Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:20:12.785959Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","apply_patch <<'PATCH'\n*** Begin Patch\n*** Update File: specs/001-ai-game-demo/tasks.md\n@@\n-- [ ] T046 [US2] Implement \"AI thinking\" overlay + submission confirmation states in `frontend/src/pages/match.tsx` and related components to match the Junction workflow (monster/gear draws)\n-- [ ] T047 [US2] Add post-battle summary modal with \"ready to fight\" and \"back to main menu\" actions plus recap copy in `frontend/src/components/BattleHud.tsx`\n-- [ ] T048 [US2] Provide guided gear/upgrade step indicators and contextual copy (\"Draw your gear\", \"Upgrade your gear\") in `frontend/src/pages/match.tsx` so each phase mirrors the storyboard\n+- [X] T046 [US2] Implement \"AI thinking\" overlay + submission confirmation states in `frontend/src/pages/match.tsx` and related components to match the Junction workflow (monster/gear draws)\n+- [X] T047 [US2] Add post-battle summary modal with \"ready to fight\" and \"back to main menu\" actions plus recap copy in `frontend/src/components/BattleHud.tsx`\n+- [X] T048 [US2] Provide guided gear/upgrade step indicators and contextual copy (\"Draw your gear\", \"Upgrade your gear\") in `frontend/src/pages/match.tsx` so each phase mirrors the storyboard\n*** End Patch\nPATCH\n"]}
+[2m2025-11-15T21:20:12.786056Z[0m [32m INFO[0m waiting for tool gate
+[2m2025-11-15T21:20:12.786067Z[0m [32m INFO[0m tool gate released
+[2m2025-11-15T21:20:41.216896Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T21:20:53.424314Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T21:23:51.615663Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T21:23:54.171572Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T21:24:01.932333Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T21:24:03.287278Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T21:24:14.573677Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T21:24:57.183599Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T21:25:16.680676Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T21:25:32.993182Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)
+[2m2025-11-15T21:39:16.514406Z[0m [32m INFO[0m ERR: No such file or directory (os error 2)

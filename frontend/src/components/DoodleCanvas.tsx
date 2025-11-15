@@ -19,6 +19,11 @@ type Props = {
   doodleType: DoodleType;
   onResult: (payload: any) => void;
   metadataOverrides?: Record<string, unknown>;
+  onSubmitStateChange?: (state: 'idle' | 'submitting' | 'complete') => void;
+  strokeColor?: string;
+  backgroundColor?: string;
+  submitLabel?: string;
+  clearLabel?: string;
 };
 
 const CANVAS_SIZE = 480;
@@ -29,6 +34,11 @@ export function DoodleCanvas({
   doodleType,
   onResult,
   metadataOverrides,
+  onSubmitStateChange,
+  strokeColor = '#ffeb3b',
+  backgroundColor = '#1f1f1f',
+  submitLabel,
+  clearLabel,
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const strokesRef = useRef<Stroke[]>([]);
@@ -46,14 +56,21 @@ export function DoodleCanvas({
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
     ctx.lineWidth = 4;
-    ctx.strokeStyle = '#ffeb3b';
-    ctx.fillStyle = '#1f1f1f';
+    ctx.strokeStyle = strokeColor;
+    ctx.fillStyle = backgroundColor;
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    ctx.beginPath();
     ctxRef.current = ctx;
 
     const handlePointerDown = (event: PointerEvent) => {
       drawingRef.current = true;
-      strokesRef.current.push(toStroke(event, canvas));
+      const stroke = toStroke(event, canvas);
+      const ctxLocal = ctxRef.current;
+      if (ctxLocal) {
+        ctxLocal.beginPath();
+        ctxLocal.moveTo(stroke.x, stroke.y);
+      }
+      strokesRef.current.push(stroke);
     };
 
     const handlePointerMove = (event: PointerEvent) => {
@@ -81,7 +98,7 @@ export function DoodleCanvas({
       canvas.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
     };
-  }, []);
+  }, [strokeColor, backgroundColor]);
 
   useEffect(() => {
     if (lobbyId) {
@@ -99,6 +116,7 @@ export function DoodleCanvas({
       return;
     }
     setStatus('Submitting doodle...');
+    onSubmitStateChange?.('submitting');
     try {
       const snapshot = canvasRef.current?.toDataURL('image/png');
       const ticket = await apiClient.submitDoodle({
@@ -111,17 +129,20 @@ export function DoodleCanvas({
       const result = await pollInference(ticket.ticket_id);
       onResult(result);
       setStatus('Inference complete');
+      onSubmitStateChange?.('complete');
       clearCanvas();
     } catch (error: any) {
       setStatus(error?.message ?? 'Submission failed');
+      onSubmitStateChange?.('idle');
     }
   };
 
   const clearCanvas = () => {
     const ctx = ctxRef.current;
     if (ctx) {
-      ctx.fillStyle = '#1f1f1f';
+      ctx.fillStyle = backgroundColor;
       ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+      ctx.strokeStyle = strokeColor;
       ctx.beginPath();
     }
     strokesRef.current = [];
@@ -164,8 +185,8 @@ export function DoodleCanvas({
     <div className="doodle-canvas">
       <canvas ref={canvasRef} />
       <div className="actions">
-        <button onClick={submitDoodle}>Submit {doodleType}</button>
-        <button onClick={clearCanvas}>Clear</button>
+        <button onClick={submitDoodle}>{submitLabel ?? `Submit ${doodleType}`}</button>
+        <button onClick={clearCanvas}>{clearLabel ?? 'Clear'}</button>
       </div>
       <p>{status}</p>
     </div>

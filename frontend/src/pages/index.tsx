@@ -1,20 +1,34 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import type { CSSProperties } from 'react';
+
+type CSSVarStyle = CSSProperties & { [key: `--${string}`]: string };
+
+const backgroundTexture = 'https://www.figma.com/api/mcp/asset/675f74a5-b8e8-4a79-9606-8d59e591297f';
 
 export default function Home() {
+  const heroStyle: CSSVarStyle = {
+    '--hero-texture': `url(${backgroundTexture})`,
+  };
+
   return (
-    <div className="layout">
+    <>
       <Head>
         <title>Sketch Brawl</title>
       </Head>
-      <main>
-        <h1>Sketch Brawl Demo</h1>
-        <p>Launch the dual-player canvas and judge tooling.</p>
-        <div className="home-links">
-          <Link href="/match">Open Lobby</Link>
+      <div className="hero-screen" data-node-id="42:2667" style={heroStyle}>
+        <div className="hero-nav">
           <Link href="/tutorial">Judge Tutorial</Link>
         </div>
-      </main>
-    </div>
+        <div className="hero-content">
+          <p className="hero-title" data-node-id="42:2669">
+            Sketch Brawl!
+          </p>
+          <Link className="hero-cta" data-node-id="42:2670" href="/match">
+            start sketching
+          </Link>
+        </div>
+      </div>
+    </>
   );
 }

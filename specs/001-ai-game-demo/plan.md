@@ -103,6 +103,32 @@ ios/ or android/
 **Structure Decision**: [Document the selected structure and reference the real
 directories captured above]
 
+## End-to-End Flow Alignment (AI + UI)
+
+```
+[Frontend Canvas]
+  | strokes + seed + snapshot
+  V
+[Backend API: /doodles (monster / gear / reinforcement)]
+  | validate + persist to Postgres
+  | call Gemini/ONNX inference
+  V
+[AI Interpreter]
+  | stats + explanation
+  V
+[Frontend displays monster/gear attributes]
+
+Battle start →
+[Backend Battle Engine]
+  | load monster/gear from DB
+  | simulate via RNG seed
+  | emit telemetry + store battle session
+  V
+[Frontend Battle HUD + Log]
+
+Upgrade → repeat the doodle pipeline; stored as reinforcement history that feeds future battles.
+```
+
 ## Complexity Tracking
 
 > **Fill ONLY if Constitution Check has violations that must be justified**

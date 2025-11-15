@@ -97,6 +97,9 @@ description: "Updated task list for Sketch Brawl demo implementation"
 - [X] T031 [US2] Add reinforcement selection & history UI (skill picker, upgrade log) in `frontend/src/pages/match.tsx` + `frontend/src/components/SkillHistoryPanel.tsx`
 - [X] T032 [US2] Animate BattleHud events + judge summary overlays per `doc/AI-game` in `frontend/src/components/BattleHud.tsx`
 - [X] T033 [US2] Document hot-seat workflow + skill reuse instructions in `specs/001-ai-game-demo/quickstart.md`
+- [X] T046 [US2] Implement "AI thinking" overlay + submission confirmation states in `frontend/src/pages/match.tsx` and related components to match the Junction workflow (monster/gear draws)
+- [X] T047 [US2] Add post-battle summary modal with "ready to fight" and "back to main menu" actions plus recap copy in `frontend/src/components/BattleHud.tsx`
+- [X] T048 [US2] Provide guided gear/upgrade step indicators and contextual copy ("Draw your gear", "Upgrade your gear") in `frontend/src/pages/match.tsx` so each phase mirrors the storyboard
 
 **Checkpoint**: US1 + US2 together provide the full hot-seat battle loop with deterministic evidence.
 
