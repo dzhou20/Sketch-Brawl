@@ -582,6 +582,20 @@ body {
   flex-shrink: 0;
 }
 
+.player-frame--overlay {
+  position: relative;
+}
+
+.player-frame-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
 .player-frame img {
   width: 100%;
   height: 100%;
@@ -594,6 +608,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .player-frame .doodle-canvas canvas {

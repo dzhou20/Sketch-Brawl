@@ -34,7 +34,14 @@ const phaseCopy: Record<
   },
 };
 
-const ELEMENTS = ['Wood', 'Metal', 'Fire', 'Water', 'Earth', 'Wind', 'Light', 'Dark'];
+const ELEMENTS = ['Wood', 'Metal', 'Fire', 'Water', 'Earth'];
+const elementColors: Record<string, string> = {
+  Wood: '#22c55e',
+  Metal: '#0004ff',
+  Fire: '#ef4444',
+  Water: '#3b82f6',
+  Earth: '#a16207',
+};
 const MONSTER_NAMES = [
   'Weird Bunny',
   'Fluffy Dragon',
@@ -64,6 +71,11 @@ const randomFrom = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.lengt
 const randomInt = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
+const getElementColor = (element?: string | null) => {
+  if (!element) return '#0004ff';
+  return elementColors[element] ?? '#0004ff';
+};
+
 const buildMockMonsterPayload = (slot: 'A' | 'B', snapshot: string) => {
   const primary = randomFrom(ELEMENTS);
   const secondary = randomFrom(ELEMENTS.filter((el) => el !== primary));
@@ -77,6 +89,7 @@ const buildMockMonsterPayload = (slot: 'A' | 'B', snapshot: string) => {
     attack: randomInt(12, 24),
     defence: randomInt(60, 110),
     snapshot,
+    image: snapshot,
   };
 };
 
@@ -91,6 +104,88 @@ const buildMockSkillPayload = (snapshot: string) => {
     snapshot,
     type: 'attack',
   };
+};
+
+const stylizeSnapshot = async (src: string, color: string) => {
+  try {
+    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const image = new Image();
+      image.crossOrigin = 'anonymous';
+      image.onload = () => resolve(image);
+      image.onerror = reject;
+      image.src = src;
+    });
+
+    const baseCanvas = document.createElement('canvas');
+    baseCanvas.width = img.width;
+    baseCanvas.height = img.height;
+    const baseCtx = baseCanvas.getContext('2d');
+    if (!baseCtx) return src;
+    baseCtx.drawImage(img, 0, 0);
+
+    const imageData = baseCtx.getImageData(0, 0, baseCanvas.width, baseCanvas.height);
+    const data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      if (r > 245 && g > 245 && b > 245) {
+        data[i + 3] = 0;
+      }
+    }
+    baseCtx.putImageData(imageData, 0, 0);
+
+    const colorCanvas = document.createElement('canvas');
+    colorCanvas.width = baseCanvas.width;
+    colorCanvas.height = baseCanvas.height;
+    const colorCtx = colorCanvas.getContext('2d');
+    colorCtx?.drawImage(baseCanvas, 0, 0);
+    if (colorCtx) {
+      colorCtx.globalCompositeOperation = 'source-in';
+      colorCtx.fillStyle = color;
+      colorCtx.fillRect(0, 0, colorCanvas.width, colorCanvas.height);
+    }
+
+    const outlineCanvas = document.createElement('canvas');
+    outlineCanvas.width = baseCanvas.width;
+    outlineCanvas.height = baseCanvas.height;
+    const outlineCtx = outlineCanvas.getContext('2d');
+    outlineCtx?.drawImage(baseCanvas, 0, 0);
+    if (outlineCtx) {
+      outlineCtx.globalCompositeOperation = 'source-in';
+      outlineCtx.fillStyle = '#ffffff';
+      outlineCtx.fillRect(0, 0, outlineCanvas.width, outlineCanvas.height);
+    }
+
+    const padding = 12;
+    const finalCanvas = document.createElement('canvas');
+    finalCanvas.width = baseCanvas.width + padding * 2;
+    finalCanvas.height = baseCanvas.height + padding * 2;
+    const finalCtx = finalCanvas.getContext('2d');
+    if (!finalCtx) return src;
+
+    const offsets = [
+      [-padding, 0],
+      [padding, 0],
+      [0, -padding],
+      [0, padding],
+      [-padding, -padding],
+      [padding, -padding],
+      [-padding, padding],
+      [padding, padding],
+    ];
+
+    offsets.forEach(([dx, dy]) => {
+      finalCtx.drawImage(outlineCanvas, dx + padding, dy + padding);
+    });
+
+    finalCtx.drawImage(colorCanvas, padding, padding);
+
+    return finalCanvas.toDataURL('image/png');
+  } catch (err) {
+    console.warn('Snapshot stylize failed', err);
+    return src;
+  }
 };
 
 export default function MatchPage() {
@@ -239,37 +334,59 @@ export default function MatchPage() {
     }
   };
 
-  const handleLocalSubmission = (slot: 'A' | 'B') => {
+  const handleLocalSubmission = async (slot: 'A' | 'B') => {
     const ref = canvasRefs.current[slot];
     if (!ref) return;
+    const strokes = ref.getStrokes?.();
+    if (!strokes || strokes.length === 0) return;
     const snapshot = ref.getSnapshot?.();
     if (!snapshot) return;
 
-    const submissionType =
-      doodleType === 'monster' ? 'monster' : doodleType === 'skill' ? 'skill' : 'reinforcement';
+    const submissionType = doodleType === 'monster' ? 'monster' : 'skill';
 
-    const payload =
-      submissionType === 'monster'
-        ? buildMockMonsterPayload(slot, snapshot)
-        : buildMockSkillPayload(snapshot);
+    if (submissionType === 'monster') {
+      const payload = buildMockMonsterPayload(slot, snapshot);
+      const colored = await stylizeSnapshot(snapshot, getElementColor(payload.element));
+      payload.snapshot = colored;
+      payload.image = colored;
+      handleInferenceResult(slot, payload, { snapshot: colored, doodleType: submissionType });
+    } else {
+      const payload = buildMockSkillPayload(snapshot);
+      const colored = await stylizeSnapshot(snapshot, getElementColor(payload.element));
+      payload.card_snapshot = colored;
+      payload.snapshot = colored;
+      handleInferenceResult(slot, payload, { snapshot: colored, doodleType: submissionType });
+    }
 
-    handleInferenceResult(slot, payload, { snapshot, doodleType: submissionType });
     ref.clear();
   };
 
   const playerPanels = (['A', 'B'] as const).map((slot) => {
     const isActive = slot === playerSlot;
-    const candidateSkill = latestSkills[slot];
-    const latestSubmission =
-      doodleType === 'monster' ? latestMonsters[slot] : candidateSkill ?? latestMonsters[slot];
-    const preview =
-      latestSubmission?.snapshot ??
-      latestSubmission?.card_snapshot ??
-      latestSubmission?.card_image ??
-      latestSubmission?.image ??
-      null;
     const label = slot === 'A' ? 'PLAYER 1' : 'PLAYER 2';
-    const submitted = Boolean(preview);
+
+    const phaseSubmission =
+      doodleType === 'monster'
+        ? latestMonsters[slot]
+        : doodleType === 'skill'
+          ? latestSkills[slot]
+          : latestSkills[slot];
+
+    const preview =
+      phaseSubmission?.snapshot ??
+      phaseSubmission?.card_snapshot ??
+      phaseSubmission?.card_image ??
+      phaseSubmission?.image ??
+      null;
+
+    const hasSubmission = Boolean(preview);
+    const showCanvas = isActive && !hasSubmission;
+
+    const reinforcementBase =
+      doodleType === 'reinforcement'
+        ? latestSkills[slot]?.card_snapshot ?? latestSkills[slot]?.snapshot ?? null
+        : null;
+
     const frameClass = `player-panel ${slot === 'A' ? 'player-panel--dashed' : 'player-panel--solid'} ${
       isActive ? 'player-panel--active' : ''
     }`;
@@ -277,9 +394,13 @@ export default function MatchPage() {
     return (
       <article key={slot} className={frameClass} data-slot={slot}>
         <p className="player-panel-label">{label}</p>
-        <div className="player-frame">
-          {isActive ? (
+        <div className={`player-frame ${reinforcementBase && showCanvas ? 'player-frame--overlay' : ''}`}>
+          {reinforcementBase && showCanvas && (
+            <img src={reinforcementBase} alt="base gear" className="player-frame-overlay" />
+          )}
+          {showCanvas ? (
             <DoodleCanvas
+              key={`${slot}-${doodleType}`}
               ref={(instance) => {
                 canvasRefs.current[slot] = instance ?? null;
               }}
@@ -305,12 +426,14 @@ export default function MatchPage() {
             <p className="player-placeholder">Waiting for sketch…</p>
           )}
         </div>
-        {isActive ? (
+        {showCanvas ? (
           <>
             <div className="player-actions">
               <button
                 type="button"
-                onClick={() => handleLocalSubmission(slot)}
+                onClick={() => {
+                  void handleLocalSubmission(slot);
+                }}
                 className="doodle-action-button"
               >
                 SUBMIT
@@ -331,8 +454,8 @@ export default function MatchPage() {
             <p className="player-hint">{phaseSubtitle}</p>
           </>
         ) : (
-          <p className={`player-status ${submitted ? 'is-complete' : ''}`}>
-            {submitted ? 'SUBMITTED' : 'WAITING'}
+          <p className={`player-status ${hasSubmission ? 'is-complete' : ''}`}>
+            {hasSubmission ? 'SUBMITTED' : 'WAITING'}
           </p>
         )}
       </article>
