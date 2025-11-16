@@ -51,3 +51,24 @@ The Next.js app runs at `http://127.0.0.1:3000` and proxies API calls through `p
 - `cd frontend && yarn dev`: starts the UI with hot reload.
 - `cd backend && poetry run pytest`: exercises Python services and API contracts.
 
+## UI previews
+- [doc/ui.png](doc/ui.png) – DoodleCanvas and HUD layout real display
+
+## Diagram
+
+```
+[Browser / Next.js UI]
+    ↓
+[pages/api/proxy] ───► [FastAPI backend]
+                          ├─► Battle engine / timeline builder
+                          ├─► Inference runner (TorchServe / Gemini)
+                          └─► Persists to PostgreSQL / Redis / MinIO
+```
+
+## Folder structure
+
+- `backend/`: FastAPI services, SQLModel models, inference runner, telemetry, and battle logic.
+- `frontend/`: Next.js + React UI, DoodleCanvas, Battle HUD, BattleStage, API proxy, and Zustand store.
+- `ops/`: Docker compose setup for Postgres, Redis, MinIO, and backend.
+- `specs/001-ai-game-demo/`: Research, plan, spec, quickstart, and tasks for the ai-game demo.
+- `doc/`: Supporting documentation and UI mock assets (UI.jpeg, spec diagrams).
