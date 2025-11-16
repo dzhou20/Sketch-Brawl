@@ -28,6 +28,8 @@ export GEMINI_API_KEY=<your-key>
 
 You can drop the same variable into `/.env` for easier re-use.
 
+![Banner](https://github.com/dzhou20/Sketch-Brawl/blob/001-ai-game-demo/doc/flow.jpeg)
+
 ### Frontend (Next.js + React)
 
 1. Enter the frontend workspace:
