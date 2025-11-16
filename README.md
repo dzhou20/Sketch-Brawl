@@ -5,6 +5,7 @@ Players sketch monsters and gear like a kid, and the AI instantly interprets eac
 personalities, and chaotic battle actions. Every match is unpredictable, creative, and powered entirely by your
 imagination.
 ![Banner](https://github.com/dzhou20/Sketch-Brawl/blob/001-ai-game-demo/doc/Sketch-Brawl-Logo-Rect.png)
+
 ---
 
 ## Toolbox by Layer
@@ -52,8 +53,8 @@ The Next.js app runs at `http://127.0.0.1:3000` and proxies API calls through `p
 - `cd backend && poetry run pytest`: exercises Python services and API contracts.
 
 ## UI previews
-- [doc/ui.png](doc/ui.png) – DoodleCanvas and HUD layout real display
 
+![Banner](https://github.com/dzhou20/Sketch-Brawl/blob/001-ai-game-demo/doc/ui.png)
 ## Diagram
 
 ```
