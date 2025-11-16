@@ -4,7 +4,7 @@ Sketch Brawl is an AI-powered doodle battler where anything you draw becomes ali
 Players sketch monsters and gear like a kid, and the AI instantly interprets each stroke into stats, abilities,
 personalities, and chaotic battle actions. Every match is unpredictable, creative, and powered entirely by your
 imagination.
-
+![Banner](https://github.com/dzhou20/Sketch-Brawl/blob/001-ai-game-demo/doc/Sketch-Brawl-Logo-Rect.png)
 ---
 
 ## Toolbox by Layer
