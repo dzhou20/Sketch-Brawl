@@ -44,6 +44,7 @@ export type CombatantPayload = {
   base_hp: number;
   base_attack: number;
   skill_power: number;
+  defence?: number;
   snapshot?: string | null;
   skills: Array<Record<string, any>>;
 };

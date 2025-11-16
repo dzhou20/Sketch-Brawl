@@ -4,7 +4,7 @@ import type { CSSProperties } from 'react';
 
 type CSSVarStyle = CSSProperties & { [key: `--${string}`]: string };
 
-const backgroundTexture = 'https://www.figma.com/api/mcp/asset/675f74a5-b8e8-4a79-9606-8d59e591297f';
+const backgroundTexture = 'https://www.figma.com/api/mcp/asset/3d3f5cbc-ed06-4a54-9f54-3bda5312d30c';
 
 export default function Home() {
   const heroStyle: CSSVarStyle = {

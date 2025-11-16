@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'IBM Plex Mono', monospace;
   background: #0a0a0a;
   color: #fafafa;
 }
@@ -58,7 +58,7 @@ body {
 
 .hero-title {
   margin: 0;
-  font-family: 'Figma Hand', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
   font-size: clamp(3.5rem, 8vw, 8rem);
   color: #0004ff;
   text-shadow:
@@ -72,7 +72,7 @@ body {
 .hero-cta {
   margin-top: 1.5rem;
   display: inline-block;
-  font-family: 'Figma Hand', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
   font-size: clamp(1.25rem, 3vw, 3rem);
   color: #0004ff;
   text-decoration: none;
@@ -81,6 +81,375 @@ body {
 
 .hero-cta:hover {
   transform: translateY(-1px);
+}
+
+/* Battle View Styles */
+.battle-view {
+  position: relative;
+  min-height: 100vh;
+  background: #efefe1;
+  overflow: auto;
+  color: #0004ff;
+  padding: 2rem 1rem;
+}
+
+.battle-view::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--match-texture, none);
+  background-size: cover;
+  background-position: 50% 50%;
+  opacity: 0.72;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.battle-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1800px;
+  margin: 0 auto 2rem;
+  padding: 0 2rem;
+}
+
+.battle-player-name {
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  color: #0004ff;
+}
+
+.battle-vs {
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  color: #0004ff;
+}
+
+.battle-main-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 420px) 1fr;
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto 2rem;
+  padding: 0 2rem;
+  align-items: start;
+}
+
+.battle-player-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.battle-center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.25rem;
+  padding-bottom: 2rem;
+  min-height: 560px;
+}
+
+.battle-center-banner {
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  width: 100%;
+  max-width: 360px;
+}
+
+.battle-center-title {
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', sans-serif;
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #0004ff;
+  margin: 0;
+}
+
+.battle-center-subtitle {
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0004ff;
+  margin: 0.25rem 0 0 0;
+}
+
+/* HP Bar Styles */
+.battle-hp-section {
+  margin-bottom: 1rem;
+}
+
+.battle-hp-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.5rem;
+  color: #0004ff;
+  margin-bottom: 0.5rem;
+}
+
+.battle-hp-text-right {
+  text-align: right;
+}
+
+.battle-hp-bar-container {
+  position: relative;
+  width: 100%;
+  height: 15px;
+  border-radius: 41px;
+  overflow: hidden;
+}
+
+.battle-hp-bar-bg {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  border-radius: 41px;
+}
+
+.battle-hp-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #cb0000;
+  border-radius: 41px;
+  transition: width 0.5s ease;
+}
+
+.battle-hp-bar-fill-right {
+  left: auto;
+  right: 0;
+}
+
+/* Monster and Gear Display */
+.battle-monster-display {
+  width: 100%;
+  max-width: 300px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.battle-monster-display img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.battle-gear-frame {
+  width: 120px;
+  height: 120px;
+  border: 3px dashed #0004ff;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin: 0.5rem auto;
+}
+
+.battle-gear-frame img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Stats Cards */
+.battle-stats-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.battle-stats-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0004ff;
+  margin: 0 0 0.5rem 0;
+}
+
+.battle-stats-divider {
+  height: 0;
+  border-bottom: 3px dashed #0004ff;
+  margin-bottom: 1rem;
+}
+
+.battle-stats-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 1.5rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.4rem;
+}
+
+.battle-stat-label {
+  color: #0004ff;
+  font-weight: 600;
+  margin: 0;
+}
+
+.battle-stat-value {
+  color: #0004ff;
+  margin: 0;
+}
+
+/* Gear Card */
+.battle-gear-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.battle-gear-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0004ff;
+  margin: 0 0 0.5rem 0;
+}
+
+.battle-gear-layout {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.battle-gear-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.2rem;
+}
+
+/* Battle Log */
+.battle-log-card {
+  width: 100%;
+  max-width: 360px;
+  background: rgba(167, 167, 167, 0.17);
+  border: 3px dashed #0004ff;
+  border-radius: 24px;
+  padding: 1.5rem;
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+.battle-log-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0004ff;
+  margin: 0 0 1rem 0;
+}
+
+.battle-log-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.battle-log-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.25rem;
+  color: #0004ff;
+}
+
+.battle-log-item {
+  margin-bottom: 1.25rem;
+  padding-left: 1.875rem;
+  position: relative;
+}
+
+.battle-log-item::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.battle-victory-button {
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: #0004ff;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  margin-top: 0.5rem;
+  align-self: center;
+}
+
+.battle-victory-button:hover {
+  background: #0003cc;
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .battle-main-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .battle-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .battle-center-column {
+    min-height: auto;
+    padding-bottom: 1rem;
+  }
+
+  .battle-log-card {
+    height: auto;
+  }
 }
 
 @media (max-width: 640px) {
@@ -103,7 +472,7 @@ body {
 .match-screen {
   position: relative;
   min-height: 100vh;
-  padding: clamp(2rem, 4vw, 3.5rem);
+  padding: 0;
   color: #0004ff;
   background: #efefe1;
 }
@@ -123,62 +492,94 @@ body {
 
 .match-hero {
   position: relative;
-  background: rgba(255, 255, 255, 0.66);
-  border-radius: 32px;
-  border: 2px solid rgba(0, 4, 255, 0.15);
-  padding: clamp(1.5rem, 4vw, 3rem);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.08);
+  padding: clamp(1rem, 2vw, 2rem);
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.match-hero .eyebrow {
+  display: none;
 }
 
 .match-hero h1 {
   margin: 0;
-  font-family: 'Figma Hand', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  margin-bottom: clamp(0.5rem, 1vw, 1rem);
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
   font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: bold;
+  color: #0004ff;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.match-hero .subtitle {
+  display: none;
 }
 
 .player-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(1.5rem, 4vw, 5rem);
+  grid-template-columns: 1fr auto 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  flex: 1;
+  min-height: 0;
+  padding: clamp(0.5rem, 1vw, 1rem) 0;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.match-center-column {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 2rem;
 }
 
 .player-panel {
-  background: #faf9f5;
-  border-radius: 32px;
-  border: 8px solid #0004ff;
-  padding: 1.5rem;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  min-height: 480px;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+  min-width: 0;
 }
 
-.player-panel--dashed {
-  border-style: dashed;
+.player-panel--dashed .player-frame {
+  border: 8px dashed #0004ff;
 }
 
-.player-panel--solid {
-  border-style: solid;
+.player-panel--solid .player-frame {
+  border: 8px solid #0004ff;
 }
 
 .player-panel-label {
-  margin: 0 0 1rem;
-  font-family: 'Figma Hand', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.1em;
+  margin: 0;
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  color: #0004ff;
+  text-transform: uppercase;
 }
 
 .player-frame {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 24px;
-  padding: 0.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: clamp(220px, 32vw, 380px);
   aspect-ratio: 1 / 1;
+  background: #faf9f5;
+  border-radius: 32px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .player-frame img {
@@ -187,58 +588,89 @@ body {
   object-fit: contain;
 }
 
+.player-frame .doodle-canvas {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-frame .doodle-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 16px;
+  border: none;
+  background: #ffffff;
+  touch-action: none;
+  display: block;
+  object-fit: contain;
+}
+
 .player-placeholder {
-  font-family: 'Figma Hand', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
   font-size: 1.5rem;
   color: rgba(0, 4, 255, 0.45);
 }
 
 .player-status {
-  margin-top: 1rem;
-  font-size: 1.35rem;
-  font-family: 'Figma Hand', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  margin-top: 0.5rem;
+  font-size: 2rem;
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.05em;
   color: #c7c7c7;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
 }
 
 .player-status.is-complete {
-  color: #898989;
+  color: #c7c7c7;
 }
 
-.player-panel--active .doodle-canvas {
-  width: 100%;
-}
-
-.player-panel--active .doodle-canvas canvas {
-  width: 100%;
-  height: auto;
-  border-radius: 24px;
-  border: 4px solid rgba(0, 4, 255, 0.4);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-}
-
-.player-panel--active .doodle-canvas .actions {
+.player-actions {
   margin-top: 1rem;
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 2rem;
+  flex-shrink: 0;
+  visibility: visible;
+  opacity: 1;
+  position: relative;
+  z-index: 10;
+  width: 100%;
 }
 
-.player-panel--active .doodle-canvas .actions button {
+.player-actions .doodle-action-button {
   background: none;
   border: none;
-  font-family: 'Figma Hand', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
-  font-size: 1.35rem;
-  letter-spacing: 0.08em;
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
   color: #0004ff;
   text-transform: uppercase;
   cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s ease;
+  visibility: visible;
+  opacity: 1;
 }
 
-.player-panel--active .doodle-canvas p {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: rgba(0, 4, 255, 0.55);
+.player-actions .doodle-action-button:hover {
+  opacity: 0.8;
+}
+
+.player-actions .doodle-action-button:active {
+  opacity: 0.6;
+}
+
+.player-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  color: rgba(0, 4, 255, 0.6);
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
 }
 
 .match-arrow {
@@ -247,7 +679,10 @@ body {
   align-items: center;
   gap: 0.5rem;
   text-transform: lowercase;
-  font-family: 'Figma Hand', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0004ff;
 }
 
 .match-arrow svg {
@@ -261,47 +696,50 @@ body {
 .match-tools {
   display: flex;
   gap: 0.75rem;
-  justify-content: flex-end;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  background: transparent;
 }
 
 .match-tool {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  border: 2px solid #0004ff;
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: transparent !important;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 4, 255, 0.08);
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  position: relative;
+  z-index: 2;
 }
 
-.match-tool--pencil::before,
-.match-tool--eraser::before {
-  content: '';
-  display: block;
+.match-tool:hover {
+  opacity: 0.8;
 }
 
-.match-tool--pencil::before {
-  width: 18px;
-  height: 4px;
-  background: #0004ff;
-  transform: rotate(-20deg);
-  border-radius: 4px;
+.match-tool.active {
+  opacity: 1;
 }
 
-.match-tool--eraser::before {
-  width: 16px;
-  height: 12px;
-  border: 2px solid #0004ff;
-  border-radius: 4px;
+.match-tool img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
 }
 
 .match-admin {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
-  margin-top: 2rem;
-  padding: 1.5rem;
+  padding: 1.5rem clamp(1rem, 4vw, 3.5rem);
   border-radius: 24px;
   background: rgba(250, 249, 245, 0.85);
   border: 1px solid rgba(0, 4, 255, 0.2);
@@ -332,6 +770,7 @@ body {
 
 .match-toolbar {
   margin-top: 1.5rem;
+  padding: 0 clamp(1rem, 4vw, 3.5rem);
   justify-content: center;
 }
 
@@ -342,6 +781,7 @@ body {
 
 .match-dashboard {
   margin-top: 2rem;
+  padding: 0 clamp(1rem, 4vw, 3.5rem);
 }
 
 @media (max-width: 900px) {
@@ -823,6 +1263,7 @@ a {
 .error {
   color: #ff7675;
   margin-top: 1rem;
+  padding: 0 clamp(1rem, 4vw, 3.5rem);
 }
 
 .step-indicator {
@@ -830,6 +1271,8 @@ a {
   border: 1px dashed #2c2c2c;
   border-radius: 12px;
   padding: 1rem;
+  margin-left: clamp(1rem, 4vw, 3.5rem);
+  margin-right: clamp(1rem, 4vw, 3.5rem);
   background: #111;
 }
 
@@ -868,7 +1311,7 @@ a {
 
 .ai-thinking-title {
   margin: 0;
-  font-family: 'Figma Hand', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
   font-size: clamp(2.5rem, 4vw, 4rem);
 }
 
@@ -898,7 +1341,7 @@ a {
 
 .ai-thinking-status {
   margin: 0;
-  font-family: 'Figma Hand', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
+  font-family: 'Caveat', 'Patrick Hand', 'Comic Sans MS', 'Inter', sans-serif;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   color: #0004ff;
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
