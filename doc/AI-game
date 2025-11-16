@@ -1,1 +1,58 @@
- 游戏玩法简介（简短清晰版）<br/><br/>这是一个结合「玩家简笔作画 + AI 判定 + 自动战斗」的对战游戏。<br/>双方玩家通过绘制怪物和技能，让 AI 决定它们的属性，并让怪物自行战斗。<br/>玩家不直接操作战斗，策略来自于“画得什么 → AI 怎么理解 → 战斗如何变化”。<br/><br/>🧩 核心循环<br/><br/>绘制主怪物（双方各一次）<br/>玩家画出自己的主怪 doodle。<br/>AI 会分析它的样子，决定：元素、血量、基础攻击、怪物名字。<br/><br/>绘制初始技能卡（双方各一次）<br/>玩家画一张技能 doodle（武器或防御）。<br/>AI 会根据画作判断技能类型、元素、攻击力，并命名招式。<br/><br/>自动战斗开始<br/>双方怪物使用自己的技能自动战斗。<br/>伤害由基础攻击、技能攻击、以及元素克制关系决定。<br/><br/>局间成长：双方都能强化技能<br/>本局结束后，两位玩家都可以对已有技能卡继续作画。<br/>AI 会把新增 doodle 视为“强化”，给该技能追加：<br/><br/>额外攻击力（added power）<br/><br/>新的元素（added element）<br/><br/>全新的招式名（new move name）<br/><br/>进入下一局战斗<br/>技能卡越叠越怪、越强，战斗也会越来越混乱。<br/>三局两胜决出最终胜者。
+Description: ## What We Built
+
+Sketch Brawl is an AI-powered doodle battler where players draw monsters and gear like a kid, and the AI instantly turns those messy strokes into living creatures, stats, abilities, and chaotic battles.
+
+A match has three fast phases:
+
+1. **Draw Your Monster**  
+   Players sketch any shape — silly, abstract, messy — and submit it.
+
+2. **AI Interprets the Drawing**  
+   Our interpretation engine generates:
+   - Monster type, stats, elements  
+   - Personality and “flavor text”  
+   - Funny explanations of what the AI thinks it sees  
+
+3. **Battle With Your Doodles**  
+   Players draw weapons or items.  
+   AI converts them into swords, shields, buffs, traps, or “chaos effects.”  
+   A turn-based fight plays out with clear battle logs.  
+   
+The loop is fast, funny, and unpredictable:  
+**sketch → AI interpretation → battle → upgrade → repeat.**
+
+---
+
+## Technology Used
+
+- **Frontend**
+  - HTML Canvas for freehand drawing  
+  - 2D UI for stats, actions, and battle logs  
+  - Responsive real-time rendering of AI outputs  
+
+- **Game Logic**
+  - Custom stroke and shape analysis:
+    - Circles → shields/bombs  
+    - Lines → lasers/whips  
+    - Triangles → spikes/dash attacks  
+    - Scribbles → random chaos  
+  - Size, stroke count, and placement influence stats and skill power  
+  - Turn-based combat engine with deterministic rules + fun randomness  
+
+- **AI Layer**
+  - Lightweight interpretation engine (rule-based + geometric inference)  
+  - Randomized flavor generation for names & personality  
+  - AI acts as a playful “game master,” not a classifier  
+  - No heavy model required — fully hackathon-friendly  
+
+---
+
+## Why It’s AI-Native
+
+- AI **is the core mechanic**, not an extra feature.  
+- The game has no predefined list of monsters or items — everything emerges from player drawings.  
+- Each stroke triggers new behaviors, stats, and battle outcomes.  
+- AI doesn’t try to be “correct”; it **embraces ambiguity**, turning human creativity into gameplay.  
+- Every match is unique because every drawing is unique.
+
+Sketch Brawl is not assisted by AI — it **exists because of AI**.
